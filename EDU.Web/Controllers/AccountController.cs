@@ -65,7 +65,7 @@ namespace EDU.Web.Controllers
 
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("Education");
+                return RedirectToAction("Index");
             }
 
             var lstUsers = new UsersBO().GetList();            
@@ -124,7 +124,7 @@ namespace EDU.Web.Controllers
                 var branchList = new BranchBO().GetList().Where(x => x.CompanyCode == companyCode).ToList();
                 modelObj.BranchList = new SelectList(branchList, "BranchID", "BranchName").ToList();
 
-                return View("Education", modelObj);
+                return View("Index", modelObj);
             }
 
         }
