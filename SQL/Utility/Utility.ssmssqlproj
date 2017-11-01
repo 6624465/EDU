@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<SqlWorkbenchSqlProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Utility">
+  <Items>
+    <LogicalFolder Name="Connections" Type="2" Sorted="true">
+      <Items>
+        <ConnectionNode Name="SUDARSHAN:sa">
+          <Created>2013-05-02T12:37:33.7946303+07:00</Created>
+          <Type>SQL</Type>
+          <Server>SUDARSHAN</Server>
+          <UserName>sa</UserName>
+          <Authentication>SQL</Authentication>
+          <InitialDB>master</InitialDB>
+          <LoginTimeout>15</LoginTimeout>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
+        </ConnectionNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Queries" Type="0" Sorted="true">
+      <Items>
+        <FileNode Name="DocumentNumberDetail.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:SUDARSHAN:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>SUDARSHAN</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
+          <FullPath>DocumentNumberDetail.sql</FullPath>
+        </FileNode>
+        <FileNode Name="DocumentNumberHeader.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:SUDARSHAN:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>SUDARSHAN</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
+          <FullPath>DocumentNumberHeader.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Utility.udf_PADL.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:SUDARSHAN:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>SUDARSHAN</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
+          <FullPath>Utility.udf_PADL.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Utility.usp_GenerateDocumentNumber.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:SUDARSHAN:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>SUDARSHAN</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
+          <FullPath>Utility.usp_GenerateDocumentNumber.sql</FullPath>
+        </FileNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Miscellaneous" Type="3" Sorted="true">
+      <Items />
+    </LogicalFolder>
+  </Items>
+</SqlWorkbenchSqlProject>

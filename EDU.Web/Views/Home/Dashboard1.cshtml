@@ -1,0 +1,208 @@
+﻿@model EZY.EDU.Contract.DashboardInandOutDTO
+@{
+    ViewBag.Title = "Dashboard1";
+}
+<style>
+    .highcharts-title tspan {
+        visibility: hidden;
+    }
+     .highcharts-credits{
+             display:none;
+         }
+</style>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<section class="content">
+    <h3 style="margin:10px 0px 15px;">&nbsp; Dashboard</h3>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-dnex">
+                <div class="box-header with-border">
+                    <h3 class="box-title">&nbsp; Material Inward and Outward Invoices Report</h3>
+
+                </div>
+                <div class="box-body">               
+                    <div id="MaterialInwardOutward" style="min-width: 310px; height: 300px; margin: 0 auto"></div>
+
+                    <table id="datatable" style="display:none">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Inward</th>
+                                <th>Outward</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (var i = 0; i < Model.InwardAndOutward.Count; i++)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(m => Model.InwardAndOutward[i].MonthName)</td>
+                                    <td>@Html.DisplayFor(m => Model.InwardAndOutward[i].InwardCount)</td>
+                                    <td>@Html.DisplayFor(m => Model.InwardAndOutward[i].OutwardCount)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-dnex">
+                <div class="box-header with-border">
+                    <h3 class="box-title">&nbsp; RMA Inward and Outward Report</h3>
+
+                </div>
+                <div class="box-body">
+                    <div id="RMAMaterialInwardOutward" style="min-width: 310px; height: 300px; margin: 0 auto"></div>
+
+                    <table id="datatable1" style="display:none">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>RMA Inward</th>
+                                <th>RMA Outward</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (var i = 0; i < Model.RMAInwardAndOutward.Count; i++)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(m => Model.RMAInwardAndOutward[i].MonthName)</td>
+                                    <td>@Html.DisplayFor(m => Model.RMAInwardAndOutward[i].RMAInwardCount)</td>
+                                    <td>@Html.DisplayFor(m => Model.RMAInwardAndOutward[i].RMAOutwardCount)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    Highcharts.createElement('link', {
+        href: 'https://fonts.googleapis.com/css?family=Dosis:400,600',
+        rel: 'stylesheet',
+        type: 'text/css'
+    }, null, document.getElementsByTagName('head')[0]);
+
+    Highcharts.theme = {
+        colors: ['#008B8B', '#B8860B', '#8A2BE2', '#1E90FF', '#DC143C', '#B8860B',
+           '#FF0000', '#FFFF00', '#00FF7F', '#EE82EE', '#4169E1'],
+        chart: {
+            backgroundColor: null,
+            style: {
+                fontFamily: 'Dosis, sans-serif'
+            }
+        },
+        title: {
+            style: {
+                fontSize: '16px',
+                fontWeight: 'bold',
+                textTransform: 'uppercase'
+            }
+        },
+        tooltip: {
+            borderWidth: 0,
+            shadow: true,
+            backgroundColor: '#FFFFFF',
+            style: {
+                fontSize: '16px',
+                fontWeight: 'bold'
+            }
+
+        },
+        legend: {
+            itemStyle: {
+                fontWeight: 'bold',
+                fontSize: '13px'
+            }
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: '15px',
+                    fontWeight: 'bold'
+                }
+            }
+        },
+        yAxis: {
+            title: {
+                style: {
+                    fontSize: '18px',
+                    fontWeight: 'bold',
+                }
+            },
+            labels: {
+                style: {
+                    fontSize: '13px',
+                    fontWeight: 'bold'
+                }
+            }
+        },
+        plotOptions: {
+            candlestick: {
+                lineColor: '#404048'
+            }
+        },
+
+
+        // General
+        background2: '#F0F0EA'
+
+    };
+
+    // Apply the theme
+    Highcharts.setOptions(Highcharts.theme);
+
+    Highcharts.chart('MaterialInwardOutward', {
+        data: {
+            table: 'datatable'
+        },
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Data extracted from a HTML table in the page'
+        },
+        yAxis: {
+            allowDecimals: false,
+            title: {
+                text: 'Units'
+            }
+        },
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.series.name + '</b><br/>' +
+                    this.point.y + ' ' + this.point.name.toLowerCase();
+            }
+        }
+    });
+    Highcharts.chart('RMAMaterialInwardOutward', {
+        data: {
+            table: 'datatable1'
+        },
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Data extracted from a HTML table in the page'
+        },
+        yAxis: {
+            allowDecimals: false,
+            title: {
+                text: 'Units'
+            }
+        },
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.series.name + '</b><br/>' +
+                    this.point.y + ' ' + this.point.name.toLowerCase();
+            }
+        }
+    });
+</script>

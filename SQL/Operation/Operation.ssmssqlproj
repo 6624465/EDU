@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<SqlWorkbenchSqlProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Operation">
+  <Items>
+    <LogicalFolder Name="Connections" Type="2" Sorted="true">
+      <Items>
+        <ConnectionNode Name="SQL5031.SmarterASP.NET:DB_9F30C5_RMAS_admin">
+          <Created>2017-03-12T10:30:21.2437202+05:30</Created>
+          <Type>SQL</Type>
+          <Server>SQL5031.SmarterASP.NET</Server>
+          <UserName>DB_9F30C5_RMAS_admin</UserName>
+          <Authentication>SQL</Authentication>
+          <InitialDB>DB_9F30C5_RMAS</InitialDB>
+          <LoginTimeout>15</LoginTimeout>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
+        </ConnectionNode>
+        <ConnectionNode Name="SUDARSHAN:sa">
+          <Created>2013-03-19T20:42:58.4690855+05:30</Created>
+          <Type>SQL</Type>
+          <Server>SUDARSHAN</Server>
+          <UserName>sa</UserName>
+          <Authentication>SQL</Authentication>
+          <InitialDB>RMAS</InitialDB>
+          <LoginTimeout>15</LoginTimeout>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
+        </ConnectionNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Queries" Type="0" Sorted="true">
+      <Items>
+        <FileNode Name="[Operation].[RMAOutwardDetail].sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:SQL5031.SmarterASP.NET:False:DB_9F30C5_RMAS_admin</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>SQL5031.SmarterASP.NET</AssociatedConnSrvName>
+          <AssociatedConnUserName>DB_9F30C5_RMAS_admin</AssociatedConnUserName>
+          <FullPath>[Operation].[RMAOutwardDetail].sql</FullPath>
+        </FileNode>
+        <FileNode Name="[Operation].[RMAOutwardHeader].sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:SQL5031.SmarterASP.NET:False:DB_9F30C5_RMAS_admin</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>SQL5031.SmarterASP.NET</AssociatedConnSrvName>
+          <AssociatedConnUserName>DB_9F30C5_RMAS_admin</AssociatedConnUserName>
+          <FullPath>[Operation].[RMAOutwardHeader].sql</FullPath>
+        </FileNode>
+        <FileNode Name="[Operation].[usp_InvoiceHeaderDataTableList2].sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:SQL5031.SmarterASP.NET:False:DB_9F30C5_RMAS_admin</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>SQL5031.SmarterASP.NET</AssociatedConnSrvName>
+          <AssociatedConnUserName>DB_9F30C5_RMAS_admin</AssociatedConnUserName>
+          <FullPath>[Operation].[usp_InvoiceHeaderDataTableList2].sql</FullPath>
+        </FileNode>
+        <FileNode Name="Operation.InvoiceDetail.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:SUDARSHAN:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>SUDARSHAN</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
+          <FullPath>Operation.InvoiceDetail.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Operation.InvoiceHeader.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:SQL5031.SmarterASP.NET:False:DB_9F30C5_RMAS_admin</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>SQL5031.SmarterASP.NET</AssociatedConnSrvName>
+          <AssociatedConnUserName>DB_9F30C5_RMAS_admin</AssociatedConnUserName>
+          <FullPath>Operation.InvoiceHeader.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Operation.usp_SerialNoInquiry.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:SUDARSHAN:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>SUDARSHAN</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
+          <FullPath>Operation.usp_SerialNoInquiry.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Operation.usp_CustomerSerialNoInquiry.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:SUDARSHAN:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>SUDARSHAN</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
+          <FullPath>Operation.usp_CustomerSerialNoInquiry.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Operation.RMAHeader.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:SQL5031.SmarterASP.NET:False:DB_9F30C5_RMAS_admin</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>SQL5031.SmarterASP.NET</AssociatedConnSrvName>
+          <AssociatedConnUserName>DB_9F30C5_RMAS_admin</AssociatedConnUserName>
+          <FullPath>Operation.RMAHeader.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Operation.RMADetail.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:SQL5031.SmarterASP.NET:False:DB_9F30C5_RMAS_admin</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>SQL5031.SmarterASP.NET</AssociatedConnSrvName>
+          <AssociatedConnUserName>DB_9F30C5_RMAS_admin</AssociatedConnUserName>
+          <FullPath>Operation.RMADetail.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Operation.usp_ListPendingRMA.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:SUDARSHAN:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>SUDARSHAN</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
+          <FullPath>Operation.usp_ListPendingRMA.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Operation.usp_ListShipmentDetails.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:SUDARSHAN:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>SUDARSHAN</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
+          <FullPath>Operation.usp_ListShipmentDetails.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Operation.usp_VendorSerialNoInquiry.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:SUDARSHAN:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>SUDARSHAN</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
+          <FullPath>Operation.usp_VendorSerialNoInquiry.sql</FullPath>
+        </FileNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Miscellaneous" Type="3" Sorted="true">
+      <Items />
+    </LogicalFolder>
+  </Items>
+</SqlWorkbenchSqlProject>

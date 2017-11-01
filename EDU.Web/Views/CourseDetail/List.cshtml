@@ -1,0 +1,55 @@
+﻿@model IEnumerable<EZY.EDU.Contract.CourseDetail>
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section seccss{
+    <link href="@Url.Content("~/Css/dataTables.bootstrap.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Css/dataTables.responsive.css")" rel="stylesheet" />
+}
+<section class="content">
+    <div class="box box-dnex">
+        <div class="box-header with-border">
+            <h3 class="box-title"><i class="fa fa-product-hunt" aria-hidden="true"></i>&nbsp;Course Detail</h3>
+            <div class="box-tools">
+                <button class="btn btn-default btn-sm" type="button" onclick="location.href = '@Url.Content("~/CourseDetail/CourseDetail?Id=-1")'"><i class="fa fa-plus"></i>&nbsp;Add New Course Detail</button>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="row" style="margin-top:10px;">
+                <div class="col-md-12">
+                    <table class="table table-striped" id="tblProducts">
+                        <thead>
+                            <tr>
+                                <th>Course Material</th>
+                                <th>TrainerName</th>
+                                <th>#Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (var i = 0; i < Model.Count(); i++)
+                            {
+                                <tr>
+                                    <td>@Model.ElementAt(i).CourseMaterial</td>
+                                    <td>@Model.ElementAt(i).TrainerName</td>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm" onclick="location.href = '@Url.Content("~/CourseDetail/CourseDetail?Id=" + Model.ElementAt(i).Id)'"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</button>
+                                        @*<button class="btn btn-danger btn-sm" onclick="DeleteProductCategory(@Model[i].LookupID)"><i class="fa fa-trash-o"></i>&nbsp;Delete</button>*@
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section secscripts{
+    <script type="text/javascript">
+        function AddCourseDetail() {
+            
+        }
+    </script>
+}

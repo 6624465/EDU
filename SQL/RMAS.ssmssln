@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# SQL Server Management Studio Solution File, Format Version 12.00
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "Master", "Master\Master.ssmssqlproj", "{42CE0326-557A-4AD6-911E-E268011C8987}"
+EndProject
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "Operation", "Operation\Operation.ssmssqlproj", "{A884EFF6-7DB6-48EE-9565-AB4AB5DA22BC}"
+EndProject
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "Security", "Security\Security.ssmssqlproj", "{CD1F21CE-EACD-4F87-BFB0-4964EAB6D0EB}"
+EndProject
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "Utility", "Utility\Utility.ssmssqlproj", "{D6C027D6-2847-41E8-A81F-246FD52CE24A}"
+EndProject
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "DBScripts", "DBScripts\DBScripts.ssmssqlproj", "{EFB12A1B-450C-478C-870D-3B0DA7A9FF87}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Default|Default = Default|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{42CE0326-557A-4AD6-911E-E268011C8987}.Default|Default.ActiveCfg = Default
+		{A884EFF6-7DB6-48EE-9565-AB4AB5DA22BC}.Default|Default.ActiveCfg = Default
+		{CD1F21CE-EACD-4F87-BFB0-4964EAB6D0EB}.Default|Default.ActiveCfg = Default
+		{D6C027D6-2847-41E8-A81F-246FD52CE24A}.Default|Default.ActiveCfg = Default
+		{74E44DCE-1EB6-498D-99BA-D22A8C158C98}.Default|Default.ActiveCfg = Default
+		{EFB12A1B-450C-478C-870D-3B0DA7A9FF87}.Default|Default.ActiveCfg = Default
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

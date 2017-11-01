@@ -1,0 +1,371 @@
+﻿@model EZY.EDU.Contract.DashboardForQtyandPriceDTO
+@{
+    ViewBag.Title = "Dashboard2";
+    //Material Inward Start
+    var strInwardMonth = string.Empty;
+    var strInwardQty = string.Empty;
+    var strInwardCost = string.Empty;
+    for (var i = 0; i < Model.QtyandPriceDashboardForMaterialIn.Count; i++)
+    {
+        strInwardMonth += "'" + Model.QtyandPriceDashboardForMaterialIn[i].InvoiceMonth + "'" + ",";
+        strInwardQty += Model.QtyandPriceDashboardForMaterialIn[i].Quantity + ",";
+        strInwardCost += Model.QtyandPriceDashboardForMaterialIn[i].Cost + ",";
+    }
+    strInwardMonth = strInwardMonth.TrimEnd(',');
+    strInwardQty = strInwardQty.TrimEnd(',');
+    strInwardCost = strInwardCost.TrimEnd(',');
+    //Material Inward End
+
+    //Material Outward Start
+    var strOutwardMonth = string.Empty;
+    var strOutwardQty = string.Empty;
+    var strOutwardCost = string.Empty;
+    for (var i = 0; i < Model.QtyandPriceDashboardForMaterialOut.Count; i++)
+    {
+        strOutwardMonth += "'" + Model.QtyandPriceDashboardForMaterialOut[i].InvoiceMonth + "'" + ",";
+        strOutwardQty += Model.QtyandPriceDashboardForMaterialOut[i].Quantity + ",";
+        strOutwardCost += Model.QtyandPriceDashboardForMaterialOut[i].Cost + ",";
+    }
+    strOutwardMonth = strOutwardMonth.TrimEnd(',');
+    strOutwardQty = strOutwardQty.TrimEnd(',');
+    strOutwardCost = strOutwardCost.TrimEnd(',');
+    //Material Outward End
+
+    //RMA Validation Start
+    var strRMAInwardMonth = string.Empty;
+    var strRMAInwardQty = string.Empty;
+    var strRMAInwardCost = string.Empty;
+    for (var i = 0; i < Model.QtyandPriceDashboardForRMAInward.Count; i++)
+    {
+        strRMAInwardMonth += "'" + Model.QtyandPriceDashboardForRMAInward[i].IncidentMonth + "'" + ",";
+        strRMAInwardQty += Model.QtyandPriceDashboardForRMAInward[i].Quantity + ",";
+        strRMAInwardCost += Model.QtyandPriceDashboardForRMAInward[i].Cost + ",";
+    }
+    strRMAInwardMonth = strInwardMonth.TrimEnd(',');
+    strRMAInwardQty = strInwardQty.TrimEnd(',');
+    strRMAInwardCost = strInwardCost.TrimEnd(',');
+    //RMA Validation End
+
+    //RMA Return Start
+    var strRMAOutwardMonth = string.Empty;
+    var strRMAOutwardQty = string.Empty;
+    var strRMAOutwardCost = string.Empty;
+    for (var i = 0; i < Model.QtyandPriceDashboardForRMAOutward.Count; i++)
+    {
+        strRMAOutwardMonth += "'" + Model.QtyandPriceDashboardForRMAOutward[i].DocumentMonth + "'" + ",";
+        strRMAOutwardQty += Model.QtyandPriceDashboardForRMAOutward[i].Quantity + ",";
+        strRMAOutwardCost += Model.QtyandPriceDashboardForRMAOutward[i].Cost + ",";
+    }
+    strRMAOutwardMonth = strRMAOutwardMonth.TrimEnd(',');
+    strRMAOutwardQty = strRMAOutwardQty.TrimEnd(',');
+    strRMAOutwardCost = strRMAOutwardCost.TrimEnd(',');
+    //RMA Return End
+}
+<style>
+    .highcharts-title tspan {
+        visibility: hidden;
+    }
+
+
+    .highcharts-credits {
+        display: none;
+    }
+</style>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<section class="content">
+    <div class="box box-dnex">
+        <div class="box-header with-border">
+            <div class="row">
+                <section class="content-header">
+                    <ol class="breadcrumb">
+                        <li><a href='@Url.Content("~/Home/Modules")'><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li><a href='@Url.Content("~/Home/Index")'>Modules</a></li>
+                        <li><a href='@Url.Content("~/Home/Reports")'> Reports</a></li>
+                        <li><a href='@Url.Content("~/Reports/ManagementReports")'>Management Reports</a></li>
+                        <li class="active">Dashboard</li>
+                    </ol>
+                </section>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="box box-dnex">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">&nbsp; Material Inward Report For Qty</h3>
+
+                        </div>
+                        <div class="box-body">
+                            <div id="MaterialInwardQty" style="height: 350px; margin: 0 auto"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="box box-dnex">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">&nbsp; Material Inward Report For Cost</h3>
+
+                        </div>
+                        <div class="box-body">
+                            <div id="MaterialInwardCost" style="height: 350px; margin: 0 auto"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="box box-dnex">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">&nbsp; Material Outward Report For Qty</h3>
+
+                        </div>
+                        <div class="box-body">
+                            <div id="MaterialOutwardQty" style="height:200px; margin :0 auto"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="box box-dnex">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">&nbsp; Material Outward Report For Cost</h3>
+
+                        </div>
+                        <div class="box-body">
+                            <div id="MaterialOutwardCost" style="height:200px; margin :0 auto"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="box box-dnex">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">&nbsp; RMA Validation Reports</h3>
+
+                        </div>
+                        <div class="box-body">
+                            <div id="RMAValidation" style="height: 350px; margin: 0 auto"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="box box-dnex">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">&nbsp; RMA Return Reports</h3>
+
+                        </div>
+                        <div class="box-body">
+                            <div id="RMAReturn" style="height: 350px; margin: 0 auto"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box-footer">
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn btn-default btn-sm pull-right" type="button" onclick="location.href = '@Url.Content("~/Reports/ManagementReports")'"><i class="fa fa-backward"></i>&nbsp;Back</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        Highcharts.createElement('link', {
+            href: 'https://fonts.googleapis.com/css?family=Dosis:400,600',
+            rel: 'stylesheet',
+            type: 'text/css'
+        }, null, document.getElementsByTagName('head')[0]);
+
+        Highcharts.theme = {
+            colors: ['#228B22', '#FF00FF', '#00FFFF', '#1E90FF', '#DC143C', '#B8860B',
+               '#FF0000', '#FFFF00', '#00FF7F', '#EE82EE', '#4169E1'],
+            chart: {
+                backgroundColor: null,
+                style: {
+                    fontFamily: 'Dosis, sans-serif'
+                }
+            },
+            title: {
+                style: {
+                    fontSize: '16px',
+                    fontWeight: 'bold',
+                    textTransform: 'uppercase'
+                }
+            },
+            tooltip: {
+                borderWidth: 0,
+                shadow: true,
+                backgroundColor: '#FFFFFF',
+                style: {
+                    fontSize: '16px',
+                    fontWeight: 'bold'
+                }
+
+            },
+            legend: {
+                itemStyle: {
+                    fontWeight: 'bold',
+                    fontSize: '13px'
+                }
+            },
+            xAxis: {
+                labels: {
+                    style: {
+                        fontSize: '15px',
+                        fontWeight: 'bold'
+                    }
+                }
+            },
+            yAxis: {
+                title: {
+                    style: {
+                        fontSize: '18px',
+                        fontWeight: 'bold',
+                    }
+                },
+                labels: {
+                    style: {
+                        fontSize: '13px',
+                        fontWeight: 'bold'
+                    }
+                }
+            },
+            plotOptions: {
+                candlestick: {
+                    lineColor: '#404048'
+                }
+            },
+
+
+            // General
+            background2: '#F0F0EA'
+
+        };
+
+        // Apply the theme
+        Highcharts.setOptions(Highcharts.theme);
+        var chart = Highcharts.chart('MaterialInwardQty', {
+
+            title: {
+                text: 'Chart.update'
+            },
+            xAxis: {
+                categories: [@Html.Raw(strInwardMonth)]
+            },
+
+            series: [{
+                type: 'column',
+                colorByPoint: true,
+                data: [@Html.Raw(strInwardQty)],
+                showInLegend: false,
+                name: 'Material Inward Receipt'
+            }]
+
+        });
+        var chart = Highcharts.chart('MaterialInwardCost', {
+
+            title: {
+                text: 'Chart.update'
+            },
+
+            xAxis: {
+                categories: [@Html.Raw(strInwardMonth)]
+            },
+
+            series: [{
+                type: 'column',
+                colorByPoint: true,
+                data: [@Html.Raw(strInwardCost)],
+                showInLegend: false,
+                name: 'Material Inward Receipt'
+            }]
+
+        });
+        var chart = Highcharts.chart('MaterialOutwardQty', {
+
+            title: {
+                text: 'Chart.update'
+            },
+            xAxis: {
+                categories: [@Html.Raw(strOutwardMonth)]
+            },
+
+            series: [{
+                type: 'column',
+                colorByPoint: true,
+                data: [@Html.Raw(strOutwardQty)],
+                showInLegend: false,
+                name: 'Material Inward Receipt'
+            }]
+
+        });
+        var chart = Highcharts.chart('MaterialOutwardCost', {
+
+            title: {
+                text: 'Chart.update'
+            },
+            xAxis: {
+                categories: [@Html.Raw(strOutwardMonth)]
+            },
+
+            series: [{
+                type: 'column',
+                colorByPoint: true,
+                data: [@Html.Raw(strOutwardCost)],
+                showInLegend: false,
+                name: 'Material Inward Receipt'
+            }]
+
+        });
+                var chart = Highcharts.chart('RMAValidation', {
+
+                    title: {
+                        text: 'Chart.update'
+                    },
+                    xAxis: {
+                        categories: [@Html.Raw(strRMAInwardMonth)]
+                    },
+
+                     series: [{
+                        name: 'Quantity',
+                        marker: {
+                            symbol: 'square'
+                        },
+                        data: [@Html.Raw(strRMAInwardQty)]
+
+                    }, {
+                        name: 'Cost',
+                        marker: {
+                            symbol: 'diamond'
+                        },
+                        data: [@Html.Raw(strRMAInwardCost)]
+                    }]
+                });
+        var chart = Highcharts.chart('RMAReturn', {
+
+                    title: {
+                        text: 'Chart.update'
+                    },
+                    xAxis: {
+                        categories: [@Html.Raw(strRMAOutwardMonth)]
+                    },
+
+                    series: [{
+                        name: 'Quantity',
+                        marker: {
+                            symbol: 'square'
+                        },
+                        data: [@Html.Raw(strRMAOutwardQty)]
+
+                    }, {
+                        name: 'Cost',
+                        marker: {
+                            symbol: 'diamond'
+                        },
+                        data: [@Html.Raw(strRMAOutwardCost)]
+                    }]
+                });
+    </script>
+</section>

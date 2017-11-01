@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<SqlWorkbenchSqlProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="DBScripts">
+  <Items>
+    <LogicalFolder Name="Connections" Type="2" Sorted="true">
+      <Items>
+        <ConnectionNode Name="LAPTOP-ILOFHPM7\SQLEXPRESS:sa">
+          <Created>2017-03-12T09:32:33.5356719+05:30</Created>
+          <Type>SQL</Type>
+          <Server>LAPTOP-ILOFHPM7\SQLEXPRESS</Server>
+          <UserName>sa</UserName>
+          <Authentication>SQL</Authentication>
+          <InitialDB>RMAS</InitialDB>
+          <LoginTimeout>15</LoginTimeout>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
+        </ConnectionNode>
+        <ConnectionNode Name="SQL5031.SmarterASP.NET:DB_9F30C5_RMAS_admin">
+          <Created>2017-03-12T19:44:38.5329096+05:30</Created>
+          <Type>SQL</Type>
+          <Server>SQL5031.SmarterASP.NET</Server>
+          <UserName>DB_9F30C5_RMAS_admin</UserName>
+          <Authentication>SQL</Authentication>
+          <InitialDB>DB_9F30C5_RMAS</InitialDB>
+          <LoginTimeout>15</LoginTimeout>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
+        </ConnectionNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Queries" Type="0" Sorted="true">
+      <Items>
+        <FileNode Name="[Utility].[DocumentNumberHeader]_InsertData.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:SQL5031.SmarterASP.NET:False:DB_9F30C5_RMAS_admin</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>SQL5031.SmarterASP.NET</AssociatedConnSrvName>
+          <AssociatedConnUserName>DB_9F30C5_RMAS_admin</AssociatedConnUserName>
+          <FullPath>[Utility].[DocumentNumberHeader]_InsertData.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Master.Branch_InsertData.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:SQL5031.SmarterASP.NET:False:DB_9F30C5_RMAS_admin</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>SQL5031.SmarterASP.NET</AssociatedConnSrvName>
+          <AssociatedConnUserName>DB_9F30C5_RMAS_admin</AssociatedConnUserName>
+          <FullPath>Master.Branch_InsertData.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Master.Product_ProductCategory.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:LAPTOP-ILOFHPM7\SQLEXPRESS:False:sa</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>LAPTOP-ILOFHPM7\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnUserName>sa</AssociatedConnUserName>
+          <FullPath>Master.Product_ProductCategory.sql</FullPath>
+        </FileNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Miscellaneous" Type="3" Sorted="true">
+      <Items />
+    </LogicalFolder>
+  </Items>
+</SqlWorkbenchSqlProject>

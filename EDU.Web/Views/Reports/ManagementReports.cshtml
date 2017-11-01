@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "ManagementReports";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .rpts {
+       font-size:20px;
+       align-content:center;
+    }
+    .Dashboard{
+        padding-left:50px;
+    }
+    .Dashboard2{
+        padding-left:150px;
+    }
+     .Dashboard3{
+        padding-left:270px;
+    }
+         .Dashboard4{
+        padding-left:380px;
+    }
+</style>
+<section class="content">
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <div class="row">
+                <section class="content-header">
+                    <ol class="breadcrumb">
+                        <li><a href='@Url.Content("~/Home/Modules")'><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li><a href='@Url.Content("~/Home/Index")'>Modules</a></li>
+                        <li><a href='@Url.Content("~/Home/Reports")'> Reports</a></li>
+                        <li class="active">Management Reports</li>
+                    </ol>
+                </section>
+            </div>
+        </div>
+        <div class="box-body rpts">
+            <div class="row css10">
+                <div class="col-md-6 Dashboard">
+                    @Html.ActionLink("Dashboard", "Dashboard", "Home")
+                </div>
+            </div>
+            <br />
+            <div class="row css10">
+                <div class="col-md-6 Dashboard">
+                    @Html.ActionLink("Dashboard2", "Dashboard2", "Home")
+                </div>
+            </div>
+            <br />
+            <div class="row css10">
+                <div class="col-md-6 Dashboard">
+                    @Html.ActionLink("Dashboard3", "Dashboard3", "Home")
+                </div>
+            </div>
+            <br />
+            <div class="row css10">
+                <div class="col-md-6 Dashboard">
+                    @Html.ActionLink("Dashboard4", "Dashboard4", "Home")
+                </div>
+            </div>
+        </div>
+        <div class="box-footer">
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn btn-default btn-sm pull-right" type="button" onclick="location.href = '@Url.Content("~/Home/Reports")'"><i class="fa fa-backward"></i>&nbsp;Back</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

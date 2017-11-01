@@ -1,0 +1,268 @@
+﻿@model EZY.EDU.Contract.DashBoardForTotalCountofProduct
+@{
+    ViewBag.Title = "Dashboard4";
+}
+<style>
+    .highcharts-title tspan {
+        visibility: hidden;
+    }
+
+    .highcharts-credits {
+        display: none;
+    }
+</style>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/drilldown.js"></script>
+
+<section class="content">
+    <div class="box box-dnex">
+        <div class="box-header with-border">
+            <div class="row">
+                <section class="content-header">
+                    <ol class="breadcrumb">
+                        <li><a href='@Url.Content("~/Home/Modules")'><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li><a href='@Url.Content("~/Home/Index")'>Modules</a></li>
+                        <li><a href='@Url.Content("~/Home/Reports")'> Reports</a></li>
+                        <li><a href='@Url.Content("~/Reports/ManagementReports")'>Management Reports</a></li>
+                        <li class="active">Dashboard</li>
+                    </ol>
+                </section>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="box box-dnex">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">&nbsp; Material Inward Report For Total Product Wise Quantity</h3>
+
+                        </div>
+                        <div class="box-body">
+                            <div id="MaterialInwardTotalProduct" style="height: 350px; margin: 0 auto"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="box box-dnex">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">&nbsp; Material Inward Report For Total Product Quantity</h3>
+
+                        </div>
+                        <div class="box-body">
+                            <div id="container" style="height: 350px; margin: 0 auto"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box-footer">
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn btn-default btn-sm pull-right" type="button" onclick="location.href = '@Url.Content("~/Reports/ManagementReports")'"><i class="fa fa-backward"></i>&nbsp;Back</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</section>
+<script type="text/javascript">
+    Highcharts.createElement('link', {
+        href: 'https://fonts.googleapis.com/css?family=Dosis:400,600',
+        rel: 'stylesheet',
+        type: 'text/css'
+    }, null, document.getElementsByTagName('head')[0]);
+
+    Highcharts.theme = {
+        colors: ['#FF1493', '#00008B', '#FF4500', '#FF00FF', '#B8860B', '#4169E1', '#DC143C', '#B8860B',
+           '#FF0000', '#483D8B','#00FF7F', '#EE82EE', '#228B22', '#ADFF2F'],
+        chart: {
+            backgroundColor: null,
+            style: {
+                fontFamily: 'Dosis, sans-serif'
+            }
+        },
+        title: {
+            style: {
+                fontSize: '16px',
+                fontWeight: 'bold',
+                textTransform: 'uppercase'
+            }
+        },
+        tooltip: {
+            borderWidth: 0,
+            shadow: true,
+            backgroundColor: '#FFFFFF',
+            style: {
+                fontSize: '16px',
+                fontWeight: 'bold'
+            }
+
+        },
+        legend: {
+            itemStyle: {
+                fontWeight: 'bold',
+                fontSize: '13px'
+            }
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: '20px',
+                    fontWeight: 'bold'
+                }
+            }
+        },
+        yAxis: {
+            title: {
+                style: {
+                    fontSize: '18px',
+                    fontWeight: 'bold',
+                }
+            },
+            labels: {
+                style: {
+                    fontSize: '13px',
+                    fontWeight: 'bold'
+                }
+            }
+        },
+        plotOptions: {
+            candlestick: {
+                lineColor: '#404048'
+            }
+        },
+
+
+        // General
+        background2: '#F0F0EA'
+
+    };
+
+    // Apply the theme
+    Highcharts.setOptions(Highcharts.theme);
+
+    var objPush = {};
+    var MonthData = [];
+    var MonthWiseData = [];
+    var test = '';
+    var CountInward = 0;
+    function getdata() {
+        $.ajax({
+            url: '@Url.Content("~/Home/Dashboarddata")',
+            method: 'get',
+            contentType: 'application/json',
+            success: function (data) {
+                debugger;
+                var dataObj = [];
+                $.each(data.DashboardForTotalListProductwise, function (i, item) {
+                    objPush.name = item.CategoryDescription;
+                    objPush.y = item.ProductCodeCount;
+                    objPush.drilldown = item.CategoryDescription;
+                    dataObj.push(objPush);
+                    objPush = {};
+                    CountInward = data.TotalproductCount;
+                });
+                $.each(data.DashBoardForProductListCountMonthWise, function (i, item) {
+                    MonthData = item.ProductCode + "," + item.InvoiceMonth;
+                    MonthWiseData.push(MonthData);
+                    MonthData = [];
+                });
+                var drillDownArray = new Array();
+                $.each(data.data, function (i, item) {
+                    var oDataArr = new Array();
+                    for (var k in item.data) {
+                        var iDataArr = new Array();
+                        iDataArr.push(k);
+                        iDataArr.push(item.data[k]);
+                        oDataArr.push(iDataArr);
+                    };
+
+                    var drillDownObj = {
+                        name: item.name,
+                        id: item.id,
+                        data: oDataArr
+                    };
+
+                    drillDownArray.push(drillDownObj);
+                });
+
+                //console.log(JSON.stringify(drillDownArray));
+                bindHighChart(dataObj, drillDownArray);
+                bindHighChart1(CountInward);
+            },
+            error: function (err) {
+
+            }
+        });
+    }
+    getdata();
+
+    function bindHighChart(dataObj, drillDownArray) {
+        Highcharts.chart('MaterialInwardTotalProduct', {
+            chart: {
+                type: 'pie'
+            },
+            title: {
+                text: 'Browser market shares. January, 2015 to May, 2015'
+            },
+            //subtitle: {
+            //    text: 'Click the slices to view versions. Source: netmarketshare.com.'
+            //},
+            plotOptions: {
+                series: {
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.name}'
+                    }
+                }
+            },
+
+            tooltip: {
+                headerFormat: '<span style="font-size:11px">{series.name}</span><br/>',
+                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.f}</b><br />'
+            },
+
+            series: [{
+                name: 'Peripheral',
+                colorByPoint: true,
+                data: dataObj
+            }],
+            drilldown: {
+                series: drillDownArray
+            }
+        });
+    }
+    function bindHighChart1(CountInward) {
+        Highcharts.chart('container', {
+            chart: {
+                type: 'pie'
+            },
+            title: {
+                text: 'Browser market shares. January, 2015 to May, 2015'
+            },
+            plotOptions: {
+                series: {
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.name}: {point.y:.1f}'
+                    }
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}</b> of total<br/>'
+            },
+            series: [{
+                name: 'Brands',
+                colorByPoint: true,
+                data: [{
+                    name: 'Material Inward Total product Quantity',
+                    y: CountInward,
+                    drilldown: 'Microsoft Internet Explorer'
+                }]
+            }],
+        });
+    }
+</script>

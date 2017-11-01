@@ -1,0 +1,137 @@
+﻿@model EZY.EDU.Contract.ReportParams
+
+
+@section seccss{
+    @*<link href="@Url.Content("~/Css/datepicker3.css")" rel="stylesheet" />
+        <link href="@Url.Content("~/Css/bootstrap-timepicker.css")" rel="stylesheet" />*@
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css" rel="stylesheet">
+}
+<div class="modal fade in" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+<section class="content">
+    @using (Html.BeginForm("MaterialInwards", "Reports", FormMethod.Post, new { id = "frmReportInward", name = "frmReportInward" }))
+    {
+        <div class="box box-dnex">
+            <div class="box-header with-border">
+                <div class="row">
+                    <section class="content-header">
+                        <ol class="breadcrumb">
+                            <li><a href='@Url.Content("~/Home/Modules")'><i class="fa fa-dashboard"></i> Home</a></li>
+                            <li><a href='@Url.Content("~/Home/Index")'>Modules</a></li>
+                            <li><a href='@Url.Content("~/Home/Reports")'> Reports</a></li>
+                            <li class="active">Operational Reports</li>
+                        </ol>
+                    </section>
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="row css10">
+                    <div class="col-md-2">
+                        <label class="control-label pull-right">Branch ID&nbsp; <span class="error-req">*</span></label>
+                    </div>
+                    <div class="col-md-2">
+                        @Html.TextBoxFor(x => x.BranchID, new { @class = "form-control input-sm", @readonly = "readonly", @Value = ViewBag.LoginID })
+                    </div>
+                </div>
+                <div class="row css10">
+                    <div class="col-md-2">
+                        <label class="control-label pull-right">Date From&nbsp; <span class="error-req">*</span></label>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="input-group date" id="InvoiceDt">
+                            @Html.TextBoxFor(x => x.DateFrom, new { @class = "form-control input-sm" })
+                            <span class="input-group-addon">
+                                <span class="fa fa-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row css10">
+                    <div class="col-md-2">
+                        <label class="control-label pull-right">Date To&nbsp; <span class="error-req">*</span></label>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="input-group date" id="InvoiceDts">
+                            @Html.TextBoxFor(x => x.DateTo, new { @class = "form-control input-sm" })
+                            <span class="input-group-addon">
+                                <span class="fa fa-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="col-md-12">
+                            @Html.ActionLink("Print", "MaterialInward", "Reports", new { id = "btnViewReport", onclick = "PrintClick()", @class = "btn btn-sm btn-primary" })
+                            <button class="btn btn-default btn-sm pull-right" type="button" onclick="location.href = '@Url.Content("~/Home/Reports")'"><i class="fa fa-backward"></i>&nbsp;Back</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</section>
+
+@section secscripts {
+    <script src="@Url.Content("~/Scripts/moment.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap-datetimepicker.js")"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#frmReportInward').validate({
+                rules: {
+                    BranchID: {
+                        required: true
+                    },
+                    DateFrom:{
+                        required:true
+                    },
+                    DateTo: {
+                        required:true
+                    }
+                }
+            });
+        });
+        $('#InvoiceDt').datetimepicker({
+            icons: {
+                time: 'fa fa-clock-o',
+                date: 'fa fa-calendar',
+                up: 'fa fa-arrow-up',
+                down: 'fa fa-arrow-down'
+            },
+            format: 'MM/DD/YYYY'
+        });
+        $('#InvoiceDts').datetimepicker({
+            icons: {
+                time: 'fa fa-clock-o',
+                date: 'fa fa-calendar',
+                up: 'fa fa-arrow-up',
+                down: 'fa fa-arrow-down'
+            },
+            format: 'MM/DD/YYYY'
+        });
+        function PrintClick() {
+            if ($('#frmReportInward').valid()) {
+                var CustomerCode = $("#ddlCustomerCode").val();
+                var dateFrom = ($("#DateFrom").val());
+                var dateTo = ($("#DateTo").val());
+                var ReportURL = ("/RMAReports/MaterialInwardReport");
+                var branchID = $('#BranchID').val();
+                debugger;
+                var rooturl = '@Url.Action("MaterialInwards", "Reports")';
+                var url = rooturl + "?dateFrom=" + dateFrom + "&dateTo=" + dateTo + "&URL=" + ReportURL;
+                if (branchID != '')
+                    url += "&branchID=" + branchID;
+                $("#btnViewReport").attr("href", url);
+            }
+        }
+        //$("#ddlCustomerCode").select2();
+    </script>
+}
+

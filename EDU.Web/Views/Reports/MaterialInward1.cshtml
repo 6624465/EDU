@@ -1,0 +1,115 @@
+﻿@model EZY.EDU.Contract.ReportParams
+
+@{
+    ViewBag.Title = "MaterialInward";
+}
+
+@section css{
+<link href="@Url.Content("~/Css/dataTables.bootstrap.css")" rel="stylesheet" />
+<link href="@Url.Content("~/Css/bootstrap-timepicker.css") "rel="stylesheet" />
+<link href="@Url.Content("~/Css/dataTables.responsive.css")" rel="stylesheet" />
+<link href="@Url.Content("~/Css/style.min.css")" rel="stylesheet" />
+}
+<div class="modal fade in" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+<section class="content">
+    @using (Html.BeginForm("MaterialInwards", "Reports", FormMethod.Post))
+    {
+        @*@using (Ajax.BeginForm("ViewReportDailySales", "Reports", new AjaxOptions { HttpMethod = "POST", OnBegin = "OpenPopup", OnSuccess = "OnSaveSuccess", OnFailure = "OnSaveFailure" }, new { Area = "Reports", enctype = "multipart/form-data", id = "myForm" }))
+            {*@
+
+        <div class="box box-solid box-default">
+            <div class="box-header with-border">
+                <h3 class="box-title">Daily Sales</h3>
+
+            </div>
+            <div class="box-body">
+                <fieldset class="form-horizontal">
+                    @*<div class="form-group">
+                            <div>
+                                <label class="col-md-2 input-sm control-label">Branch</label>
+                                <div class="col-md-4">
+                                    @Html.DropDownList("BranchID", new SelectList(ViewBag.BranchList, "Value", "Text"), "All", new { @class = "form-control input-sm" })
+                                </div>
+                            </div>
+                        </div>*@
+                    <div class="form-group">
+                        <div>
+                            <label class="col-md-2 control-label input-sm">Date From</label>
+                            <div class="col-sm-2">
+                                @Html.TextBoxFor(m => m.DateFrom, new { @class = "form-control input-sm datepicker" })
+                            </div>
+                            <label class="col-md-2 control-label input-sm">Date To</label>
+                            <div class="col-sm-2">
+                                @Html.TextBoxFor(m => m.DateTo, new { @class = "form-control input-sm datepicker" })
+
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="box-footer">
+                <div class="row  no-print">
+                    <div class="col-xs-12">
+                        <div class="btn-group dropup">
+                            @*the URL need to be the Datasource url*@
+                            @*@Html.ActionLink("Print", "MaterialInward", "Reports", new { }, new { data_modal = "test", id = "btnViewReport", onclick = "PrintClick()", @class = "btn btn-sm btn-primary" })*@
+                            <a id="btnViewReport" data-modal="test" onclick="PrintClick();" class="btn btn-sm btn-primary">Print ddf</a>
+                        </div>
+                        <a href="@Url.Content("~/Dashboard/Index")" id="btnBack" class="btn btn-sm btn-info pull-right">
+                            <i class="fa fa-arrow-circle-o-left"></i>
+                            Back
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</section>
+
+@section Scripts {
+
+    @*@Scripts.Render("~/bundles/modalform")*@
+<script src="@Url.Content("~/Scripts/jquery.dataTables.js")"></script>
+<script src="@Url.Content("~/Scripts/dataTables.bootstrap.js")"></script>
+<script src="@Url.Content("~/Scripts/moment.js")"></script>
+<script src="@Url.Content("~/Scripts/bootstrap-datetimepicker.js")"></script>
+
+    <script type="text/javascript">
+
+
+        function PrintClick() {
+
+            var CustomerCode = $("#ddlCustomerCode").val();
+            var dateFrom = ($("#DateFrom").val());
+            var dateTo = ($("#DateTo").val());
+            var ReportURL = ("/RMAReports/MaterialInwardReport");
+            var branchID = $('#BranchID').val();
+            debugger;
+            var rooturl = '@Url.Action("MaterialInwardReport", "Reports", new { area = "Reports" })';
+            var url = rooturl + "?dateFrom=" + dateFrom + "&dateTo=" + dateTo + "&URL=" + ReportURL;
+            if (branchID != '')
+                url += "&branchID=" + branchID;
+            debugger
+            $("#btnViewReport").attr("href", url);
+        }
+
+        //$("#ddlCustomerCode").select2();
+
+        $(function () {
+
+            $('.datepicker').datetimepicker({
+                useCurrent: false,
+                format: 'DD/MM/YYYY',
+                inline: false
+            });
+        });
+
+    </script>
+}
+
