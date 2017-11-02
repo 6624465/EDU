@@ -156,7 +156,7 @@
                             }, "Value", "Value", 1);
                          }
                     <div class="col-md-4">
-                        @Html.DropDownListFor(x => x.courseSalesMaster.MinimumReg, obj1, "Select Min.Registrations", new { @class = "form-control input-sm" })
+                        @Html.DropDownListFor(x => x.courseSalesMaster.MinimumReg, obj1, "Select Min.Registrations", new { @class = "form-control input-sm", onchange = "MinimumRegUser()" })
                     </div>
                     @*<div class="col-md-4">
                         @Html.TextBoxFor(x => x.courseSalesMaster.MinimumReg, "{0:#.#}",
@@ -190,7 +190,7 @@
                             }, "Value", "Value", 1);
                     }
                     <div class="col-md-4">
-                        @Html.DropDownListFor(x => x.courseSalesMaster.Registered, obj2, "Select Registered", new { @class = "form-control input-sm" })
+                        @Html.DropDownListFor(x => x.courseSalesMaster.Registered, obj2, "Select Registered", new { @class = "form-control input-sm", onchange = "RegisteredUser()" })
                     </div>
                     @*<div class="col-md-4">
                         @Html.TextBoxFor(x => x.courseSalesMaster.Registered, "{0:#.#}",
