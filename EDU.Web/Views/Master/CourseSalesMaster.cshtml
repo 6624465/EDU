@@ -96,7 +96,7 @@
                             }, "Value", "Value", 1);
                     }
                     <div class="col-md-4">
-                        @Html.DropDownListFor(x => x.courseSalesMaster.NoOfDays, obj, "Select NoOfDays ", new { @class = "form-control input-sm numCss", @disabled = "disabled" })
+                        @Html.DropDownListFor(x => x.courseSalesMaster.NoOfDays, obj, "Select NoOfDays ", new { @class = "form-control input-sm numCss", @readonly = "readonly" })
                     </div>
                     @*<div class="col-md-4">
                         @Html.TextBoxFor(x => x.courseSalesMaster.NoOfDays, "{0:#.#}",
@@ -109,7 +109,7 @@
                         @Html.DropDownListFor(x => x.courseSalesMaster.Month,
                         new SelectList(Model.monthList, "Value", "Name"),
                         "Select Month",
-                        new { @class = "form-control input-sm", @disabled = "disabled" })
+                        new { @class = "form-control input-sm", @readonly = "readonly" })
                     </div>
                 </div>
                 <div class="row css10">
