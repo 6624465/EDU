@@ -503,3 +503,11 @@ background: #ffffff; border-top: 3px solid #d2d6de; margin-bottom: 20px; width: 
     padding: 10px;
     background-color: #ffffff;
 }
+
+.centerwithbox {
+    margin: auto;
+    width: 35%;
+    border: 3px solid gray;
+    padding: 10px;
+    border-radius: 20px;
+}

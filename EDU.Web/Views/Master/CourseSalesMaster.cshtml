@@ -6,12 +6,21 @@
 @section seccss{
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css" rel="stylesheet">
 }
+<style>
+    .centerwithbox {
+        margin: auto;
+        width: 60%;
+        border: 3px solid gray;
+        padding: 10px;
+        border-radius: 20px;
+    }
+</style>
 @using (Html.BeginForm("CoureSalesMaster", "Master", FormMethod.Post, new { id = "frmCourseDetail", name = "frmCourseDetail" }))
 {
     @Html.HiddenFor(x => x.courseSalesMaster.Id)
     <section class="content">
         <div class="box box-dnex">
-            <div class="box-header with-border">
+            <div class="box-header">
                 <div class="row">
                     <section class="content-header">
                         <ol class="breadcrumb">
@@ -22,71 +31,73 @@
                     </section>
                 </div>
             </div>
-            <div class="box-body">
+            <div class="box-body centerwithbox">
                 <div class="row">
                     <div class="col-md-2">
-                        <label class="control-label pull-right">Country</label>
+                        <label class="control-label">Country</label>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                         @Html.DropDownListFor(x => x.courseSalesMaster.Country,
                          new SelectList(Model.countryList, "CountryCode", "CountryName"),
                          "Select Country",
                          new { @class = "form-control input-sm" })
                     </div>
+                </div>
+                <div class="row css10">
                     <div class="col-md-2">
-                        <label class="control-label pull-right">Product</label>
+                        <label class="control-label">Product</label>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                         @Html.DropDownListFor(x => x.courseSalesMaster.Product,
-                            new SelectList(Model.eduProductList, "Id", "ProductName"),
-                            "Select Product",
-                            new { @class = "form-control input-sm", onchange = "ProductChange(this);" })
+                        new SelectList(Model.eduProductList, "Id", "ProductName"),
+                        "Select Product",
+                        new { @class = "form-control input-sm", onchange = "ProductChange(this);" })
                     </div>
+                </div>
+                <div class="row css10">
                     <div class="col-md-2">
-                        <label class="control-label pull-right">Course</label>
+                        <label class="control-label">Course</label>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                         @if (Model.courseSalesMaster.Id == -1)
                         {
-                            @Html.DropDownListFor(x => x.courseSalesMaster.Course,
-                            Enumerable.Empty<SelectListItem>(),
-                            "Select Course",
-                            new { @class = "form-control input-sm", disabled = "disabled", onchange = "CourseChange(this)" })
+                        @Html.DropDownListFor(x => x.courseSalesMaster.Course,
+                        Enumerable.Empty<SelectListItem>(),
+                        "Select Course",
+                        new { @class = "form-control input-sm", disabled = "disabled", onchange = "CourseChange(this)" })
                         }
                         else
                         {
-                            @Html.DropDownListFor(x => x.courseSalesMaster.Course,
-                            new SelectList(Model.courseList, "Id", "CourseName"),
-                            "Select Course",
-                            new { @class = "form-control input-sm", onchange = "CourseChange(this)" })
+                        @Html.DropDownListFor(x => x.courseSalesMaster.Course,
+                        new SelectList(Model.courseList, "Id", "CourseName"),
+                        "Select Course",
+                        new { @class = "form-control input-sm", onchange = "CourseChange(this)" })
                         }
                     </div>
                 </div>
-                <br />
-                <div class="row">
+                <div class="row css10">
                     <div class="col-md-2">
-                        <label class="control-label pull-right">No Of Days</label>
+                        <label class="control-label">No Of Days</label>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                         @Html.TextBoxFor(x => x.courseSalesMaster.NoOfDays, "{0:#.#}",
                         new { @class = "form-control input-sm numCss", @readonly = "readonly" })
                     </div>
                     <div class="col-md-2">
-                        <label class="control-label pull-right">Month</label>
+                        <label class="control-label">Month</label>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                         @Html.DropDownListFor(x => x.courseSalesMaster.Month,
                         new SelectList(Model.monthList, "Value", "Name"),
                         "Select Month",
                         new { @class = "form-control input-sm" })
                     </div>
                 </div>
-                <br />
-                <div class="row">
+                <div class="row css10">
                     <div class="col-md-2">
-                        <label class="control-label pull-right">Start Date</label>
+                        <label class="control-label">Start Date</label>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <div class="input-group date" id="StartDt">
                                 @Html.TextBoxFor(x => x.courseSalesMaster.StartDate, "{0:dd/MM/yyyy}",
@@ -98,9 +109,9 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <label class="control-label pull-right">End Date</label>
+                        <label class="control-label">End Date</label>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <div class="input-group date" id="EndDt">
                                 @Html.TextBoxFor(x => x.courseSalesMaster.EndDate, "{0:dd/MM/yyyy}",
@@ -111,10 +122,48 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <label class="control-label pull-right">Closing Date</label>
+                </div>
+                <div class="row ">
+                    <div class="col-md-2" style="white-space:nowrap">
+                        <label class="control-label">Min. Registrations</label>
                     </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(x => x.courseSalesMaster.MinimumReg, "{0:#.#}",
+                        new { @class = "form-control input-sm numCss", onblur = "MinimumRegUser()" })
+                    </div>
+                </div>
+                <div class="row css10">
                     <div class="col-md-2">
+                        <label class="control-label">Leads On Hand</label>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(x => x.courseSalesMaster.LeadsOnHead, "{0:#.#}",
+                        new { @class = "form-control input-sm" })
+                    </div>
+                </div>
+                <div class="row css10">
+                    <div class="col-md-2">
+                        <label class="control-label">Registered</label>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(x => x.courseSalesMaster.Registered, "{0:#.#}",
+                        new { @class = "form-control input-sm numCss", onblur = "RegisteredUser()" })
+                    </div>
+                </div>
+                <div class="row css10">
+                    <div class="col-md-2">
+                        <label class="control-label">Available Seats</label>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(x => x.courseSalesMaster.AvailableSeats, "{0:#.#}",
+                        new { @class = "form-control input-sm numCss", @readonly = "readonly" })
+                    </div>
+                </div>
+                <div class="row css10">
+                    <div class="col-md-2">
+                        <label class="control-label">Closing Date</label>
+                    </div>
+                    <div class="col-md-4">
                         <div class="form-group">
                             <div class="input-group date" id="RegClosingDt">
                                 @Html.TextBoxFor(x => x.courseSalesMaster.RegClosingDate,
@@ -127,48 +176,15 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-2">
-                        <label class="control-label pull-right">Min. Registrations</label>
-                    </div>
-                    <div class="col-md-2">
-                        @Html.TextBoxFor(x => x.courseSalesMaster.MinimumReg, "{0:#.#}",
-                        new { @class = "form-control input-sm numCss", onblur = "MinimumRegUser()" })
-                    </div>
-                    <div class="col-md-2">
-                        <label class="control-label pull-right">Leads On Hand</label>
-                    </div>
-                    <div class="col-md-2">
-                        @Html.TextBoxFor(x => x.courseSalesMaster.LeadsOnHead, "{0:#.#}",
-                        new { @class = "form-control input-sm numCss" })
-                    </div>
-                    <div class="col-md-2">
-                        <label class="control-label pull-right">Registered</label>
-                    </div>
-                    <div class="col-md-2">
-                        @Html.TextBoxFor(x => x.courseSalesMaster.Registered, "{0:#.#}",
-                        new { @class = "form-control input-sm numCss", onblur = "RegisteredUser()" })
-                    </div>
-                </div>
-                <br />
-                <div class="row">
-                    <div class="col-md-2">
-                        <label class="control-label pull-right">Available Seats</label>
-                    </div>
-                    <div class="col-md-2">
-                        @Html.TextBoxFor(x => x.courseSalesMaster.AvailableSeats, "{0:#.#}",
-                        new { @class = "form-control input-sm numCss", @readonly = "readonly" })
-                    </div>
-                </div>
-            </div>
-            <div class="box-footer">
-                <div class="row">
                     <div class="col-md-12">
-                        <div class="pull-right">
+                        <div class="text-center">
                             <button type="button" onclick="SaveCourseSalesMaster()" class="btn btn-primary btn-sm"><i class="fa fa-floppy-o"></i>&nbsp;Save</button>
                             <button class="btn btn-default btn-sm" type="button" onclick="location.href = '@Url.Content("~/Master/CourseSalesMasterList")'"><i class="fa fa-backward"></i>&nbsp;Back</button>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="row" style="margin-top:20px;">
             </div>
         </div>
     </section>
@@ -212,7 +228,7 @@
                 $('#courseSalesMaster_RegClosingDate').val(moment(e.date).subtract(14, 'days').format('DD/MM/YYYY'));
             });
 
-            //$("#EndDt").on("dp.change", function (e) {                
+            //$("#EndDt").on("dp.change", function (e) {
             //    $('#StartDt').data("DateTimePicker").maxDate(e.date);
             //});
         });
