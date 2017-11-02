@@ -31,10 +31,10 @@
                             <tr>
                                 <th>Product</th>
                                 <th>Course Name</th> 
-                                <th>No Of Days</th>
+                                <th style="text-align:center">No Of Days</th>
                                 <th>Country</th>
-                                <th>Public Price</th>
-                                <th>Private Price</th>
+                                <th style="text-align:center">Public Price</th>
+                                <th style="text-align:center">Private Price</th>
                                 <th>#Action</th>
                             </tr>
                         </thead>
@@ -44,10 +44,10 @@
                                 <tr>
                                     <td>@Model.ElementAt(i).ProductName</td>
                                     <td>@Model.ElementAt(i).CourseName</td>                                    
-                                    <td>@Model.ElementAt(i).NoOfDays</td>
+                                    <td align="center">@Model.ElementAt(i).NoOfDays</td>
                                     <td>@Model.ElementAt(i).CountryName</td>
-                                    <td>@Model.ElementAt(i).PublicPrice</td>
-                                    <td>@Model.ElementAt(i).PrivatePrice</td>
+                                    <td align="center">@Model.ElementAt(i).PublicPrice</td>
+                                    <td align="center">@Model.ElementAt(i).PrivatePrice</td>
                                     <td>
                                         <button class="btn btn-primary btn-sm" onclick="EditCourse(@Model.ElementAt(i).Id)"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</button>
                                         @*<button class="btn btn-danger btn-sm" onclick="DeleteProductCategory(@Model[i].LookupID)"><i class="fa fa-trash-o"></i>&nbsp;Delete</button>*@

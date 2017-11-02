@@ -61,14 +61,14 @@
                     <div class="col-md-4">
                         @if (Model.courseSalesMaster.Id == -1)
                         {
-                        @Html.DropDownListFor(x => x.courseSalesMaster.Course,
+                            @Html.DropDownListFor(x => x.courseSalesMaster.Course,
                         Enumerable.Empty<SelectListItem>(),
                         "Select Course",
                         new { @class = "form-control input-sm", disabled = "disabled", onchange = "CourseChange(this)" })
                         }
                         else
                         {
-                        @Html.DropDownListFor(x => x.courseSalesMaster.Course,
+                            @Html.DropDownListFor(x => x.courseSalesMaster.Course,
                         new SelectList(Model.courseList, "Id", "CourseName"),
                         "Select Course",
                         new { @class = "form-control input-sm", onchange = "CourseChange(this)" })
@@ -79,10 +79,29 @@
                     <div class="col-md-2">
                         <label class="control-label">No Of Days</label>
                     </div>
+                    @{
+                        var obj = new SelectList(
+                            new[]
+                            {
+                            new { Value=1},
+                             new { Value=2},
+                             new { Value=3},
+                             new { Value=4},
+                             new { Value=5},
+                             new { Value=6},
+                             new { Value=7},
+                             new { Value=8},
+                             new { Value=9},
+                             new { Value=10},
+                            }, "Value", "Value", 1);
+                    }
                     <div class="col-md-4">
+                        @Html.DropDownListFor(x => x.courseSalesMaster.NoOfDays, obj, "Select NoOfDays ", new { @class = "form-control input-sm numCss", @disabled = "disabled" })
+                    </div>
+                    @*<div class="col-md-4">
                         @Html.TextBoxFor(x => x.courseSalesMaster.NoOfDays, "{0:#.#}",
                         new { @class = "form-control input-sm numCss", @readonly = "readonly" })
-                    </div>
+                    </div>*@
                     <div class="col-md-2">
                         <label class="control-label">Month</label>
                     </div>
@@ -90,7 +109,7 @@
                         @Html.DropDownListFor(x => x.courseSalesMaster.Month,
                         new SelectList(Model.monthList, "Value", "Name"),
                         "Select Month",
-                        new { @class = "form-control input-sm" })
+                        new { @class = "form-control input-sm", @disabled = "disabled" })
                     </div>
                 </div>
                 <div class="row css10">
@@ -127,10 +146,22 @@
                     <div class="col-md-2" style="white-space:nowrap">
                         <label class="control-label">Min. Registrations</label>
                     </div>
+                    @{
+                        var obj1 = new SelectList(
+                            new[]
+                            {
+                            new { Value=1},new { Value=2},new { Value=3},new { Value=4},new { Value=5},new { Value=6},new { Value=7},new { Value=8},new { Value=9},
+                             new { Value=10}, new { Value=11},new { Value=12},new { Value=13},new { Value=14},new { Value=15},new { Value=16},new { Value=17},
+                             new { Value=18},new { Value=19},new { Value=20},new { Value=21},new { Value=22},new { Value=23},new { Value=24},new { Value=25},
+                            }, "Value", "Value", 1);
+                         }
                     <div class="col-md-4">
+                        @Html.DropDownListFor(x => x.courseSalesMaster.MinimumReg, obj1, "Select Min.Registrations", new { @class = "form-control input-sm" })
+                    </div>
+                    @*<div class="col-md-4">
                         @Html.TextBoxFor(x => x.courseSalesMaster.MinimumReg, "{0:#.#}",
                         new { @class = "form-control input-sm numCss", onblur = "MinimumRegUser()" })
-                    </div>
+                    </div>*@
                 </div>
                 <div class="row css10">
                     <div class="col-md-2">
@@ -138,6 +169,10 @@
                     </div>
                     <div class="col-md-4">
                         @Html.TextBoxFor(x => x.courseSalesMaster.LeadsOnHead, "{0:#.#}",
+                        new { @class = "form-control input-sm numCss" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.TextBox("select",null, 
                         new { @class = "form-control input-sm" })
                     </div>
                 </div>
@@ -145,9 +180,25 @@
                     <div class="col-md-2">
                         <label class="control-label">Registered</label>
                     </div>
+                    @{
+                        var obj2 = new SelectList(
+                            new[]
+                            {
+                            new { Value=1},new { Value=2},new { Value=3},new { Value=4},new { Value=5},new { Value=6},new { Value=7},new { Value=8},new { Value=9},
+                             new { Value=10}, new { Value=11},new { Value=12},new { Value=13},new { Value=14},new { Value=15},new { Value=16},new { Value=17},
+                             new { Value=18},new { Value=19},new { Value=20},new { Value=21},new { Value=22},new { Value=23},new { Value=24},new { Value=25},
+                            }, "Value", "Value", 1);
+                    }
                     <div class="col-md-4">
+                        @Html.DropDownListFor(x => x.courseSalesMaster.Registered, obj2, "Select Registered", new { @class = "form-control input-sm" })
+                    </div>
+                    @*<div class="col-md-4">
                         @Html.TextBoxFor(x => x.courseSalesMaster.Registered, "{0:#.#}",
                         new { @class = "form-control input-sm numCss", onblur = "RegisteredUser()" })
+                    </div>*@
+                    <div class="col-md-6">
+                        @Html.TextBox("select",null,
+                        new { @class = "form-control input-sm" })
                     </div>
                 </div>
                 <div class="row css10">
@@ -201,6 +252,7 @@
                     up: 'fa fa-arrow-up',
                     down: 'fa fa-arrow-down'
                 },
+                minDate: new Date(),
                 format: 'DD/MM/YYYY'
             });
 
@@ -218,11 +270,15 @@
             @if (Model.courseSalesMaster.Id != -1)
             {
                 <text>
-                $('#EndDt').data("DateTimePicker").minDate($('#courseSalesMaster_StartDate').val());
-                </text>
+            $('#EndDt').data("DateTimePicker").minDate($('#courseSalesMaster_StartDate').val());
+            </text>
             }
 
             $("#StartDt").on("dp.change", function (e) {
+                var d = $('#courseSalesMaster_StartDate').val();
+                var m = d.toString().split("/")[1];
+                var dmonth = parseInt(m);
+                $('#courseSalesMaster_Month').val(dmonth - 1);
                 $('#courseSalesMaster_EndDate').val('');
                 $('#EndDt').data("DateTimePicker").minDate(e.date);
                 $('#courseSalesMaster_RegClosingDate').val(moment(e.date).subtract(14, 'days').format('DD/MM/YYYY'));
@@ -310,8 +366,7 @@
 
         function CourseChange(el) {
             debugger;
-            if (el.value)
-            {
+            if (el.value) {
                 $.ajax({
                     url: '@Url.Content("~/Master/GetCourse?Id=")' + el.value,
                     method: 'GET',
@@ -341,8 +396,7 @@
                     $('#courseSalesMaster_Registered').val('');
                     $('#courseSalesMaster_AvailableSeats').val($('#courseSalesMaster_MinimumReg').val());
                 }
-                else
-                {
+                else {
                     parseInt($('#courseSalesMaster_AvailableSeats').val(parseInt($('#courseSalesMaster_MinimumReg').val()) - ($('#courseSalesMaster_Registered').val() == '' ? 0 : parseInt($('#courseSalesMaster_Registered').val()))));
                 }
             }

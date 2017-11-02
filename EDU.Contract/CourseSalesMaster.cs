@@ -18,7 +18,7 @@ namespace EZY.EDU.Contract
 
         public Int16 NoOfDays { get; set; }
 
-        public Int16 Month { get; set; }
+        public Int16? Month { get; set; }
 
         public DateTime? StartDate { get; set; }
 
