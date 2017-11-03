@@ -9,34 +9,37 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="row">
-                    <div class="col-md-3">
-                        <div class="main-section grey ">
-                            <a href='@Url.Content("~/Master/EduProductList")'>
-                                <div class="menu_section  grey">
-                                    <span><i class="fa fa-book fa-5x" aria-hidden="true"></i></span>
-                                </div>
-                                <div class="content-section grey-btm">
-                                    <b> Education Products </b>
-                                    <p>Create or Modify the Education Product</p>
-                                    <div class="btn btn-lg btn-danger"></div>
-                                </div>
-                            </a>
+                    @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
+                    {
+                        <div class="col-md-3">
+                            <div class="main-section grey ">
+                                <a href='@Url.Content("~/Master/EduProductList")'>
+                                    <div class="menu_section  grey">
+                                        <span><i class="fa fa-book fa-5x" aria-hidden="true"></i></span>
+                                    </div>
+                                    <div class="content-section grey-btm">
+                                        <b> Education Products </b>
+                                        <p>Create or Modify the Education Product</p>
+                                        <div class="btn btn-lg btn-danger"></div>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="main-section dgreen ">
-                            <a href='@Url.Content("~/Master/CourseList")'>
-                                <div class="menu_section  dgreen">
-                                    <span><i class="fa fa-bars fa-5x" aria-hidden="true"></i></span>
-                                </div>
-                                <div class="content-section grey-btm">
-                                    <b> Courses </b>
-                                    <p>Create or Modify the Course</p>
-                                    <div class="btn btn-lg btn-danger"></div>
-                                </div>
-                            </a>
+                        <div class="col-md-3">
+                            <div class="main-section dgreen ">
+                                <a href='@Url.Content("~/Master/CourseList")'>
+                                    <div class="menu_section  dgreen">
+                                        <span><i class="fa fa-bars fa-5x" aria-hidden="true"></i></span>
+                                    </div>
+                                    <div class="content-section grey-btm">
+                                        <b> Courses </b>
+                                        <p>Create or Modify the Course</p>
+                                        <div class="btn btn-lg btn-danger"></div>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                    </div>
+                    }
                     <div class="col-md-3">
                         <div class="main-section org-btm ">
                             <a href='@Url.Content("~/Master/CourseSalesMasterList")'>
@@ -64,4 +67,3 @@
         </div>
     </div>
 </section>
-
