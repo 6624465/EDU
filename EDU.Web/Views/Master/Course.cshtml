@@ -54,24 +54,8 @@
                 <div class="col-md-3">
                     <label class="control-label pull-right">No Of Days</label>
                 </div>
-                @{ 
-                    var obj=new SelectList(
-                        new []
-                        {
-                            new { Value=1},
-                             new { Value=2},
-                             new { Value=3},
-                             new { Value=4},
-                             new { Value=5},
-                             new { Value=6},
-                             new { Value=7},
-                             new { Value=8},
-                             new { Value=9},
-                             new { Value=10},
-                        },"Value","Value",1);
-                }
                 <div class="col-md-4">
-                    @Html.DropDownListFor(x=>x.NoOfDays, obj, "Select NoOfDays ", new { @class = "form-control input-sm" })
+                    @Html.DropDownListFor(x => x.NoOfDays, Enumerable.Range(1, 10).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), "Select NoOfDays ", new { @class = "form-control input-sm" })
                 </div>
                 @*<div class="col-md-8">
                     @Html.TextBoxFor(x => x.NoOfDays, "{0:#.#}",
