@@ -29,7 +29,10 @@
                 </section>
             </div>
             <div class="box-tools">
-                <button class="btn btn-default btn-sm" type="button" onclick="location.href = '@Url.Content("~/Master/CourseSalesMaster?Id=-1")'"><i class="fa fa-plus"></i>&nbsp;Add New Regonal Lead</button>
+                @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
+                {
+                    <button class="btn btn-default btn-sm" type="button" onclick="location.href = '@Url.Content("~/Master/CourseSalesMaster?Id=-1")'"><i class="fa fa-plus"></i>&nbsp;Add New Regonal Lead</button>
+                }
             </div>
         </div>
         <div class="box-body">
@@ -50,7 +53,10 @@
                                 <th style="text-align:center">Registered</th>
                                 <th style="text-align:center">Avl. Seats</th>
                                 <th style="text-align:center">Reg. Closing Dt</th>
-                                <th>#Action</th>
+                                @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
+                                {
+                                    <th>#Action</th>
+                                }
                             </tr>
                         </thead>
                         <tbody>
@@ -73,10 +79,13 @@
                                     </td>
                                     <td align="center">@Model.ElementAt(i).AvailableSeats</td>
                                     <td align="center">@Model.ElementAt(i).RegClosingDate.ToString("dd/MM/yyyy")</td>
-                                    <td>
+                                    @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
+                                    {
+                                        <td>
                                         <button class="btn btn-primary btn-sm" onclick="location.href = '@Url.Content("~/Master/CourseSalesMaster?Id=" + Model.ElementAt(i).Id)'"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</button>
                                         @*<button class="btn btn-danger btn-sm" onclick="DeleteProductCategory(@Model[i].LookupID)"><i class="fa fa-trash-o"></i>&nbsp;Delete</button>*@
                                     </td>
+                                    }
                                 </tr>
                             }
                         </tbody>

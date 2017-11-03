@@ -97,6 +97,9 @@ namespace EDU.Web.Controllers
                 USER_OBJECT = SsnObj;
                 USER_SECURABLES = new RoleRightsBO().GetSecurableItemsListByRoleCode(SsnObj.RoleCode);
 
+                Session["UserID"] = currentUser.UserID;
+                Session["UserName"] = currentUser.UserName;
+
                 if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                     && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                 {
