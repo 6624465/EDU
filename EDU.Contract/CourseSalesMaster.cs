@@ -43,6 +43,8 @@ namespace EZY.EDU.Contract
         public string ModifiedBy { get; set; }
 
         public DateTime ModifiedOn { get; set; }
+        public string LeadsOnHeadRemarks { get; set; }
+        public string RegisteredRemarks { get; set; }
     }
 
     public class CourseSalesMasterViewModel : IContract
@@ -82,5 +84,7 @@ namespace EZY.EDU.Contract
         public string ModifiedBy { get; set; }
 
         public DateTime ModifiedOn { get; set; }
+        public string LeadsOnHeadRemarks { get; set; }
+        public string RegisteredRemarks { get; set; }
     }
 }

@@ -154,16 +154,22 @@
                     </div>
                 </div>
                 <div class="row css10">
-                    <div class="col-md-6">
-                        @Html.TextBox("select", null,
+                    <div class="col-md-2">
+                        <label class="control-label">Leads On Head Remarks</label>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextAreaFor(x => x.courseSalesMaster.LeadsOnHeadRemarks,
                         new { @class = "form-control input-sm" })
                     </div>
                     @*<div class="col-md-4">
                             @Html.TextBoxFor(x => x.courseSalesMaster.Registered, "{0:#.#}",
                             new { @class = "form-control input-sm numCss", onblur = "RegisteredUser()" })
                         </div>*@
-                    <div class="col-md-6">
-                        @Html.TextBox("select", null,
+                    <div class="col-md-2">
+                        <label class="control-label">Registered Remarks</label>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextAreaFor(x => x.courseSalesMaster.RegisteredRemarks,
                         new { @class = "form-control input-sm" })
                     </div>
                 </div>
