@@ -178,7 +178,7 @@
                         <label class="control-label">Available Seats</label>
                     </div>
                     <div class="col-md-4">
-                        @Html.TextBoxFor(x => x.courseSalesMaster.AvailableSeats, "{0:#.#}",
+                        @Html.TextBoxFor(x => x.courseSalesMaster.AvailableSeats, 
                         new { @class = "form-control input-sm numCss", @readonly = "readonly" })
                     </div>
                 </div>
@@ -312,8 +312,14 @@
                 },
                 'courseSalesMaster.AvailableSeats': {
                     required: true
-                }
-            }
+                },
+                'courseSalesMaster.LeadsOnHeadRemarks': {
+                       required: true
+                },
+                'courseSalesMaster.RegisteredRemarks': {
+                required: true
+                    },
+        }
         });
 
         function ProductChange(el) {
