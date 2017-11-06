@@ -268,9 +268,10 @@
         });
 
         function SaveCourseSalesMaster() {
-            $('#courseSalesMaster_NoOfDays').removeAttr('disabled');
-            $('#courseSalesMaster_Month').removeAttr('disabled');
+           
             if ($('#frmCourseDetail').valid()) {
+                $('#courseSalesMaster_NoOfDays').removeAttr('disabled');
+                $('#courseSalesMaster_Month').removeAttr('disabled');
                 $('#frmCourseDetail').submit();
             }
         }
