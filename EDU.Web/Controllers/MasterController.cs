@@ -293,7 +293,7 @@ namespace EDU.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteProduct(int? Id)
+        public ActionResult DeleteEduProduct(int? Id)
         {
             var result =new EduProductBO().DeleteEduProduct(new EduProduct { Id = Id.Value });
 
@@ -346,6 +346,16 @@ namespace EDU.Web.Controllers
             var result = new CourseBO().SaveCouse(course);
 
             return RedirectToAction("CourseList");
+        }
+
+
+        [HttpPost]
+        public ActionResult DeleteEduCourse(int? Id)
+        {
+            var result = new CourseBO().DeleteEduCourse(new Course { Id = Id.Value });
+
+            var list = new CourseBO().GetList();
+            return View("CourseList", list);
         }
         #endregion
 
