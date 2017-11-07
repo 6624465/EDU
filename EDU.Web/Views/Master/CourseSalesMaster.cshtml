@@ -178,7 +178,7 @@
                         <label class="control-label">Available Seats</label>
                     </div>
                     <div class="col-md-4">
-                        @Html.TextBoxFor(x => x.courseSalesMaster.AvailableSeats, 
+                        @Html.TextBoxFor(x => x.courseSalesMaster.AvailableSeats,
                         new { @class = "form-control input-sm numCss", @readonly = "readonly" })
                     </div>
                 </div>
@@ -268,7 +268,7 @@
         });
 
         function SaveCourseSalesMaster() {
-           
+
             if ($('#frmCourseDetail').valid()) {
                 $('#courseSalesMaster_NoOfDays').removeAttr('disabled');
                 $('#courseSalesMaster_Month').removeAttr('disabled');
@@ -315,12 +315,12 @@
                     required: true
                 },
                 'courseSalesMaster.LeadsOnHeadRemarks': {
-                       required: true
+                    required: true
                 },
                 'courseSalesMaster.RegisteredRemarks': {
-                required: true
-                    },
-        }
+                    required: true
+                },
+            }
         });
 
         function ProductChange(el) {

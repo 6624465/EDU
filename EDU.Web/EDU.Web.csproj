@@ -44,6 +44,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -69,6 +77,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\MvcReportViewer.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -263,6 +273,16 @@
     <Content Include="Images\sort_desc_disabled.png" />
     <Content Include="Images\sri.png" />
     <Content Include="Images\user2-160x160.jpg" />
+    <Content Include="Models\EduEntity.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EduEntity.edmx</DependentUpon>
+      <LastGenOutput>EduEntity.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\EduEntity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EduEntity.edmx</DependentUpon>
+      <LastGenOutput>EduEntity.cs</LastGenOutput>
+    </Content>
     <Content Include="MVCReportViewer.aspx" />
     <Content Include="MVCReportViewerErrorPage.html" />
     <Content Include="Scripts\app.min.js" />
@@ -276,6 +296,13 @@
     <Content Include="Scripts\demo.js" />
     <Content Include="Scripts\fastclick.js" />
     <Content Include="Css\templates\WelcomeEmail.cshtml" />
+    <EntityDeploy Include="Models\EduEntity.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EduEntity.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\EduEntity.edmx.diagram">
+      <DependentUpon>EduEntity.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\RMAS.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\icheck.js" />
@@ -307,6 +334,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LayoutController.cs" />
     <Compile Include="Controllers\MasterController.cs" />
+    <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Core\WebSsnFilter.cs" />
@@ -315,7 +343,25 @@
     </Compile>
     <Compile Include="HtmlHelpers\EncryptedActionParameterAttribute.cs" />
     <Compile Include="HtmlHelpers\UrlEncryptionHelper.cs" />
+    <Compile Include="Models\EduEntity.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EduEntity.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EduEntity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EduEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EduEntity.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EduEntity.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\EmailGenerator.cs" />
+    <Compile Include="Models\Registration.cs">
+      <DependentUpon>EduEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="MVCReportViewer.aspx.cs">
       <DependentUpon>MVCReportViewer.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -389,6 +435,8 @@
     <Content Include="Views\Master\CourseSalesMasterList.cshtml" />
     <Content Include="Views\Master\CourseSalesMaster.cshtml" />
     <Content Include="Views\Home\Education.cshtml" />
+    <Content Include="Views\Registration\Registration.cshtml" />
+    <Content Include="Views\Registration\GetRegistrationList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -413,6 +461,9 @@
       <Project>{7ec50a4e-d1b6-4108-aafc-85997fbaf6f5}</Project>
       <Name>EDU.DataFactory</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

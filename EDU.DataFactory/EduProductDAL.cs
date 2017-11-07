@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using EZY.EDU.Contract;
+using System.Data;
 
 namespace EZY.EDU.DataFactory
 {
@@ -27,6 +28,19 @@ namespace EZY.EDU.DataFactory
                                                        .Build(), Obj.limit, Obj.offset, Obj.sortColumn, Obj.sortType).ToList();
         }
 
+        public bool IsEduProductExists<T>(T item) where T : IContract
+        {
+            var product = (EduProduct)(object)item;
+            var result = 0;
+
+            var savecommand = db.GetStoredProcCommand(DBRoutine.PRODUCTCOUNT);
+            db.AddInParameter(savecommand, "ProductName", DbType.String, product.ProductName);
+
+            result = Convert.ToInt32(db.ExecuteScalar(savecommand));
+
+            return (result > 0 ? true : false);
+        }
+
         public bool Save<T>(T item) where T : IContract
         {
             var result = 0;
@@ -44,7 +58,7 @@ namespace EZY.EDU.DataFactory
 
                 db.AddInParameter(savecommand, "Id", System.Data.DbType.Int32, product.Id);
                 db.AddInParameter(savecommand, "ProductName", System.Data.DbType.String, product.ProductName);
-                db.AddInParameter(savecommand, "ProductDescription", System.Data.DbType.String, product.ProductDescription);                
+                db.AddInParameter(savecommand, "ProductDescription", System.Data.DbType.String, product.ProductDescription);
                 db.AddInParameter(savecommand, "CreatedBy", System.Data.DbType.String, product.CreatedBy);
                 db.AddInParameter(savecommand, "CreatedOn", System.Data.DbType.DateTime, product.CreatedOn);
                 db.AddInParameter(savecommand, "ModifiedBy", System.Data.DbType.String, product.ModifiedBy);
@@ -105,5 +119,7 @@ namespace EZY.EDU.DataFactory
                                                     item.Id).FirstOrDefault();
             return productItem;
         }
+
+
     }
 }

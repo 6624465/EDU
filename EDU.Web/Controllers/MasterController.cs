@@ -287,10 +287,30 @@ namespace EDU.Web.Controllers
             eduProduct.CreatedOn = UTILITY.SINGAPORETIME;
             eduProduct.ModifiedBy = USER_ID;
             eduProduct.ModifiedOn = UTILITY.SINGAPORETIME;
-            var result = new EduProductBO().SaveEduProduct(eduProduct);
+            if (!IsEduProductExists(eduProduct.ProductName))
+            {
+                var result = new EduProductBO().SaveEduProduct(eduProduct);
+            }
 
             return RedirectToAction("EduProductList");
         }
+
+        [HttpPost]
+        public ActionResult DeleteEduProduct(int? Id)
+        {
+            var result =new EduProductBO().DeleteEduProduct(new EduProduct { Id = Id.Value });
+
+            var list = new EduProductBO().GetList();
+            return View("EduProductList", list.AsEnumerable());
+        }
+
+
+        [HttpGet]
+        public bool IsEduProductExists(string productName)
+        {
+            return new EduProductBO().IsEduProductExists(new EduProduct { ProductName = productName });
+        }
+
         #endregion
 
         #region Course
@@ -336,6 +356,16 @@ namespace EDU.Web.Controllers
             var result = new CourseBO().SaveCouse(course);
 
             return RedirectToAction("CourseList");
+        }
+
+
+        [HttpPost]
+        public ActionResult DeleteEduCourse(int? Id)
+        {
+            var result = new CourseBO().DeleteEduCourse(new Course { Id = Id.Value });
+
+            var list = new CourseBO().GetList();
+            return View("CourseList", list);
         }
         #endregion
 
@@ -393,6 +423,16 @@ namespace EDU.Web.Controllers
 
             var result = new CourseSalesMasterBO().SaveCourseSalesMaster(courseSalesMaster);
             return RedirectToAction("CourseSalesMasterList");
+        }
+
+
+        [HttpPost]
+        public ActionResult DeleteCourseSalesMaster(int? Id)
+        {
+            var result = new CourseSalesMasterBO().DeleteCourseSalesMaster(new CourseSalesMaster { Id = Id.Value });
+
+            return View("CourseSalesMasterList",
+               new CourseSalesMasterBO().GetList().AsEnumerable());
         }
         #endregion
     }

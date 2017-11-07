@@ -8,7 +8,7 @@
     <link href="@Url.Content("~/Css/dataTables.responsive.css")" rel="stylesheet" />
     <link href="@Url.Content("~/Css/style.min.css")" rel="stylesheet" />
 }
-<section class="content">
+<section class="content" >
     <div class="box box-dnex">
         <div class="box-header">
             <div class="row">
@@ -27,7 +27,7 @@
                         <thead>
                             <tr>
                                 <th>Product Name</th>
-                                <th class="pull-right">#Action</th>
+                                <th class="pull-right" style="width: 100px;">#Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -36,8 +36,8 @@
                                 <tr>
                                     <td>@Model.ElementAt(i).ProductName</td>
                                     <td class="pull-right">
-                                        <button class="btn btn-primary btn-xs" onclick="EditEduProduct(@Model.ElementAt(i).Id)"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</button>
-                                        @*<button class="btn btn-danger btn-sm" onclick="DeleteProductCategory(@Model[i].LookupID)"><i class="fa fa-trash-o"></i>&nbsp;Delete</button>*@
+                                        <button  class="btn btn-primary btn-xs" onclick="EditEduProduct(@Model.ElementAt(i).Id)"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</button>
+                                        <button class="btn btn-danger btn-xs" onclick="DeleteProductCategory(@Model.ElementAt(i).Id)"><i class="fa fa-trash-o"></i>&nbsp;Delete</button>
                                     </td>
                                 </tr>
                             }
@@ -98,6 +98,24 @@
             });
         }
 
+        function DeleteProductCategory(Id)
+        {
+            if (confirm("Are you sure, do you want delete?")) {
+                debugger;
+                $.ajax({
+                    url: '@Url.Content("~/Master/DeleteEduProduct?Id=")' + Id,
+                    method: 'post',
+                    contentType: 'text/html',
+                    success: function (html) {
+                        alert("Deleted successfully...");
+                    },
+                    error: function (err) {
+
+                    }
+                })
+            }
+        }
+
         $('#frmEduProduct').validate({
             rules: {
                 ProductName: {
@@ -115,6 +133,25 @@
             if ($('#frmEduProduct').valid()) {
                 $('#frmEduProduct').submit();
             }
+        };
+
+        function ValidateProductName() {
+            debugger;
+            $.ajax({
+                url: '@Url.Content("~/Master/IsEduProductExists?productName=")' + $('#ProductName').val(),
+                    method: 'get',
+                    contentType: 'text/html',
+                    success: function (html) {
+                        debugger;
+                        if (html=="True") {
+                            alert("Product already exists. Please re-enter new product.");
+                            $('#ProductName').val('');
+                        }
+                    },
+                    error: function (err) {
+
+                    }
+                })
         };
 
         //$('#ProductCode').keypress(function (e) {
