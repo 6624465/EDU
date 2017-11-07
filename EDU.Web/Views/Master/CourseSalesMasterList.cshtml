@@ -46,14 +46,14 @@
                 <section class="content-header">
                     <ol class="breadcrumb">
                         <li><a href='@Url.Content("~/Home/education")'><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li class="active">Regonal Leads List</li>
+                        <li class="active">Regional Leads List</li>
                     </ol>
                 </section>
             </div>
             <div class="box-tools">
                 @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
                 {
-                    <button class="btn btn-default btn-sm" type="button" onclick="location.href = '@Url.Content("~/Master/CourseSalesMaster?Id=-1")'"><i class="fa fa-plus"></i>&nbsp;Add New Regonal Lead</button>
+                    <button class="btn btn-default btn-sm" type="button" onclick="location.href = '@Url.Content("~/Master/CourseSalesMaster?Id=-1")'"><i class="fa fa-plus"></i>&nbsp;Add New Regional Lead</button>
                 }
             </div>
         </div>
@@ -125,7 +125,7 @@
                                     {
                                         <td>
                                         <button class="btn btn-primary btn-sm" onclick="location.href = '@Url.Content("~/Master/CourseSalesMaster?Id=" + Model.ElementAt(i).Id)'"><i class="fa fa-pencil-square-o"></i></button>
-                                        <button class="btn btn-danger btn-sm" onclick="DeleteCourseSaleMaster(@Model.ElementAt(i).Id)"><i class="fa fa-trash-o"></i></button>
+                                        <button class="btn btn-danger btn-sm" onclick="DeleteCourseSalesMaster(@Model.ElementAt(i).Id)"><i class="fa fa-trash-o"></i></button>
                                     </td>
                                     }
                                 </tr>
@@ -146,6 +146,11 @@
     </div>
 </section>
 
+@using (Html.BeginForm("DeleteCourseSalesMaster", "Master", FormMethod.Post, new { id = "frmDelete", name = "frmDelete" }))
+{
+    <input type="hidden" id="id" name="id" />
+}
+
 @section secscripts{
     
    
@@ -164,26 +169,12 @@
         });
     </script>
     <script type="text/javascript">
-        function DeleteCourseSaleMaster(Id)
+        function DeleteCourseSalesMaster(Id)
         {
 
             if (confirm("Are you sure, do you want delete?")) {
-                debugger;
-                $.ajax({
-                    url: '@Url.Content("~/Master/DeleteCourseSalesMaster?Id=")' + Id,
-                    method: 'post',
-                    contentType: 'text/html',
-                    success: function (html) {
-                        alert("Deleted successfully...");
-                        if(html)
-                        {
-                            location.reload();
-                        }
-                    },
-                    error: function (err) {
-
-                    }
-                })
+                $('#id').val(Id);
+                $('#frmDelete').submit();
             }
             
         }

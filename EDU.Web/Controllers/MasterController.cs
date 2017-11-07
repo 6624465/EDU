@@ -317,7 +317,7 @@ namespace EDU.Web.Controllers
         [HttpGet]
         public ViewResult CourseList()
         {
-            var list = new CourseBO().GetList();
+            var list = new CourseBO().GetList().AsEnumerable();
             return View("CourseList", list);
         }
 
@@ -366,6 +366,12 @@ namespace EDU.Web.Controllers
 
             var list = new CourseBO().GetList();
             return View("CourseList", list);
+        }
+
+        [HttpGet]
+        public bool IsEduCourseExists(string courseName, string country, int product)
+        {
+            return new CourseBO().IsEduCourseExists(new Course { CourseName = courseName, Country = country, Product = product, });
         }
         #endregion
 

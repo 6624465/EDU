@@ -13,7 +13,7 @@ namespace EZY.EDU.BusinessFactory
             courseDAL = new CourseDAL();
         }
 
-        public IEnumerable<CourseVm> GetList()
+        public List<CourseVm> GetList()
         {
             return courseDAL.GetList();
         }
@@ -36,6 +36,11 @@ namespace EZY.EDU.BusinessFactory
         public bool DeleteEduCourse(Course item)
         {
             return courseDAL.Delete<Course>(item);
+        }
+
+        public bool IsEduCourseExists(Course item)
+        {
+            return courseDAL.IsEduCourseExists<Course>(item);
         }
     }
 }
