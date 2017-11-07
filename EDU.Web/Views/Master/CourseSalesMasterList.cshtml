@@ -112,8 +112,8 @@
                                     @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
                                     {
                                         <td>
-                                        <button class="btn btn-primary btn-sm" onclick="location.href = '@Url.Content("~/Master/CourseSalesMaster?Id=" + Model.ElementAt(i).Id)'"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</button>
-                                        <button class="btn btn-danger btn-sm" onclick="DeleteCourseSaleMaster(@Model.ElementAt(i).Id)"><i class="fa fa-trash-o"></i>&nbsp;Delete</button>
+                                        <button class="btn btn-primary btn-sm" onclick="location.href = '@Url.Content("~/Master/CourseSalesMaster?Id=" + Model.ElementAt(i).Id)'"><i class="fa fa-pencil-square-o"></i></button>
+                                        <button class="btn btn-danger btn-sm" onclick="DeleteCourseSaleMaster(@Model.ElementAt(i).Id)"><i class="fa fa-trash-o"></i></button>
                                     </td>
                                     }
                                 </tr>
