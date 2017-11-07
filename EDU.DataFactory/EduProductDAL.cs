@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using EZY.EDU.Contract;
+using System.Data;
 
 namespace EZY.EDU.DataFactory
 {
@@ -105,5 +106,7 @@ namespace EZY.EDU.DataFactory
                                                     item.Id).FirstOrDefault();
             return productItem;
         }
+
+        
     }
 }

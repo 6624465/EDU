@@ -32,5 +32,10 @@ namespace EZY.EDU.BusinessFactory
         {
             return courseDAL.GetCoursesByProduct(Id);
         }
+        
+        public bool DeleteEduCourse(Course item)
+        {
+            return courseDAL.Delete<Course>(item);
+        }
     }
 }

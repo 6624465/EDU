@@ -291,6 +291,16 @@ namespace EDU.Web.Controllers
 
             return RedirectToAction("EduProductList");
         }
+
+        [HttpPost]
+        public ActionResult DeleteEduProduct(int? Id)
+        {
+            var result =new EduProductBO().DeleteEduProduct(new EduProduct { Id = Id.Value });
+
+            var list = new EduProductBO().GetList();
+            return View("EduProductList", list.AsEnumerable());
+        }
+
         #endregion
 
         #region Course
@@ -336,6 +346,16 @@ namespace EDU.Web.Controllers
             var result = new CourseBO().SaveCouse(course);
 
             return RedirectToAction("CourseList");
+        }
+
+
+        [HttpPost]
+        public ActionResult DeleteEduCourse(int? Id)
+        {
+            var result = new CourseBO().DeleteEduCourse(new Course { Id = Id.Value });
+
+            var list = new CourseBO().GetList();
+            return View("CourseList", list);
         }
         #endregion
 
