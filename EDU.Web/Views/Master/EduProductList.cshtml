@@ -100,20 +100,20 @@
         
         function DeleteProductCategory(Id)
         {
-            debugger;
-            $.ajax({
-                url: '@Url.Content("~/Master/DeleteEduProduct?Id=")' + Id,
-                method: 'delete',
-                contentType: 'text/html',
-                success:function(html)
-                {
+            if (confirm("Are you sure, do you want delete?")) {
+                debugger;
+                $.ajax({
+                    url: '@Url.Content("~/Master/DeleteEduProduct?Id=")' + Id,
+                    method: 'post',
+                    contentType: 'text/html',
+                    success: function (html) {
+                        alert("Deleted successfully...");
+                    },
+                    error: function (err) {
 
-                },
-                error:function(err)
-                {
-
-                }
-            })
+                    }
+                })
+            }
         }
 
         $('#frmEduProduct').validate({
