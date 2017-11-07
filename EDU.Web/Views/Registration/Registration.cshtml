@@ -1,0 +1,220 @@
+﻿@model  EDU.Web.Models.Registration
+@{
+    ViewBag.Title = "Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section seccss{
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css" rel="stylesheet">
+}
+<h2>Registration</h2>
+<section class="content">
+    @using (Html.BeginForm("Registration", "Registration", FormMethod.Post, new { id = "frmRegistration", name = "frmRegistration" }))
+    {
+
+        <div class="row css10">
+            <div class="col-md-2">
+                <label class="control-label pull-right">Oracle DataBase</label>
+            </div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.OracleDataBase, new { @class = "form-control input-sm" })
+            </div>
+            <div class="col-md-2">
+                <label class="control-label pull-right">Amount</label>
+            </div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.Amount, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row css10">
+            <div class="col-md-2">
+                <label class="control-label pull-right">WHT</label>
+            </div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.WHT, new { @class = "form-control" })
+            </div>
+            <div class="col-md-2">
+                <label class="control-label pull-right">VAT/TAX</label>
+            </div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.VAT, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row css10">
+            <div class="col-md-2">
+                <label class="control-label pull-right">Payment1</label>
+            </div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.Payment1, new { @class = "form-control" })
+            </div>
+            <div class="col-md-2">
+                <label class="control-label pull-right">Payment2</label>
+            </div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.Payment2, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row css10">
+            <div class="col-md-2">
+                <label class="control-label pull-right">Balance</label>
+            </div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.Balance, new { @class = "form-control" })
+            </div>
+            <div class="col-md-2">
+                <label class="control-label pull-right">Email</label>
+            </div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row css10">
+            <div class="col-md-2">
+                <label class="control-label pull-right">Contact</label>
+            </div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.Contact, new { @class = "form-control" })
+            </div>
+            <div class="col-md-2">
+
+                <label class="control-label pull-right">CompanyName</label>
+            </div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.CompanyName, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row css10">
+            <div class="col-md-2">
+                <label class="control-label pull-right">Product</label>
+            </div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.Product, new { @class = "form-control" })
+            </div>
+            <div class="col-md-2">
+                <label class="control-label pull-right">CourseName</label>
+            </div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.CourseName, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row css10">
+            <div class="col-md-2">
+                <label class="control-label pull-right">Start Date</label>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <div class="input-group date" id="StartDt">
+                        @Html.TextBoxFor(x => x.StartDate, new { @class = "form-control" })
+                        <span class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <label class="control-label pull-right">End Date</label>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <div class="input-group date" id="EndDt">
+                        @Html.TextBoxFor(x => x.EndDate, new { @class = "form-control input-sm dtCss" })
+                        <span class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row css10">
+            <div class="col-md-2">
+                <label class="control-label pull-right">Trainer Name</label>
+            </div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.TrainerName, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="pull-right">
+                    <button type="button" onclick="SaveRegistration()" class="btn btn-primary btn-sm"><i class="fa fa-floppy-o"></i>&nbsp;Save</button>
+                </div>
+            </div>
+        </div>
+    }
+</section>
+@section secscripts {
+    <script src="@Url.Content("~/Scripts/moment.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap-datetimepicker.js")"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            $('#StartDt,#EndDt').datetimepicker({
+                icons: {
+                    time: 'fa fa-clock-o',
+                    date: 'fa fa-calendar',
+                    up: 'fa fa-arrow-up',
+                    down: 'fa fa-arrow-down'
+                },
+                //minDate: new Date(),
+                format: 'DD/MM/YYYY'
+            });
+        });
+
+        function SaveRegistration() {
+            if ($('#frmRegistration').valid()) {
+                $('#frmRegistration').submit();
+            }
+        }
+        $('#frmRegistration').validate({
+            rules: {
+                'OracleDataBase': {
+                    required: true
+                },
+                'Amount': {
+                    required: true
+                },
+                'WHT': {
+                    required: true
+                },
+                'TAX': {
+                    required: true
+                },
+                'Payment1': {
+                    required: true
+                },
+                'Payment2': {
+                    required: true
+                },
+                'Email': {
+                    required: true,
+                    email: true
+                },
+                'CompanyName': {
+                    required: true
+                },
+                'Product': {
+                    required: true
+                },
+                'CourseName': {
+                    required: true
+                },
+                'StartDate': {
+                    required: true
+                },
+                'EndDate': {
+                    required: true
+                },
+                'TrainerName': {
+                    required: true
+                }
+                ,
+                'Balance': {
+                    required: true
+                },
+                'Contact': {
+                    required: true
+                }
+            }
+        });
+
+    </script>
+}

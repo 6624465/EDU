@@ -82,9 +82,9 @@
                                     @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
                                     {
                                         <td>
-                                        <button class="btn btn-primary btn-sm" onclick="location.href = '@Url.Content("~/Master/CourseSalesMaster?Id=" + Model.ElementAt(i).Id)'"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</button>
-                                        <button class="btn btn-danger btn-sm" onclick="DeleteCourseSaleMaster(@Model.ElementAt(i).Id)"><i class="fa fa-trash-o"></i>&nbsp;Delete</button>
-                                    </td>
+                                            <button class="btn btn-primary btn-sm" onclick="location.href = '@Url.Content("~/Master/CourseSalesMaster?Id=" + Model.ElementAt(i).Id)'"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</button>
+                                            <button class="btn btn-danger btn-sm" onclick="DeleteCourseSaleMaster(@Model.ElementAt(i).Id)"><i class="fa fa-trash-o"></i>&nbsp;Delete</button>
+                                        </td>
                                     }
                                 </tr>
                             }
@@ -105,8 +105,8 @@
 </section>
 
 @section secscripts{
-    
-   
+
+
     <script src="@Url.Content("~/Scripts/jquery.dataTables.js")"></script>
     <script src="@Url.Content("~/Scripts/dataTables.bootstrap.js")"></script>
     <script type="text/javascript">
@@ -119,8 +119,7 @@
         });
     </script>
     <script type="text/javascript">
-        function DeleteCourseSaleMaster(Id)
-        {
+        function DeleteCourseSaleMaster(Id) {
             debugger;
         }
     </script>
