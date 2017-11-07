@@ -26,5 +26,6 @@ namespace EDU.Web.Models
         }
     
         public virtual DbSet<Registration> Registrations { get; set; }
+        public virtual DbSet<TrainerInformation> TrainerInformations { get; set; }
     }
 }
