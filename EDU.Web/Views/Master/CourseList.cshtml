@@ -30,7 +30,7 @@
                         <thead>
                             <tr>
                                 <th>Product</th>
-                                <th>Course Name</th> 
+                                <th>Course Name</th>
                                 <th style="text-align:center">No Of Days</th>
                                 <th>Country</th>
                                 <th style="text-align:center">Public Price</th>
@@ -43,14 +43,14 @@
                             {
                                 <tr>
                                     <td>@Model.ElementAt(i).ProductName</td>
-                                    <td>@Model.ElementAt(i).CourseName</td>                                    
+                                    <td>@Model.ElementAt(i).CourseName</td>
                                     <td align="center">@Model.ElementAt(i).NoOfDays</td>
                                     <td>@Model.ElementAt(i).CountryName</td>
                                     <td align="center">@Model.ElementAt(i).PublicPrice</td>
                                     <td align="center">@Model.ElementAt(i).PrivatePrice</td>
                                     <td>
-                                        <button class="btn btn-primary btn-sm" onclick="EditCourse(@Model.ElementAt(i).Id)"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</button>
-                                        <button class="btn btn-danger btn-sm" onclick="DeleteCourse(@Model.ElementAt(i).Id)"><i class="fa fa-trash-o"></i>&nbsp;Delete</button>
+                                        <button class="btn btn-primary btn-sm" onclick="EditCourse(@Model.ElementAt(i).Id)"><i class="fa fa-pencil-square-o"></i></button>
+                                        <button class="btn btn-danger btn-sm" onclick="DeleteEduCourse(@Model.ElementAt(i).Id)"><i class="fa fa-trash-o"></i></button>
                                     </td>
                                 </tr>
                             }
@@ -69,6 +69,10 @@
         </div>
     </div>
 </section>
+@using (Html.BeginForm("DeleteEduCourse", "Master", FormMethod.Post, new { id = "frmDelete", name = "frmDelete" }))
+{
+    <input type="hidden" id="id" name="id" />
+}
 @using (Html.BeginForm("SaveCourse", "Master", FormMethod.Post, new { id = "frmCourse", name = "frmCourse" }))
 {
     <div id="CourseModal" class="modal fade" role="dialog">
@@ -76,6 +80,8 @@
 }
 @section secscripts{
     <script type="text/javascript">
+
+
         function AddCourse() {
             $.ajax({
                 url: '@Url.Content("~/Master/Course")',
@@ -90,7 +96,7 @@
             });
         }
 
-        function EditCourse(Id) {            
+        function EditCourse(Id) {
             $.ajax({
                 url: '@Url.Content("~/Master/Course?Id=")' + Id,
                 method: 'get',
@@ -103,21 +109,12 @@
                 }
             });
         }
-        function DeleteCourse(Id)
+        function DeleteEduCourse(Id)
         {
             debugger;
             if (confirm("Are you sure, do you want delete?")) {
-                $.ajax({
-                    url: '@Url.Content("~/Master/DeleteEduCourse?Id=")' + Id,
-                    method: 'post',
-                    contentType: 'text/html',
-                    success: function (html) {
-                        alert("Deleted successfully...");
-                    },
-                    error: function (err) {
-
-                    }
-                })
+                $('#id').val(Id);
+                $('#frmDelete').submit();
             }
         }
         $('#frmCourse').validate({
@@ -153,7 +150,85 @@
             if ($('#frmCourse').valid()) {
                 $('#frmCourse').submit();
             }
-        };        
+        };
+
+        function SaveCourse() {
+            debugger;
+            var cName = $('#CourseName').val() == null ? '' : $('#CourseName').val();
+            var country = $('#Country').val() == null ? '' : $('#Country').val();
+            var product = $('#Product').val() == null ? '' : $('#Product').val();
+
+
+            if (cName != '' && country != '' && product != '') {
+                if ($('#Id').val() == '-1') {
+                    var promise = ValidateByCourseName();
+                    $.when(promise).done(function (result) {
+                        debugger;
+                        if (result == "False") {
+                            if ($('#frmCourse').valid()) {
+                                $('#CourseName').removeAttr('disabled');
+                                $('#Country').removeAttr('disabled');
+                                $('#Product').removeAttr('disabled');
+                                $('#frmCourse').submit();
+                            }
+                        }
+                        else {
+                            if (result == "True") {
+                                alert("Course already exists with the combination of country and Product. Please re-enter new course.");
+                                $('#CourseName').val('');
+                                if ($('#frmCourse').valid()) {
+                                    //$('#frmCourse').submit();
+                                }
+                            }
+                        }
+                    });
+                }
+                else {
+                    if ($('#frmCourse').valid()) {
+                        $('#CourseName').removeAttr('disabled');
+                        $('#Country').removeAttr('disabled');
+                        $('#Product').removeAttr('disabled');
+                        $('#frmCourse').submit();
+                    }
+                }
+            }
+            else {
+                if ($('#frmCourse').valid()) {
+                    //$('#frmCourse').submit();
+                }
+            }
+        };
+
+        function ValidateByCourseName() {
+
+            var def = $.Deferred();
+            $.ajax({
+                url: '@Url.Content("~/Master/IsEduCourseExists?courseName=")' + $('#CourseName').val() + '&country=' + $('#Country').val() + '&product=' + $('#Product').val(),
+                method: 'get',
+                contentType: 'text/html',
+                success: function (result) {
+                    def.resolve(result);
+                }
+            });
+            return def.promise();
+        };
+
+
+        function ValidateCourseName(isBlur) {
+            var promise = ValidateByCourseName();
+            $.when(promise).done(function (result) {
+                if (isBlur) {
+                    if (result == "True") {
+                        alert("Course already exists with the combination of country and Product. Please re-enter new course.");
+                        $('#CourseName').val('');
+                    }
+                }
+                else
+                {
+                    return result
+                }
+            });
+        };
     </script>
 
     <script src="@Url.Content("~/Scripts/jquery.dataTables.js")"></script>

@@ -33,10 +33,10 @@ namespace EZY.EDU.DataFactory
             var product = (EduProduct)(object)item;
             var result = 0;
 
-            var savecommand = db.GetStoredProcCommand(DBRoutine.PRODUCTCOUNT);
-            db.AddInParameter(savecommand, "ProductName", DbType.String, product.ProductName);
+            var command = db.GetStoredProcCommand(DBRoutine.PRODUCTCOUNT);
+            db.AddInParameter(command, "ProductName", DbType.String, product.ProductName);
 
-            result = Convert.ToInt32(db.ExecuteScalar(savecommand));
+            result = Convert.ToInt32(db.ExecuteScalar(command));
 
             return (result > 0 ? true : false);
         }

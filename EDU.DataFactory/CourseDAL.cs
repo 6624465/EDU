@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using EZY.EDU.Contract;
+using System.Data;
 
 namespace EZY.EDU.DataFactory
 {
@@ -14,9 +15,9 @@ namespace EZY.EDU.DataFactory
             db = DatabaseFactory.CreateDatabase("EDU");
         }
 
-        public IEnumerable<CourseVm> GetList()
+        public List<CourseVm> GetList()
         {
-            return db.ExecuteSprocAccessor(DBRoutine.LISTEDUCOURSE, MapBuilder<CourseVm>.BuildAllProperties()).AsEnumerable();
+            return db.ExecuteSprocAccessor(DBRoutine.LISTEDUCOURSE, MapBuilder<CourseVm>.BuildAllProperties()).ToList();
         }
 
         public List<Course> GetProductTableDataList(DataTableObject Obj)
@@ -99,6 +100,22 @@ namespace EZY.EDU.DataFactory
             }
 
             return result;
+        }
+
+
+        public bool IsEduCourseExists<T>(T item) where T : IContract
+        {
+            var course = (Course)(object)item;
+            var result = 0;
+
+            var command = db.GetStoredProcCommand(DBRoutine.COURSECOUNT);
+            db.AddInParameter(command, "CourseName", DbType.String, course.CourseName);
+            db.AddInParameter(command, "Country", DbType.String, course.Country);
+            db.AddInParameter(command, "Product", DbType.Int32, course.Product);
+
+            result = Convert.ToInt32(db.ExecuteScalar(command));
+
+            return (result > 0 ? true : false);
         }
 
         public IContract GetItem<T>(IContract lookupItem) where T : IContract
