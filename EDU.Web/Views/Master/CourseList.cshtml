@@ -50,7 +50,7 @@
                                     <td align="center">@Model.ElementAt(i).PrivatePrice</td>
                                     <td>
                                         <button class="btn btn-primary btn-sm" onclick="EditCourse(@Model.ElementAt(i).Id)"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</button>
-                                        @*<button class="btn btn-danger btn-sm" onclick="DeleteProductCategory(@Model[i].LookupID)"><i class="fa fa-trash-o"></i>&nbsp;Delete</button>*@
+                                        <button class="btn btn-danger btn-sm" onclick="DeleteCourse(@Model.ElementAt(i).Id)"><i class="fa fa-trash-o"></i>&nbsp;Delete</button>
                                     </td>
                                 </tr>
                             }
@@ -103,7 +103,22 @@
                 }
             });
         }
+        function DeleteCourse(Id)
+        {
+            $.ajax({
+                url: '@Url.Content("~/Master/DeleteEduCourse?Id=")' + Id,
+                method: 'delete',
+                contentType: 'text/html',
+                success:function(html)
+                {
 
+                },
+                error:function(err)
+                {
+
+                }
+            })
+        }
         $('#frmCourse').validate({
             rules: {
                 Country: {
