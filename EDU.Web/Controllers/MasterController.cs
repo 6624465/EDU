@@ -414,6 +414,16 @@ namespace EDU.Web.Controllers
             var result = new CourseSalesMasterBO().SaveCourseSalesMaster(courseSalesMaster);
             return RedirectToAction("CourseSalesMasterList");
         }
+
+
+        [HttpDelete]
+        public ActionResult DeleteCourseSalesMaster(int? Id)
+        {
+            var result = new CourseSalesMasterBO().DeleteCourseSalesMaster(new CourseSalesMaster { Id = Id.Value });
+
+            return View("CourseSalesMasterList",
+               new CourseSalesMasterBO().GetList().AsEnumerable());
+        }
         #endregion
     }
 }
