@@ -121,7 +121,23 @@
     <script type="text/javascript">
         function DeleteCourseSaleMaster(Id)
         {
-            debugger;
+
+            if (confirm("Are you sure, do you want delete?")) {
+                debugger;
+                $.ajax({
+                    url: '@Url.Content("~/Master/DeleteCourseSalesMaster?Id=")' + Id,
+                    method: 'post',
+                    contentType: 'text/html',
+                    success: function (html) {
+
+                        alert("Deleted successfully...");
+                    },
+                    error: function (err) {
+
+                    }
+                })
+            }
+            
         }
     </script>
 }

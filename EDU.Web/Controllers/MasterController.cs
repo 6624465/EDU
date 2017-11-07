@@ -423,7 +423,7 @@ namespace EDU.Web.Controllers
         }
 
 
-        [HttpDelete]
+        [HttpPost]
         public ActionResult DeleteCourseSalesMaster(int? Id)
         {
             var result = new CourseSalesMasterBO().DeleteCourseSalesMaster(new CourseSalesMaster { Id = Id.Value });
