@@ -12,7 +12,7 @@ namespace EDU.Web.ViewModels.Master
     {
         public CourseSalesMaster courseSalesMaster { get; set; }
 
-        public IEnumerable<Country> countryList { get; set; }
+        public IEnumerable<Branch> branchList { get; set; }
 
         public IEnumerable<Course> courseList { get; set; }
 
