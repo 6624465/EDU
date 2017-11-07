@@ -28,6 +28,19 @@ namespace EZY.EDU.DataFactory
                                                        .Build(), Obj.limit, Obj.offset, Obj.sortColumn, Obj.sortType).ToList();
         }
 
+        public bool IsEduProductExists<T>(T item) where T : IContract
+        {
+            var product = (EduProduct)(object)item;
+            var result = 0;
+
+            var savecommand = db.GetStoredProcCommand(DBRoutine.PRODUCTCOUNT);
+            db.AddInParameter(savecommand, "ProductName", DbType.String, product.ProductName);
+
+            result = db.ExecuteNonQuery(savecommand);
+
+            return (result > 0 ? true : false);
+        }
+
         public bool Save<T>(T item) where T : IContract
         {
             var result = 0;

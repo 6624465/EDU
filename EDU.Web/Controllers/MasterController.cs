@@ -301,6 +301,13 @@ namespace EDU.Web.Controllers
             return View("EduProductList", list.AsEnumerable());
         }
 
+
+        [HttpGet]
+        public bool IsEduProductExists(string productName)
+        {
+            return new EduProductBO().IsEduProductExists(new EduProduct { ProductName = productName });
+        }
+
         #endregion
 
         #region Course
