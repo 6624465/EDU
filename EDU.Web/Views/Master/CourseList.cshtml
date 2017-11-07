@@ -105,19 +105,20 @@
         }
         function DeleteCourse(Id)
         {
-            $.ajax({
-                url: '@Url.Content("~/Master/DeleteEduCourse?Id=")' + Id,
-                method: 'delete',
-                contentType: 'text/html',
-                success:function(html)
-                {
+            debugger;
+            if (confirm("Are you sure, do you want delete?")) {
+                $.ajax({
+                    url: '@Url.Content("~/Master/DeleteEduCourse?Id=")' + Id,
+                    method: 'post',
+                    contentType: 'text/html',
+                    success: function (html) {
+                        alert("Deleted successfully...");
+                    },
+                    error: function (err) {
 
-                },
-                error:function(err)
-                {
-
-                }
-            })
+                    }
+                })
+            }
         }
         $('#frmCourse').validate({
             rules: {

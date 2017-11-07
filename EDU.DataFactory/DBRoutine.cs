@@ -49,6 +49,7 @@ namespace EZY.EDU.DataFactory
         public const string SAVEEDUPRODUCT = "[Edu].[usp_ProductSave]";
         public const string SELECTEDUPRODUCT = "[Edu].[usp_ProductSelect]";
         public const string SELECTEDUPRODUCTTABLEDATA = "[Edu].[ProductTableData]";
+        public const string PRODUCTCOUNT = "[Edu].[usp_ProductCount]";
 
         /// <summary>
         /// [Edu].[Course]

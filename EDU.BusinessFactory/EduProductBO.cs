@@ -34,5 +34,10 @@ namespace EZY.EDU.BusinessFactory
         {
             return eduProductDAL.Delete<EduProduct>(item);
         }
+
+        public bool IsEduProductExists(EduProduct item)
+        {
+            return eduProductDAL.IsEduProductExists<EduProduct>(item);
+        }
     }
 }
