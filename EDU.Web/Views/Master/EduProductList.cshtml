@@ -108,6 +108,9 @@
                     contentType: 'text/html',
                     success: function (html) {
                         alert("Deleted successfully...");
+                        if (html) {
+                            location.reload();
+                        }
                     },
                     error: function (err) {
 
