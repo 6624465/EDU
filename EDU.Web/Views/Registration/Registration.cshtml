@@ -10,7 +10,7 @@
 <section class="content">
     @using (Html.BeginForm("Registration", "Registration", FormMethod.Post, new { id = "frmRegistration", name = "frmRegistration" }))
     {
-
+        @Html.HiddenFor(x => x.RegistrationId, new { @class = "form-control input-sm" })
         <div class="row css10">
             <div class="col-md-2">
                 <label class="control-label pull-right">Oracle DataBase</label>
