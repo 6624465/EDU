@@ -291,6 +291,16 @@ namespace EDU.Web.Controllers
 
             return RedirectToAction("EduProductList");
         }
+
+        [HttpPost]
+        public ActionResult DeleteProduct(int? Id)
+        {
+            var result =new EduProductBO().DeleteEduProduct(new EduProduct { Id = Id.Value });
+
+            var list = new EduProductBO().GetList();
+            return View("EduProductList", list.AsEnumerable());
+        }
+
         #endregion
 
         #region Course
