@@ -1,0 +1,126 @@
+﻿@model EDU.Web.ViewModels.Trainer.TrainerVM
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add Trainer</h2>
+
+<section class="content">
+    @using (Html.BeginForm("SaveTrainer", "Trainer", FormMethod.Post, new { id = "frmTrainer", name = "frmTrainer" }))
+    {
+        @Html.HiddenFor(x => x.TrainerInformation.TrianerId, new { @class = "form-control input-sm" })
+        <div class="row css10">
+            <div class="col-md-2">
+                <label class="control-label pull-right">Trainer Name</label>
+            </div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.TrainerInformation.TrainerName, new { @class = "form-control input-sm" })
+            </div>
+            <div class="col-md-2">
+                <label class="control-label pull-right">Technology</label>
+            </div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.TrainerInformation.Technology, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row css10">
+            <div class="col-md-2">
+                <label class="control-label pull-right">Country</label>
+            </div>
+            <div class="col-md-4">
+                @Html.DropDownListFor(x => x.TrainerInformation.Country, new SelectList(Model.countryList, "CountryCode", "CountryName"), "Select Country", new { @class = "form-control input-sm" })
+            </div>
+            <div class="col-md-2">
+                <label class="control-label pull-right">Profile</label>
+            </div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.TrainerInformation.Profile, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row css10">
+            <div class="col-md-2">
+                <label class="control-label pull-right">Trainer Rate</label>
+            </div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.TrainerInformation.TrainerRate, new { @class = "form-control input-sm" })
+            </div>
+            <div class="col-md-2">
+                <label class="control-label pull-right"> Vendor Name</label>
+            </div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.TrainerInformation.VendorName, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row css10">
+            <div class="col-md-2">
+                <label class="control-label pull-right">Address</label>
+            </div>
+            <div class="col-md-4">
+                @Html.TextAreaFor(x => x.TrainerInformation.Address, new { @class = "form-control input-sm" })
+            </div>
+            <div class="col-md-2">
+                <label class="control-label pull-right">Contact</label>
+            </div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(x => x.TrainerInformation.Contact, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row css10">
+            <div class="col-md-2">
+                <label class="control-label pull-right">Remarks</label>
+            </div>
+            <div class="col-md-4">
+                @Html.TextAreaFor(x => x.TrainerInformation.Remarks, new { @class = "form-control input-sm" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="pull-right">
+                    <button type="button" onclick="SaveTrainer()" class="btn btn-primary btn-sm"><i class="fa fa-floppy-o"></i>&nbsp;Save</button>
+                </div>
+            </div>
+        </div>
+    }
+
+</section>
+@section secscripts {
+    <script type="text/javascript">
+        $(function () {
+
+        });
+        function SaveTrainer() {
+            if ($('#frmTrainer').valid()) {
+                $('#frmTrainer').submit();
+            }
+        }
+        $('#frmTrainer').validate({
+            rules: {
+                'TrainerInformation.TrainerName': {
+                    required: true
+                },
+                'TrainerInformation.Technology': {
+                    required: true
+                },
+                'TrainerInformation.Country': {
+                    required: true
+                },
+                'TrainerInformation.Profile': {
+                    required: true
+                },
+                'TrainerInformation.TrainerRate': {
+                    required: true
+                },
+                'TrainerInformation.VendorName': {
+                    required: true
+                },
+                'TrainerInformation.Address': {
+                    required: true
+                },
+                'TrainerInformation.Contact': {
+                    required: true
+                }
+            }
+        });
+    </script>
+}

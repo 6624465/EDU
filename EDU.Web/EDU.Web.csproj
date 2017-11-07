@@ -336,6 +336,7 @@
     <Compile Include="Controllers\MasterController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\TrainerController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Core\WebSsnFilter.cs" />
     <Compile Include="Global.asax.cs">
@@ -362,6 +363,9 @@
     <Compile Include="Models\Registration.cs">
       <DependentUpon>EduEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TrainerInformation.cs">
+      <DependentUpon>EduEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="MVCReportViewer.aspx.cs">
       <DependentUpon>MVCReportViewer.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -371,6 +375,7 @@
     <Compile Include="ViewModels\Account\LoginViewModel.cs" />
     <Compile Include="ViewModels\CourseDetail\CourseDetailVm.cs" />
     <Compile Include="ViewModels\Master\CourseSalesMasterVm.cs" />
+    <Compile Include="ViewModels\Trainer\TrainerVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -437,6 +442,8 @@
     <Content Include="Views\Home\Education.cshtml" />
     <Content Include="Views\Registration\Registration.cshtml" />
     <Content Include="Views\Registration\GetRegistrationList.cshtml" />
+    <Content Include="Views\Trainer\Index.cshtml" />
+    <Content Include="Views\Trainer\TrainersList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
