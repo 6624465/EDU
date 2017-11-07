@@ -8,7 +8,7 @@
     <link href="@Url.Content("~/Css/dataTables.responsive.css")" rel="stylesheet" />
     <link href="@Url.Content("~/Css/style.min.css")" rel="stylesheet" />
 }
-<section class="content" >
+<section class="content">
     <div class="box box-dnex">
         <div class="box-header">
             <div class="row">
@@ -36,7 +36,7 @@
                                 <tr>
                                     <td>@Model.ElementAt(i).ProductName</td>
                                     <td class="pull-right">
-                                        <button  class="btn btn-primary btn-xs" onclick="EditEduProduct(@Model.ElementAt(i).Id)"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</button>
+                                        <button class="btn btn-primary btn-xs" onclick="EditEduProduct(@Model.ElementAt(i).Id)"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</button>
                                         <button class="btn btn-danger btn-xs" onclick="DeleteProductCategory(@Model.ElementAt(i).Id)"><i class="fa fa-trash-o"></i>&nbsp;Delete</button>
                                     </td>
                                 </tr>
@@ -108,6 +108,9 @@
                     contentType: 'text/html',
                     success: function (html) {
                         alert("Deleted successfully...");
+                        if (html) {
+                            location.reload();
+                        }
                     },
                     error: function (err) {
 
@@ -130,44 +133,56 @@
         });
 
         function SaveEduProduct() {
-            if ($('#frmEduProduct').valid()) {
-                $('#frmEduProduct').submit();
-            }
+            var promise = ValidateByProductName();
+            $.when(promise).done(function (result) {
+                if (result=="False") {
+                    if ($('#frmEduProduct').valid()) {
+                        $('#frmEduProduct').submit();
+                    }
+                }
+            });            
         };
 
-        function ValidateProductName() {
-            debugger;
+        function ValidateByProductName() {
+            var def = $.Deferred();
             $.ajax({
                 url: '@Url.Content("~/Master/IsEduProductExists?productName=")' + $('#ProductName').val(),
-                    method: 'get',
-                    contentType: 'text/html',
-                    success: function (html) {
-                        debugger;
-                        if (html=="True") {
-                            alert("Product already exists. Please re-enter new product.");
-                            $('#ProductName').val('');
-                        }
-                    },
-                    error: function (err) {
-
-                    }
-                })
+                method: 'get',
+                contentType: 'text/html',
+                success: function (result) {
+                    def.resolve(result);
+                }
+            });
+            return def.promise();
         };
 
-        //$('#ProductCode').keypress(function (e) {
-        //    if (e.which === 32)
-        //        return false;
-        //})​​​​​;
+
+        function ValidateProductName(isBlur) {
+            var promise = ValidateByProductName();
+            $.when(promise).done(function (result) {
+                if (isBlur) {
+                    if (result == "True") {
+                        alert("Product already exists. Please re-enter new product.");
+                        $('#ProductName').val('');
+                    }
+                }
+                else
+                {
+                    return result
+                }
+            });
+        };
+
     </script>
 
     @*<script src="@Url.Content("~/Scripts/jquery.dataTables.js")"></script>
-    <script src="@Url.Content("~/Scripts/dataTables.bootstrap.js")"></script>
-    <script type="text/javascript">
-        $(function () {
-            $('#tblProducts').DataTable({
-                responsive: true
+        <script src="@Url.Content("~/Scripts/dataTables.bootstrap.js")"></script>
+        <script type="text/javascript">
+            $(function () {
+                $('#tblProducts').DataTable({
+                    responsive: true
+                });
             });
-        });
-    </script>*@
+        </script>*@
 }
 

@@ -16,7 +16,29 @@
         var month = monthData[id - 1];
         return month;
     }
+
+    public string CheckString(string remarks)
+    {
+        return remarks.Replace(System.Environment.NewLine, "<br/>");
+    }
 }
+<style>
+    .popover {
+        color:black;
+    }
+
+    .popover-title {
+        background-color: #F7F7F7;
+        border-bottom: 1px solid #EBEBEB;
+        border-radius: 5px 5px 0 0;
+        font-size: 15px;
+        font-weight: bold;
+        line-height: 18px;
+        margin: 0;
+        padding: 8px 14px;
+
+    }
+</style>
 <section class="content">
     <div class="box box-dnex">
         <div class="box-header with-border">
@@ -49,7 +71,7 @@
                                 <th style="text-align:center">Start Dt</th>
                                 <th style="text-align:center">End Dt</th>
                                 <th style="text-align:center">Min. Reg</th>
-                                <th style="text-align:center">Lead On Head</th>
+                                <th style="text-align:center">Pipeline</th>
                                 <th style="text-align:center">Registered</th>
                                 <th style="text-align:center">Avl. Seats</th>
                                 <th style="text-align:center">Reg. Closing Dt</th>
@@ -72,18 +94,38 @@
                                     <td align="center">@Model.ElementAt(i).EndDate.ToString("dd/MM/yyyy")</td>
                                     <td align="center">@Model.ElementAt(i).MinimumReg</td>
                                     <td align="center">
-                                        <span data-toggle="tooltip" title="@Model.ElementAt(i).LeadsOnHeadRemarks">@Model.ElementAt(i).LeadsOnHead</span>
+                                        @if (string.IsNullOrWhiteSpace(Model.ElementAt(i).LeadsOnHeadRemarks))
+                                        {
+                                            <span>@Model.ElementAt(i).LeadsOnHead</span>
+                                        }
+                                        else
+                                        {
+                                            <a style="cursor:pointer;text-decoration:underline;">
+                                                <span data-toggle="popover" data-html="true" data-title="Pipeline Remarks" data-content="@CheckString(Model.ElementAt(i).LeadsOnHeadRemarks)">@Model.ElementAt(i).LeadsOnHead</span>
+                                            </a>
+                                        }
+                                        
                                     </td>
                                     <td align="center">
-                                        <span data-toggle="tooltip" title="@Model.ElementAt(i).RegisteredRemarks">@Model.ElementAt(i).Registered</span>
+                                        @if (string.IsNullOrWhiteSpace(Model.ElementAt(i).RegisteredRemarks))
+                                        {
+                                            <span>@Model.ElementAt(i).RegisteredRemarks</span>
+                                        }
+                                        else
+                                        {
+                                            <a style="cursor:pointer;text-decoration:underline;">
+                                                <span data-toggle="popover" data-html="true" data-title="Registered Remarks" data-content="@CheckString(Model.ElementAt(i).RegisteredRemarks)">@Model.ElementAt(i).Registered</span>
+                                            </a>
+                                        }
+                                        
                                     </td>
                                     <td align="center">@Model.ElementAt(i).AvailableSeats</td>
                                     <td align="center">@Model.ElementAt(i).RegClosingDate.ToString("dd/MM/yyyy")</td>
                                     @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
                                     {
                                         <td>
-                                        <button class="btn btn-primary btn-sm" onclick="location.href = '@Url.Content("~/Master/CourseSalesMaster?Id=" + Model.ElementAt(i).Id)'"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</button>
-                                        <button class="btn btn-danger btn-sm" onclick="DeleteCourseSaleMaster(@Model.ElementAt(i).Id)"><i class="fa fa-trash-o"></i>&nbsp;Delete</button>
+                                        <button class="btn btn-primary btn-sm" onclick="location.href = '@Url.Content("~/Master/CourseSalesMaster?Id=" + Model.ElementAt(i).Id)'"><i class="fa fa-pencil-square-o"></i></button>
+                                        <button class="btn btn-danger btn-sm" onclick="DeleteCourseSaleMaster(@Model.ElementAt(i).Id)"><i class="fa fa-trash-o"></i></button>
                                     </td>
                                     }
                                 </tr>
@@ -111,7 +153,10 @@
     <script src="@Url.Content("~/Scripts/dataTables.bootstrap.js")"></script>
     <script type="text/javascript">
         $(function () {
-            $('[data-toggle="tooltip"]').tooltip();
+            $('[data-toggle="popover"]').popover({
+                placement: 'top',
+                trigger: 'hover'
+            });
 
             $('#tblCourseSalesMaster').DataTable({
                 responsive: true
@@ -129,8 +174,11 @@
                     method: 'post',
                     contentType: 'text/html',
                     success: function (html) {
-
                         alert("Deleted successfully...");
+                        if(html)
+                        {
+                            location.reload();
+                        }
                     },
                     error: function (err) {
 
