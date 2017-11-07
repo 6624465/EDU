@@ -7,7 +7,7 @@
 <h2>Add Trainer</h2>
 
 <section class="content">
-    @using (Html.BeginForm("SaveTrainer", "Trainer", FormMethod.Post, new { id = "frmTrainer", name = "frmTrainer" }))
+    @using (Html.BeginForm("SaveTrainer", "Trainer", FormMethod.Post, new { id = "frmTrainer", name = "frmTrainer",enctype="multipart/form-data" }))
     {
         @Html.HiddenFor(x => x.TrainerInformation.TrianerId, new { @class = "form-control input-sm" })
         <div class="row css10">
@@ -35,7 +35,7 @@
                 <label class="control-label pull-right">Profile</label>
             </div>
             <div class="col-md-4">
-                @Html.TextBoxFor(x => x.TrainerInformation.Profile, new { @class = "form-control" })
+                @Html.TextBoxFor(x => x.TrainerInformation.Profile, new { type="file", @class = "form-control" })
             </div>
         </div>
         <div class="row css10">

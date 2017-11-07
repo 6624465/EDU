@@ -1,9 +1,104 @@
-﻿@model IEnumerable<EDU.Web.ViewModels.Trainer.TrainerVM>
+﻿@model IEnumerable<EDU.Web.Models.TrainerInformation>
 @{
     ViewBag.Title = "TrainersList";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>TrainersList</h2>
+<h2>Vendor and Trainer Information</h2>
 
-@using ()
+<section class="content">
+
+    <div class="box box-dnex">
+        <div class="box-header with-border">
+            <div class="row">
+                <div class="row">
+                    <section class="content-header"></section>
+                </div>
+            </div>
+            <div class="box-tools">
+                @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
+                {
+                    <button class="btn btn-default btn-sm" type="button" onclick="location.href = '@Url.Content("~/Trainer/Index?Id=-1")'">
+                <i class="fa fa-plus"></i>&nbsp;Add New Trainer</button>
+                }
+            </div>
+        </div>
+
+        <div class="box-body">
+            <div class="row" style="margin-top:10px;">
+                <div class="col-md-12">
+                    <table class="table table-striped" id="tblTrainer">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>TrainerName</th>
+                                <th>Technology</th>
+                                <th>Country</th>
+                                <th>Profile</th>
+                                <th>TrainerRate</th>
+                                <th>VendorName</th>
+                                <th>Address</th>
+                                <th>Contact</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.Count(); i++)
+                            {
+                                <tr>
+                                    <td>@(i + 1)</td>
+                                    <td>@Model.ElementAt(i).TrainerName</td>
+                                    <td>@Model.ElementAt(i).Technology</td>
+                                    <td>@Model.ElementAt(i).Country</td>
+                                    <td><img src="@Url.Content(Model.ElementAt(i).Profile)" alt="Profile" style="height:10px;"/></td>
+                                    <td>@Model.ElementAt(i).TrainerRate</td>
+                                    <td>@Model.ElementAt(i).VendorName</td>
+                                    <td>@Model.ElementAt(i).Address</td>
+                                    <td>@Model.ElementAt(i).Contact</td>
+                                    <td>@Model.ElementAt(i).Remarks</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary btn-sm"
+                                                onclick="location.href ='@Url.Content("~/Trainer/Index?Id=" + Model.ElementAt(i).TrianerId)'">
+                                            Edit
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-sm"
+                                                onclick="DeleteTrainer(@Model.ElementAt(i).TrianerId)">
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section secscripts{
+    <script type="text/javascript">
+        $('#tblTrainer').DataTable();
+
+        function DeleteTrainer(id) {
+
+            if (confirm("Are you sure, You want to delete")) {
+                $.ajax({
+                    url: '@Url.Content("~/Trainer/DeleteTrainer?Id=")' + id,
+                    type: 'POST',
+                    contentType: 'application/json',
+                    success: function (data) {
+
+                        alert("Deleted Successfully");
+                        if (data) {
+                            location.reload();
+                        }
+                    },
+                    error: function (e) {
+
+                    }
+                });
+            }
+        }
+    </script>
+
+}

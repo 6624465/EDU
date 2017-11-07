@@ -11,13 +11,28 @@ namespace EDU.Web.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web;
+
     public partial class TrainerInformation
     {
         public int TrianerId { get; set; }
         public string Technology { get; set; }
         public string Country { get; set; }
         public string Profile { get; set; }
+        public Nullable<decimal> TrainerRate { get; set; }
+        public string VendorName { get; set; }
+        public string Address { get; set; }
+        public string Contact { get; set; }
+        public string Remarks { get; set; }
+        public string TrainerName { get; set; }
+    }
+
+    public class TrainerInformationVM
+    {
+        public int TrianerId { get; set; }
+        public string Technology { get; set; }
+        public string Country { get; set; }
+        public HttpPostedFileBase Profile { get; set; }
         public Nullable<decimal> TrainerRate { get; set; }
         public string VendorName { get; set; }
         public string Address { get; set; }
