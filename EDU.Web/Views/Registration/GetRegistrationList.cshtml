@@ -11,76 +11,86 @@
 
 <section class="content">
 
-    @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
-    {
-        <button class="btn btn-default btn-sm" type="button" onclick="location.href = '@Url.Content("~/Registration/Registration?Id=-1")'">
-            <i class="fa fa-plus"></i>&nbsp;
-            New Registration
-        </button>
-    }
-
-    <div class="box-body">
-        <div class="row" style="margin-top:10px;">
-            <div class="col-md-12">
-                <table class="table table-striped" id="tblRegistration">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>OracleDataBase</th>
-                            <th>Amount</th>
-                            <th>WHT</th>
-                            <th>VAT/TAX</th>
-                            <th>Payment1</th>
-                            <th>Payment2</th>
-                            <th>Balance</th>
-                            <th>Email</th>
-                            <th>Contact</th>
-                            <th>CompanyName</th>
-                            <th>Product</th>
-                            <th>CourseName</th>
-                            <th>StartDate</th>
-                            <th>EndDate</th>
-                            <th>TrainerName</th>
-                            <th>#Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @for (int i = 0; i < Model.Count(); i++)
-                        {
-                            <tr>
-                                <td>@(i + 1)</td>
-                                <td>@Model.ElementAt(i).OracleDataBase</td>
-                                <td>@Model.ElementAt(i).Amount</td>
-                                <td>@Model.ElementAt(i).WHT</td>
-                                <td>@Model.ElementAt(i).VAT</td>
-                                <td>@Model.ElementAt(i).Payment1</td>
-                                <td>@Model.ElementAt(i).Payment2</td>
-                                <td>@Model.ElementAt(i).Balance</td>
-                                <td>@Model.ElementAt(i).Email</td>
-                                <td>@Model.ElementAt(i).Contact</td>
-                                <td>@Model.ElementAt(i).CompanyName</td>
-                                <td>@Model.ElementAt(i).Product</td>
-                                <td>@Model.ElementAt(i).CourseName</td>
-                                <td>@Model.ElementAt(i).StartDate</td>
-                                <td>@Model.ElementAt(i).EndDate</td>
-                                <td>@Model.ElementAt(i).TrainerName</td>
-                                <td>
-                                    <button type="button" class="btn btn-default btn-sm"
-                                            onclick="location.href ='@Url.Content("~/Registration/Registration?Id=" + Model.ElementAt(i).RegistrationId)'">
-                                        Edit
-                                    </button>
-                                    <button type="button" class="btn btn-default btn-sm"
-                                            onclick="DeleteRegistration(@Model.ElementAt(i).RegistrationId)">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+    <div class="box box-dnex">
+        <div class="box-header with-border">
+            <div class="row">
+                <div class="row">
+                    <section class="content-header">
+                       
+                    </section>
+                </div>
+            </div>
+            <div class="box-tools">
+                @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
+                {
+                    <button class="btn btn-default btn-sm" type="button" onclick="location.href = '@Url.Content("~/Registration/Registration?Id=-1")'"><i class="fa fa-plus"></i>&nbsp;New Registration</button>
+                }
             </div>
         </div>
-    </div>
+
+        <div class="box-body">
+            <div class="row" style="margin-top:10px;">
+                <div class="col-md-12">
+                    <table class="table table-striped" id="tblRegistration">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>OracleDataBase</th>
+                                <th>Amount</th>
+                                <th>WHT</th>
+                                <th>VAT/TAX</th>
+                                <th>Payment1</th>
+                                <th>Payment2</th>
+                                <th>Balance</th>
+                                <th>Email</th>
+                                <th>Contact</th>
+                                <th>CompanyName</th>
+                                <th>Product</th>
+                                <th>CourseName</th>
+                                <th>StartDate</th>
+                                <th>EndDate</th>
+                                <th>TrainerName</th>
+                                <th>#Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.Count(); i++)
+                            {
+                                <tr>
+                                    <td>@(i + 1)</td>
+                                    <td>@Model.ElementAt(i).OracleDataBase</td>
+                                    <td>@Model.ElementAt(i).Amount</td>
+                                    <td>@Model.ElementAt(i).WHT</td>
+                                    <td>@Model.ElementAt(i).VAT</td>
+                                    <td>@Model.ElementAt(i).Payment1</td>
+                                    <td>@Model.ElementAt(i).Payment2</td>
+                                    <td>@Model.ElementAt(i).Balance</td>
+                                    <td>@Model.ElementAt(i).Email</td>
+                                    <td>@Model.ElementAt(i).Contact</td>
+                                    <td>@Model.ElementAt(i).CompanyName</td>
+                                    <td>@Model.ElementAt(i).Product</td>
+                                    <td>@Model.ElementAt(i).CourseName</td>
+                                    <td>@Model.ElementAt(i).StartDate</td>
+                                    <td>@Model.ElementAt(i).EndDate</td>
+                                    <td>@Model.ElementAt(i).TrainerName</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary btn-sm"
+                                                onclick="location.href ='@Url.Content("~/Registration/Registration?Id=" + Model.ElementAt(i).RegistrationId)'">
+                                            Edit
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-sm"
+                                                onclick="DeleteRegistration(@Model.ElementAt(i).RegistrationId)">
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        </div>
 </section>
 
 @section secscripts{
