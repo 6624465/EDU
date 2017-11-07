@@ -8,7 +8,7 @@
     <link href="@Url.Content("~/Css/dataTables.responsive.css")" rel="stylesheet" />
     <link href="@Url.Content("~/Css/style.min.css")" rel="stylesheet" />
 }
-<section class="content">
+<section class="content" >
     <div class="box box-dnex">
         <div class="box-header">
             <div class="row">
@@ -97,7 +97,7 @@
                 }
             });
         }
-        
+
         function DeleteProductCategory(Id)
         {
             if (confirm("Are you sure, do you want delete?")) {
@@ -133,6 +133,25 @@
             if ($('#frmEduProduct').valid()) {
                 $('#frmEduProduct').submit();
             }
+        };
+
+        function ValidateProductName() {
+            debugger;
+            $.ajax({
+                url: '@Url.Content("~/Master/IsEduProductExists?productName=")' + $('#ProductName').val(),
+                    method: 'get',
+                    contentType: 'text/html',
+                    success: function (html) {
+                        debugger;
+                        if (html=="True") {
+                            alert("Product already exists. Please re-enter new product.");
+                            $('#ProductName').val('');
+                        }
+                    },
+                    error: function (err) {
+
+                    }
+                })
         };
 
         //$('#ProductCode').keypress(function (e) {

@@ -36,7 +36,7 @@ namespace EZY.EDU.DataFactory
             var savecommand = db.GetStoredProcCommand(DBRoutine.PRODUCTCOUNT);
             db.AddInParameter(savecommand, "ProductName", DbType.String, product.ProductName);
 
-            result = db.ExecuteNonQuery(savecommand);
+            result = Convert.ToInt32(db.ExecuteScalar(savecommand));
 
             return (result > 0 ? true : false);
         }
@@ -58,7 +58,7 @@ namespace EZY.EDU.DataFactory
 
                 db.AddInParameter(savecommand, "Id", System.Data.DbType.Int32, product.Id);
                 db.AddInParameter(savecommand, "ProductName", System.Data.DbType.String, product.ProductName);
-                db.AddInParameter(savecommand, "ProductDescription", System.Data.DbType.String, product.ProductDescription);                
+                db.AddInParameter(savecommand, "ProductDescription", System.Data.DbType.String, product.ProductDescription);
                 db.AddInParameter(savecommand, "CreatedBy", System.Data.DbType.String, product.CreatedBy);
                 db.AddInParameter(savecommand, "CreatedOn", System.Data.DbType.DateTime, product.CreatedOn);
                 db.AddInParameter(savecommand, "ModifiedBy", System.Data.DbType.String, product.ModifiedBy);
@@ -120,6 +120,6 @@ namespace EZY.EDU.DataFactory
             return productItem;
         }
 
-        
+
     }
 }

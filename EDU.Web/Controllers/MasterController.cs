@@ -287,7 +287,10 @@ namespace EDU.Web.Controllers
             eduProduct.CreatedOn = UTILITY.SINGAPORETIME;
             eduProduct.ModifiedBy = USER_ID;
             eduProduct.ModifiedOn = UTILITY.SINGAPORETIME;
-            var result = new EduProductBO().SaveEduProduct(eduProduct);
+            if (!IsEduProductExists(eduProduct.ProductName))
+            {
+                var result = new EduProductBO().SaveEduProduct(eduProduct);
+            }
 
             return RedirectToAction("EduProductList");
         }
