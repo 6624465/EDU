@@ -107,32 +107,6 @@ namespace EZY.EDU.DataFactory
             return productItem;
         }
 
-
-        public bool DeleteEduProduct<T>(IContract lookupItem) where T : IContract
-        {
-            var item = (EduProduct)lookupItem;
-
-            var result = false;
-
-            var connnection = db.CreateConnection();
-            connnection.Open();
-
-            var transaction = connnection.BeginTransaction();
-
-            try
-            {
-                var deleteCommand = db.GetStoredProcCommand(DBRoutine.DELETEEDUPRODUCT);
-                db.AddInParameter(deleteCommand, "Id", DbType.Int32, item.Id);
-                result = Convert.ToBoolean(db.ExecuteNonQuery(deleteCommand, transaction));
-                transaction.Commit();
-            }
-            catch (Exception ex)
-            {
-                transaction.Rollback();
-                throw ex;
-            }
-
-            return result;
-        }
+        
     }
 }
