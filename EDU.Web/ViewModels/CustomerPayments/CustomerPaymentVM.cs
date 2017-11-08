@@ -19,6 +19,7 @@ namespace EDU.Web.ViewModels.CustomerPayments
         public Nullable<System.DateTime> RecieptDate { get; set; }
         public HttpPostedFileBase ReferenceDocument { get; set; }
         public Nullable<decimal> PaidAmount { get; set; }
+        public Nullable<bool> IsActive { get; set; }
     }
 
 }

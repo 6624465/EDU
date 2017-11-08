@@ -20,6 +20,7 @@
           <Property Name="RecieptDate" Type="datetime" />
           <Property Name="ReferenceDocument" Type="nvarchar" MaxLength="50" />
           <Property Name="PaidAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="Registration">
           <Key>
@@ -41,6 +42,7 @@
           <Property Name="StartDate" Type="datetime" />
           <Property Name="EndDate" Type="datetime" />
           <Property Name="TrainerName" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="TrainerInformation">
           <Key>
@@ -56,6 +58,7 @@
           <Property Name="Contact" Type="nvarchar" MaxLength="20" />
           <Property Name="Remarks" Type="nvarchar(max)" />
           <Property Name="TrainerName" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityContainer Name="DB_9F30C5_edudevModelStoreContainer">
           <EntitySet Name="CustomerPayments" EntityType="Self.CustomerPayments" Schema="Edu" store:Type="Tables" />
@@ -86,6 +89,7 @@
           <Property Name="StartDate" Type="DateTime" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Precision="3" />
           <Property Name="TrainerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
         </EntityType>
         <EntityContainer Name="EducationEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Registrations" EntityType="Self.Registration" />
@@ -106,6 +110,7 @@
           <Property Name="Contact" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="TrainerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
         </EntityType>
         <EntityType Name="CustomerPayment">
           <Key>
@@ -122,6 +127,7 @@
           <Property Name="RecieptDate" Type="DateTime" Precision="3" />
           <Property Name="ReferenceDocument" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PaidAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IsActive" Type="Boolean" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -132,6 +138,7 @@
           <EntitySetMapping Name="Registrations">
             <EntityTypeMapping TypeName="DB_9F30C5_edudevModel.Registration">
               <MappingFragment StoreEntitySet="Registration">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="RegistrationId" ColumnName="RegistrationId" />
                 <ScalarProperty Name="OracleDataBase" ColumnName="OracleDataBase" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
@@ -154,6 +161,7 @@
           <EntitySetMapping Name="TrainerInformations">
             <EntityTypeMapping TypeName="DB_9F30C5_edudevModel.TrainerInformation">
               <MappingFragment StoreEntitySet="TrainerInformation">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="TrainerName" ColumnName="TrainerName" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="Contact" ColumnName="Contact" />
@@ -170,6 +178,7 @@
           <EntitySetMapping Name="CustomerPayments">
             <EntityTypeMapping TypeName="DB_9F30C5_edudevModel.CustomerPayment">
               <MappingFragment StoreEntitySet="CustomerPayments">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
                 <ScalarProperty Name="ReferenceDocument" ColumnName="ReferenceDocument" />
                 <ScalarProperty Name="RecieptDate" ColumnName="RecieptDate" />

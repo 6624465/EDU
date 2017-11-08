@@ -25,5 +25,6 @@ namespace EDU.Web.ViewModels.Trainer
         public string Contact { get; set; }
         public string Remarks { get; set; }
         public string TrainerName { get; set; }
+        public Nullable<bool> IsActive { get; set; }
     }
 }

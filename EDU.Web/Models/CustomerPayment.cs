@@ -25,5 +25,6 @@ namespace EDU.Web.Models
         public Nullable<System.DateTime> RecieptDate { get; set; }
         public string ReferenceDocument { get; set; }
         public Nullable<decimal> PaidAmount { get; set; }
+        public Nullable<bool> IsActive { get; set; }
     }
 }
