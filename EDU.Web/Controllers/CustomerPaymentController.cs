@@ -82,7 +82,7 @@ namespace EDU.Web.Controllers
 
                 dbContext.SaveChanges();
             }
-            return View("GetCustomerPayments");
+            return View("CustomerPaymentList");
         }
 
         public ActionResult CustomerPaymentList()
