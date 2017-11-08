@@ -62,6 +62,8 @@ namespace EZY.EDU.DataFactory
                 db.AddInParameter(savecommand, "ModifiedOn ", System.Data.DbType.DateTime, courseSalesMaster.ModifiedOn);
                 db.AddInParameter(savecommand, "LeadsOnHeadRemarks", System.Data.DbType.String, courseSalesMaster.LeadsOnHeadRemarks);
                 db.AddInParameter(savecommand, "RegisteredRemarks ", System.Data.DbType.String, courseSalesMaster.RegisteredRemarks);
+                db.AddInParameter(savecommand, "TOD", System.Data.DbType.Boolean, courseSalesMaster.TOD);
+                db.AddInParameter(savecommand, "LVC", System.Data.DbType.Boolean, courseSalesMaster.LVC);
 
                 result = db.ExecuteNonQuery(savecommand, transaction);
 

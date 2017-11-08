@@ -45,6 +45,8 @@ namespace EZY.EDU.Contract
         public DateTime ModifiedOn { get; set; }
         public string LeadsOnHeadRemarks { get; set; }
         public string RegisteredRemarks { get; set; }
+        public bool? TOD { get; set; }
+        public bool? LVC { get; set; }
     }
 
     public class CourseSalesMasterViewModel : IContract
@@ -61,9 +63,9 @@ namespace EZY.EDU.Contract
 
         public Int16 Month { get; set; }
 
-        public DateTime StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
 
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
         public Int16 MinimumReg { get; set; }
 
@@ -86,5 +88,7 @@ namespace EZY.EDU.Contract
         public DateTime ModifiedOn { get; set; }
         public string LeadsOnHeadRemarks { get; set; }
         public string RegisteredRemarks { get; set; }
+        public bool? TOD { get; set; }
+        public bool? LVC { get; set; }
     }
 }
