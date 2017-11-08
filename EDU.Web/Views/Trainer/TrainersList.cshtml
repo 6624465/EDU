@@ -3,23 +3,25 @@
     ViewBag.Title = "TrainersList";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Vendor and Trainer Information</h2>
-
 <section class="content">
 
     <div class="box box-dnex">
         <div class="box-header with-border">
             <div class="row">
-                <div class="row">
-                    <section class="content-header"></section>
-                </div>
+                <section class="content-header">
+                    <ol class="breadcrumb">
+                        <li><a href='@Url.Content("~/Home/Modules")'><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li><a href='@Url.Content("~/Home/Index")'>Modules</a></li>
+                        <li><a href='@Url.Content("~/Trainer/TrainersList")'>Trainers List</a></li>
+                    </ol>
+                </section>
             </div>
             <div class="box-tools">
                 @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
                 {
                     <button class="btn btn-default btn-sm" type="button" onclick="location.href = '@Url.Content("~/Trainer/Index?Id=-1")'">
-                <i class="fa fa-plus"></i>&nbsp;Add New Trainer</button>
+                        <i class="fa fa-plus"></i>&nbsp;Add New Trainer
+                    </button>
                 }
             </div>
         </div>

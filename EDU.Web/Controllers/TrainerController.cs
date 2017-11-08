@@ -18,8 +18,9 @@ namespace EDU.Web.Controllers
         // GET: Trainer
         public ActionResult Index(int Id = -1)
         {
-            TrainerInformation TrainerInfo = dbContext.TrainerInformations.Where(x => x.TrianerId == Id).FirstOrDefault();
-            
+            TrainerInformation TrainerInfo = dbContext.TrainerInformations.
+                Where(x => x.TrianerId == Id && x.IsActive == true).FirstOrDefault();
+
             if (TrainerInfo == null)
             {
                 var trainerVM = new TrainerVM()
@@ -54,7 +55,7 @@ namespace EDU.Web.Controllers
                     TrainerRate = TrainerInfo.TrainerRate,
                     VendorName = TrainerInfo.VendorName,
                 };
-                
+
                 return View(trainerVM);
             }
         }
@@ -81,6 +82,7 @@ namespace EDU.Web.Controllers
                 ti.Technology = TrainerInfo.TrainerInformation.Technology;
                 ti.TrainerRate = TrainerInfo.TrainerInformation.TrainerRate;
                 ti.VendorName = TrainerInfo.TrainerInformation.VendorName;
+                ti.IsActive = true;
                 dbContext.TrainerInformations.Add(ti);
                 dbContext.SaveChanges();
             }
@@ -109,10 +111,10 @@ namespace EDU.Web.Controllers
         [HttpGet]
         public ActionResult TrainersList()
         {
-            List<TrainerInformation> trainerList = dbContext.TrainerInformations.ToList();
+            List<TrainerInformation> trainerList = dbContext.TrainerInformations.Where(x => x.IsActive == true).ToList();
             foreach (TrainerInformation ti in trainerList)
             {
-                ti.Profile = "~/FileUploads/" + ti.Profile;
+                ti.Profile = "~/FileUploads/"+ti.Profile;
                 var countryList = new CountryBO().GetList().AsEnumerable();
                 ti.Country = countryList.Where(x => x.CountryCode == ti.Country).FirstOrDefault().CountryName;
             }
@@ -127,7 +129,7 @@ namespace EDU.Web.Controllers
                    Where(x => x.TrianerId == Id).FirstOrDefault();
             if (trainerInfoDetail != null)
             {
-                dbContext.TrainerInformations.Remove(trainerInfoDetail);
+                trainerInfoDetail.IsActive = false;
                 dbContext.SaveChanges();
             }
             return Json(true, JsonRequestBehavior.AllowGet);

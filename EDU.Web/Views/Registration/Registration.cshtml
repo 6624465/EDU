@@ -6,14 +6,26 @@
 @section seccss{
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css" rel="stylesheet">
 }
-<h2>Registration</h2>
 
 @using (Html.BeginForm("Registration", "Registration", FormMethod.Post, new { id = "frmRegistration", name = "frmRegistration" }))
 {
     @Html.HiddenFor(x => x.RegistrationId, new { @class = "form-control input-sm" })
     <section class="content">
-        <div class="box box-dnex">
-            <div class="box-body" >
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <div class="row">
+                    <div class="row">
+                        <section class="content-header">
+                            <ol class="breadcrumb">
+                                <li><a href='@Url.Content("~/Home/Modules")'><i class="fa fa-dashboard"></i> Home</a></li>
+                                <li><a href='@Url.Content("~/Registration/GetRegistrationList")'>Registration List</a></li>
+                            </ol>
+                        </section>
+                    </div>
+                </div>
+
+            </div>
+            <div class="box-body">
                 <div class="row css10">
                     <div class="col-md-2">
                         <label class="control-label pull-right">Oracle DataBase</label>
