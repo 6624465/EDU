@@ -5,6 +5,23 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DB_9F30C5_edudevModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CustomerPayments">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="100" />
+          <Property Name="OrderId" Type="nvarchar" MaxLength="250" />
+          <Property Name="CourseName" Type="nvarchar" MaxLength="50" />
+          <Property Name="InvoiceValue" Type="nvarchar" MaxLength="500" />
+          <Property Name="BalanceAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="OtherRecievables" Type="nvarchar" MaxLength="250" />
+          <Property Name="DueDate" Type="datetime" />
+          <Property Name="RecieptDate" Type="datetime" />
+          <Property Name="ReferenceDocument" Type="nvarchar" MaxLength="50" />
+          <Property Name="PaidAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
         <EntityType Name="Registration">
           <Key>
             <PropertyRef Name="RegistrationId" />
@@ -25,6 +42,7 @@
           <Property Name="StartDate" Type="datetime" />
           <Property Name="EndDate" Type="datetime" />
           <Property Name="TrainerName" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="TrainerInformation">
           <Key>
@@ -40,8 +58,10 @@
           <Property Name="Contact" Type="nvarchar" MaxLength="20" />
           <Property Name="Remarks" Type="nvarchar(max)" />
           <Property Name="TrainerName" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityContainer Name="DB_9F30C5_edudevModelStoreContainer">
+          <EntitySet Name="CustomerPayments" EntityType="Self.CustomerPayments" Schema="Edu" store:Type="Tables" />
           <EntitySet Name="Registration" EntityType="Self.Registration" Schema="Edu" store:Type="Tables" />
           <EntitySet Name="TrainerInformation" EntityType="Self.TrainerInformation" Schema="Edu" store:Type="Tables" />
         </EntityContainer>
@@ -69,10 +89,12 @@
           <Property Name="StartDate" Type="DateTime" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Precision="3" />
           <Property Name="TrainerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
         </EntityType>
         <EntityContainer Name="EducationEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Registrations" EntityType="Self.Registration" />
           <EntitySet Name="TrainerInformations" EntityType="DB_9F30C5_edudevModel.TrainerInformation" />
+          <EntitySet Name="CustomerPayments" EntityType="DB_9F30C5_edudevModel.CustomerPayment" />
         </EntityContainer>
         <EntityType Name="TrainerInformation">
           <Key>
@@ -88,6 +110,24 @@
           <Property Name="Contact" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="TrainerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="CustomerPayment">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="OrderId" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CourseName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceValue" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="BalanceAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="OtherRecievables" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DueDate" Type="DateTime" Precision="3" />
+          <Property Name="RecieptDate" Type="DateTime" Precision="3" />
+          <Property Name="ReferenceDocument" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PaidAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IsActive" Type="Boolean" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -98,6 +138,7 @@
           <EntitySetMapping Name="Registrations">
             <EntityTypeMapping TypeName="DB_9F30C5_edudevModel.Registration">
               <MappingFragment StoreEntitySet="Registration">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="RegistrationId" ColumnName="RegistrationId" />
                 <ScalarProperty Name="OracleDataBase" ColumnName="OracleDataBase" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
@@ -120,6 +161,7 @@
           <EntitySetMapping Name="TrainerInformations">
             <EntityTypeMapping TypeName="DB_9F30C5_edudevModel.TrainerInformation">
               <MappingFragment StoreEntitySet="TrainerInformation">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="TrainerName" ColumnName="TrainerName" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="Contact" ColumnName="Contact" />
@@ -130,6 +172,24 @@
                 <ScalarProperty Name="Country" ColumnName="Country" />
                 <ScalarProperty Name="Technology" ColumnName="Technology" />
                 <ScalarProperty Name="TrianerId" ColumnName="TrianerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerPayments">
+            <EntityTypeMapping TypeName="DB_9F30C5_edudevModel.CustomerPayment">
+              <MappingFragment StoreEntitySet="CustomerPayments">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+                <ScalarProperty Name="ReferenceDocument" ColumnName="ReferenceDocument" />
+                <ScalarProperty Name="RecieptDate" ColumnName="RecieptDate" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="OtherRecievables" ColumnName="OtherRecievables" />
+                <ScalarProperty Name="BalanceAmount" ColumnName="BalanceAmount" />
+                <ScalarProperty Name="InvoiceValue" ColumnName="InvoiceValue" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

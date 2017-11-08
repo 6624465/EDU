@@ -30,5 +30,6 @@ namespace EDU.Web.Models
         public Nullable<System.DateTime> StartDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
         public string TrainerName { get; set; }
+        public Nullable<bool> IsActive { get; set; }
     }
 }

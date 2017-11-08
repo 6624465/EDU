@@ -1,0 +1,97 @@
+﻿@model IEnumerable<EDU.Web.Models.CustomerPayment>
+@{
+    ViewBag.Title = "CustomerPaymentList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CustomerPaymentList</h2>
+
+<section class="content">
+
+    <div class="box box-dnex">
+        <div class="box-header with-border">
+            <div class="row">
+                <div class="row">
+                    <section class="content-header"></section>
+                </div>
+            </div>
+            <div class="box-tools">
+                @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
+                {
+                    <button class="btn btn-default btn-sm" type="button" onclick="location.href = '@Url.Content("~/CustomerPayment/Payment?customerId=-1")'">
+                        <i class="fa fa-plus"></i>&nbsp;Add New Trainer
+                    </button>
+                }
+            </div>
+        </div>
+
+        <div class="box-body">
+            <div class="row" style="margin-top:10px;">
+                <div class="col-md-12">
+                    <table class="table table-striped" id="tblCustomerPayments">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Customer Name</th>
+                                <th>Order</th>
+                                <th>Course Name</th>
+                                <th>Invoice Value</th>
+                                <th>Paid Amount</th>
+                                <th>Other Recievables</th>
+                                <th>Due Date</th>
+                                <th>Reciept Date</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.Count(); i++)
+                            {
+                                <tr>
+                                    <td>@(i + 1)</td>
+                                    <td>@Model.ElementAt(i).CustomerName</td>
+                                    <td>@Model.ElementAt(i).OrderId</td>
+                                    <td>@Model.ElementAt(i).CourseName</td>
+                                    <td>@Model.ElementAt(i).InvoiceValue</td>
+                                    <td>@Model.ElementAt(i).PaidAmount</td>
+                                    <td>@Model.ElementAt(i).OtherRecievables</td>
+                                    <td>@Model.ElementAt(i).DueDate</td>
+                                    <td>@Model.ElementAt(i).RecieptDate</td>
+                                    <td><img src="@Url.Content(Model.ElementAt(i).ReferenceDocument)" alt="Profile" style="height:20px;" /></td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary btn-sm"
+                                                onclick="location.href ='@Url.Content("~/CustomerPayment/Payment?customerId=" + Model.ElementAt(i).CustomerId)'">
+                                            Edit
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-sm"
+                                                onclick="DeleteCustomerPayment(@Model.ElementAt(i).CustomerId)">
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@using (Html.BeginForm("DeleteCustomerPayment", "CustomerPayment", FormMethod.Post,new {id= "frmDelete",name= "frmDelete" }))
+{
+    <input type="hidden" id="customerId" name="customerId"/>
+}
+@section secscripts{
+    <script type="text/javascript">
+        $('#tblCustomerPayments').DataTable();
+        function DeleteCustomerPayment(Id)
+        {
+            if (confirm("Are you sure, do you want delete?")) {
+                $('#customerId').val(Id);
+                $('#frmDelete').submit();
+            }
+        }
+        
+    </script>
+   
+
+}

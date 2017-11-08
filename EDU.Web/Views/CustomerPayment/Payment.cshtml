@@ -1,0 +1,176 @@
+﻿@model EDU.Web.ViewModels.CustomerPayments.CustomerPaymentVM
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Payment</h2>
+
+@using (Html.BeginForm("Payment", "CustomerPayment", FormMethod.Post,
+                                                                                                    new { id = "frmCustomerPayment", name = "frmCustomerPayment", enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(x => x.CustomerId, new { @class = "form-control input-sm" })
+    <section class="content">
+        <div class="box box-dnex">
+            <div class="box-body">
+                <div class="row css10">
+                    <div class="col-md-2">
+                        <label class="control-label pull-right">CustomerName</label>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(x => x.CustomerName, new { @class = "form-control input-sm" })
+                    </div>
+                    <div class="col-md-2">
+                        <label class="control-label pull-right">OrderId</label>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(x => x.OrderId, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="row css10">
+                    <div class="col-md-2">
+                        <label class="control-label pull-right">CourseName</label>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(x => x.CourseName, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-2">
+                        <label class="control-label pull-right">InvoiceValue</label>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(x => x.InvoiceValue, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="row css10">
+                    <div class="col-md-2">
+                        <label class="control-label pull-right">PaidAmount</label>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(x => x.PaidAmount, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-2">
+                        <label class="control-label pull-right">BalanceAmount</label>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(x => x.BalanceAmount, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="row css10">
+                    <div class="col-md-2">
+                        <label class="control-label pull-right">OtherRecievables</label>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(x => x.OtherRecievables, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-2">
+                        <label class="control-label pull-right">DueDate</label>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="input-group date" id="DueDt">
+                                @Html.TextBoxFor(x => x.DueDate, new { @class = "form-control input-sm dtCss" })
+                                <span class="input-group-addon">
+                                    <span class="fa fa-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row css10">
+                    <div class="col-md-2">
+                        <label class="control-label pull-right">RecieptDate</label>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="input-group date" id="RecieptDt">
+                                @Html.TextBoxFor(x => x.RecieptDate, new { @class = "form-control input-sm dtCss" })
+                                <span class="input-group-addon">
+                                    <span class="fa fa-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+
+                        <label class="control-label pull-right">CompanyName</label>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(x => x.ReferenceDocument, new { type = "file", @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pull-right">
+                            <button type="button" onclick="SaveCustomerPayment()" class="btn btn-primary btn-sm"><i class="fa fa-floppy-o"></i>&nbsp;Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+@section secscripts {
+    <script src="@Url.Content("~/Scripts/moment.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap-datetimepicker.js")"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            $('#DueDt,#RecieptDt').datetimepicker({
+                icons: {
+                    time: 'fa fa-clock-o',
+                    date: 'fa fa-calendar',
+                    up: 'fa fa-arrow-up',
+                    down: 'fa fa-arrow-down'
+                },
+                //minDate: new Date(),
+                format: 'DD/MM/YYYY'
+            });
+        });
+
+
+        function SaveCustomerPayment() {
+            if ($('#frmCustomerPayment').valid()) {
+                $('#frmCustomerPayment').submit();
+            }
+
+        }
+
+        $('#frmCustomerPayment').validate({
+            rules: {
+                'CustomerName': {
+                    required: true
+                },
+                'OrderId': {
+                    required: true
+                },
+                'CourseName': {
+                    required: true
+                },
+                'InvoiceValue': {
+                    required: true
+                },
+                'PaidAmount': {
+                    required: true
+                },
+                'BalanceAmount': {
+                    required: true
+                },
+                'OtherRecievables': {
+                    required: true
+                },
+                'DueDate': {
+                    required: true
+                },
+                'RecieptDate': {
+                    required: true
+                },
+                'ReferenceDocument': {
+                    required: true
+                }
+            }
+
+        })
+    </script>
+}
