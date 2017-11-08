@@ -33,8 +33,8 @@
                 <div class="col-md-3">
                     <label class="control-label pull-right">Course Name</label>
                 </div>
-                <div class="col-md-4">
-                    @Html.TextBoxFor(x => x.CourseName,
+                <div class="col-md-8">
+                    @Html.TextAreaFor(x => x.CourseName,
                     new { @class = "form-control input-sm", placeholder = "Course Name", onblur = "ValidateCourseName(true)" })
                 </div>
                 @Html.HiddenFor(x => x.Id)
