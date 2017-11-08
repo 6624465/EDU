@@ -6,8 +6,7 @@
 @section seccss{
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css" rel="stylesheet">
 }
-@using (Html.BeginForm("Payment", "CustomerPayment", FormMethod.Post,
-                                                                                                                            new { id = "frmCustomerPayment", name = "frmCustomerPayment", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Payment", "CustomerPayment", FormMethod.Post, new { id = "frmCustomerPayment", name = "frmCustomerPayment", enctype = "multipart/form-data" }))
 {
     @Html.HiddenFor(x => x.CustomerId, new { @class = "form-control input-sm" })
     <section class="content">
@@ -18,7 +17,7 @@
                         <ol class="breadcrumb">
                             <li><a href='@Url.Content("~/Home/Modules")'><i class="fa fa-dashboard"></i> Home</a></li>
                             <li><a href='@Url.Content("~/CustomerPayment/CustomerPaymentList")'>Payment List</a></li>
-                            <li><a href='@Url.Content("~/CustomerPayment/Payment?customerId=-1")'> Master Data</a></li>
+                            <li><a href='@Url.Content("~/CustomerPayment/Payment?customerId=-1")'> Add Payment</a></li>
 
                         </ol>
                     </section>
