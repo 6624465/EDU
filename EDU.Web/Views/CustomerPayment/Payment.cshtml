@@ -7,7 +7,7 @@
 <h2>Payment</h2>
 
 @using (Html.BeginForm("Payment", "CustomerPayment", FormMethod.Post,
-                                                                new { id = "frmCustomerPayment", name = "frmCustomerPayment", enctype = "multipart/form-data" }))
+                                                                                                    new { id = "frmCustomerPayment", name = "frmCustomerPayment", enctype = "multipart/form-data" }))
 {
     @Html.HiddenFor(x => x.CustomerId, new { @class = "form-control input-sm" })
     <section class="content">
@@ -115,14 +115,62 @@
     <script src="@Url.Content("~/Scripts/moment.min.js")"></script>
     <script src="@Url.Content("~/Scripts/bootstrap-datetimepicker.js")"></script>
     <script type="text/javascript">
-        $(function () {
 
+        $(function () {
+            $('#DueDt,#RecieptDt').datetimepicker({
+                icons: {
+                    time: 'fa fa-clock-o',
+                    date: 'fa fa-calendar',
+                    up: 'fa fa-arrow-up',
+                    down: 'fa fa-arrow-down'
+                },
+                //minDate: new Date(),
+                format: 'DD/MM/YYYY'
+            });
         });
 
 
         function SaveCustomerPayment() {
+            if ($('#frmCustomerPayment').valid()) {
+                $('#frmCustomerPayment').submit();
+            }
 
         }
 
+        $('#frmCustomerPayment').validate({
+            rules: {
+                'CustomerName': {
+                    required: true
+                },
+                'OrderId': {
+                    required: true
+                },
+                'CourseName': {
+                    required: true
+                },
+                'InvoiceValue': {
+                    required: true
+                },
+                'PaidAmount': {
+                    required: true
+                },
+                'BalanceAmount': {
+                    required: true
+                },
+                'OtherRecievables': {
+                    required: true
+                },
+                'DueDate': {
+                    required: true
+                },
+                'RecieptDate': {
+                    required: true
+                },
+                'ReferenceDocument': {
+                    required: true
+                }
+            }
+
+        })
     </script>
 }
