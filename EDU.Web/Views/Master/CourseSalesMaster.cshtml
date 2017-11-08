@@ -60,11 +60,11 @@
                     </div>
                     <div class="col-md-4">
                         @if (Model.courseSalesMaster.Id == -1)
-                        {
-                            @Html.DropDownListFor(x => x.courseSalesMaster.Course,
-                        Enumerable.Empty<SelectListItem>(),
-                        "Select Course",
-                        new { @class = "form-control input-sm", disabled = "disabled", onchange = "CourseChange(this)" })
+                                {
+                                    @Html.DropDownListFor(x => x.courseSalesMaster.Course,
+                                Enumerable.Empty<SelectListItem>(),
+                                "Select Course",
+                                new { @class = "form-control input-sm", disabled = "disabled", onchange = "CourseChange(this)" })
                         }
                         else
                         {
@@ -73,6 +73,21 @@
                         "Select Course",
                         new { @class = "form-control input-sm", onchange = "CourseChange(this)" })
                         }
+                    </div>
+                    <div class="col-md-2">
+
+                    </div>
+                    <div class="col-md-4">
+                        @*@Html.RadioButtonFor(x => x.courseSalesMaster.LVC, new { onclick = "todChange()" })*@
+                        <input type="radio" name="rdoGroup" id="rdoLVC" checked="@Model.courseSalesMaster.LVC" onclick="todChange()" />
+                        @Html.Label("LVC")
+                        &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+                        @*@Html.RadioButtonFor(x => x.courseSalesMaster.TOD, new { onclick = "todChange()" })*@
+                        <input type="radio" name="rdoGroup" id="rdoTOD" checked="@Model.courseSalesMaster.TOD" onclick="todChange()" />
+                        @Html.Label("TOD")
+
+                        @Html.HiddenFor(x => x.courseSalesMaster.LVC)
+                        @Html.HiddenFor(x => x.courseSalesMaster.TOD)
                     </div>
                 </div>
                 <div class="row css10">
@@ -266,9 +281,31 @@
             //    $('#StartDt').data("DateTimePicker").maxDate(e.date);
             //});
         });
+        function todChange()
+        {
+            debugger;
+            $('#frmCourseDetail').valid();
+            if (!$('#rdoLVC').is(':checked')) {
+                $('#courseSalesMaster_NoOfDays').removeAttr('disabled');
+
+            }
+            else {
+                $('#courseSalesMaster_NoOfDays').attr('disabled','disabled');
+            }
+        }
+
+        $.validator.addMethod('validatelvctod', function () {
+            if (!$('#rdoLVC').is(':checked')) {
+                return true;
+            }
+            else
+                return false;
+            
+        }, 'Your error message!');
 
         function SaveCourseSalesMaster() {
-
+            $('#courseSalesMaster_LVC').val($('#rdoLVC').is(':checked'));
+            $('#courseSalesMaster_TOD').val($('#rdoTOD').is(':checked'));
             if ($('#frmCourseDetail').valid()) {
                 $('#courseSalesMaster_NoOfDays').removeAttr('disabled');
                 $('#courseSalesMaster_Month').removeAttr('disabled');
@@ -290,14 +327,11 @@
                 'courseSalesMaster.NoOfDays': {
                     required: true
                 },
-                'courseSalesMaster.Month': {
-                    required: true
-                },
                 'courseSalesMaster.StartDate': {
-                    required: true
+                    validatelvctod: true
                 },
                 'courseSalesMaster.EndDate': {
-                    required: true
+                    validatelvctod: true
                 },
                 'courseSalesMaster.RegClosingDate': {
                     required: true
