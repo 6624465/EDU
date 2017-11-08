@@ -63,7 +63,7 @@
                                             Edit
                                         </button>
                                         <button type="button" class="btn btn-danger btn-sm"
-                                                onclick="DeleteTrainer(@Model.ElementAt(i).CustomerId)">
+                                                onclick="DeleteCustomerPayment(@Model.ElementAt(i).CustomerId)">
                                             Delete
                                         </button>
                                     </td>
@@ -76,11 +76,22 @@
         </div>
     </div>
 </section>
+@using (Html.BeginForm("DeleteCustomerPayment", "CustomerPayment", FormMethod.Post,new {id= "frmDelete",name= "frmDelete" }))
+{
+    <input type="hidden" id="customerId" name="customerId"/>
+}
 @section secscripts{
     <script type="text/javascript">
         $('#tblCustomerPayments').DataTable();
-
+        function DeleteCustomerPayment(Id)
+        {
+            if (confirm("Are you sure, do you want delete?")) {
+                $('#customerId').val(Id);
+                $('#frmDelete').submit();
+            }
+        }
         
     </script>
+   
 
 }
