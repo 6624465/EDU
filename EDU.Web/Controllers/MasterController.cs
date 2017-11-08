@@ -325,7 +325,7 @@ namespace EDU.Web.Controllers
         public PartialViewResult Course(int? Id)
         {
             ViewData["ProductData"] = new EduProductBO().GetList();
-            ViewData["CountryData"] = new CountryBO().GetList();
+            ViewData["CountryData"] = new BranchBO().GetList();
             if (!Id.HasValue)
             {
                 ViewBag.Title = "New Course";
@@ -390,7 +390,7 @@ namespace EDU.Web.Controllers
             var courseSalesMasterVm = new CourseSalesMasterVm
             {                
                 eduProductList = new EduProductBO().GetList().AsEnumerable(),
-                countryList = new CountryBO().GetList().AsEnumerable(),
+                branchList = new BranchBO().GetList().AsEnumerable(),
                 monthList = GetMonthData(),
                 courseSalesMaster = courseSalesMaster
             };
