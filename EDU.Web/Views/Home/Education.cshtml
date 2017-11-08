@@ -9,53 +9,50 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="row">
-                    @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
-                    {
-                        <div class="col-md-3">
-                            <div class="main-section grey ">
-                                <a href='@Url.Content("~/Master/EduProductList")'>
-                                    <div class="menu_section  grey">
-                                        <span><i class="fa fa-book fa-5x" aria-hidden="true"></i></span>
-                                    </div>
-                                    <div class="content-section grey-btm">
-                                        @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
-                                        {
-                                            <b> Education Products </b>
+                    <div class="col-md-3">
+                        <div class="main-section grey ">
+                            <a href='@Url.Content("~/Master/EduProductList")'>
+                                <div class="menu_section  grey">
+                                    <span><i class="fa fa-book fa-5x" aria-hidden="true"></i></span>
+                                </div>
+                                <div class="content-section grey-btm">
+                                    @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
+                                    {
+                                        <b> Education Products </b>
                                             <p>Create or Modify the Education Product</p>
-                                        }
-                                        else
-                                        {
-                                            <b> Education Products </b>
+                                    }
+                                    else
+                                    {
+                                        <b> Education Products </b>
                                             <p>View the Education Product</p>
-                                        }
-                                        <div class="btn btn-lg btn-danger"></div>
-                                    </div>
-                                </a>
-                            </div>
+                                    }
+                                    <div class="btn btn-lg btn-danger"></div>
+                                </div>
+                            </a>
                         </div>
-                        <div class="col-md-3">
-                            <div class="main-section dgreen ">
-                                <a href='@Url.Content("~/Master/CourseList")'>
-                                    <div class="menu_section  dgreen">
-                                        <span><i class="fa fa-bars fa-5x" aria-hidden="true"></i></span>
-                                    </div>
-                                    <div class="content-section grey-btm">
-                                        @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
-                                        {
-                                            <b> Courses </b>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="main-section dgreen ">
+                            <a href='@Url.Content("~/Master/CourseList")'>
+                                <div class="menu_section  dgreen">
+                                    <span><i class="fa fa-bars fa-5x" aria-hidden="true"></i></span>
+                                </div>
+                                <div class="content-section grey-btm">
+                                    @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
+                                    {
+                                        <b> Courses </b>
                                             <p>Create or Modify the Courses</p>
-                                        }
-                                        else
-                                        {
-                                            <b> Courses </b>
+                                    }
+                                    else
+                                    {
+                                        <b> Courses </b>
                                             <p>View the Courses</p>
-                                        }
-                                        <div class="btn btn-lg btn-danger"></div>
-                                    </div>
-                                </a>
-                            </div>
+                                    }
+                                    <div class="btn btn-lg btn-danger"></div>
+                                </div>
+                            </a>
                         </div>
-                    }
+                    </div>
                     <div class="col-md-3">
                         <div class="main-section org-btm ">
                             <a href='@Url.Content("~/Master/CourseSalesMasterList")'>

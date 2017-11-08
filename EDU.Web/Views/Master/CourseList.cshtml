@@ -147,26 +147,25 @@
                     maxlength:  4
                 },
                 PublicPrice: {
-                    required: true //validatePrices()
+                    validatePrices: true 
                 },
                 PrivatePrice: {
-                    required: true //validatePrices()
+                    validatePrices: true 
                 }
             }
         });
 
-        //function SaveCourse() {
-        //    alert($('#PublicPrice').val());
-        //    if ($('#frmCourse').valid()) {
-        //        $('#frmCourse').submit();
-        //    }
-        //};
-        function validatePrices()
-        {
+        $.validator.addMethod('validatePrices', function (value, element, param) {
             debugger;
-            return ($('#PublicPrice').val() == '0' || $('#PublicPrice').val() == '' || $('#PublicPrice').val() == null)
-                && ($('#PrivatePrice').val() == '0' || $('#PrivatePrice').val() == '' || $('#PrivatePrice').val() == null);
-        }
+            var PublicPrice = parseFloat($('#PublicPrice').val());
+            var PrivatePrice = parseFloat($('#PrivatePrice').val());
+            debugger;
+            if ((PublicPrice == 'NaN' || PublicPrice == 0) && (PrivatePrice == 'NaN' || PrivatePrice == 0)) {
+                return false;
+            }
+            else
+                return true;
+        }, 'Your error message!');
 
         function SaveCourse() {
             var cName = $('#CourseName').val() == null ? '' : $('#CourseName').val();

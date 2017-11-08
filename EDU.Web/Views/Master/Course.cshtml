@@ -55,7 +55,7 @@
                     <label class="control-label pull-right">No. Of Days</label>
                 </div>
                 <div class="col-md-4">
-                    @Html.DropDownListFor(x => x.NoOfDays, Enumerable.Range(1, 10).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), "Select", new { @class = "form-control input-sm" })
+                    @Html.DropDownListFor(x => x.NoOfDays, Enumerable.Range(0, 11).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), "Select", new { @class = "form-control input-sm" })
                 </div>
                 @*<div class="col-md-8">
                     @Html.TextBoxFor(x => x.NoOfDays, "{0:#.#}",
@@ -68,7 +68,7 @@
                     <label class="control-label pull-right">Public Price</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.TextBoxFor(x => x.PublicPrice, "{0:#.#}",
+                    @Html.TextBoxFor(x => x.PublicPrice, 
                     new { @class = "form-control input-sm decimalCss", placeholder = "Public Price" })
                 </div>
             </div>
@@ -78,7 +78,7 @@
                     <label class="control-label pull-right">Private Price</label>
                 </div>
                 <div class="col-md-8">
-                    @Html.TextBoxFor(x => x.PrivatePrice, "{0:#.#}",
+                    @Html.TextBoxFor(x => x.PrivatePrice, 
                     new { @class = "form-control input-sm decimalCss", placeholder = "Private Price" })
                 </div>
             </div>
