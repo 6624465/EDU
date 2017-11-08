@@ -20,7 +20,10 @@
                 </section>
             </div>
             <div class="box-tools">
-                <button class="btn btn-default btn-sm" type="button" onclick="AddCourse()"><i class="fa fa-plus"></i>&nbsp;Add New Course</button>
+                @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
+                {
+                    <button class="btn btn-default btn-sm" type="button" onclick="AddCourse()"><i class="fa fa-plus"></i>&nbsp;Add New Course</button>
+                }
             </div>
         </div>
         <div class="box-body">
@@ -35,7 +38,10 @@
                                 <th>Country</th>
                                 <th style="text-align:center">Public Price</th>
                                 <th style="text-align:center">Private Price</th>
-                                <th>#Action</th>
+                                @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
+                                {
+                                    <th>#Action</th>
+                                }
                             </tr>
                         </thead>
                         <tbody>
@@ -46,12 +52,15 @@
                                     <td>@Model.ElementAt(i).CourseName</td>
                                     <td align="center">@Model.ElementAt(i).NoOfDays</td>
                                     <td>@Model.ElementAt(i).CountryName</td>
-                                    <td align="center">@Model.ElementAt(i).PublicPrice</td>
-                                    <td align="center">@Model.ElementAt(i).PrivatePrice</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm" onclick="EditCourse(@Model.ElementAt(i).Id)"><i class="fa fa-pencil-square-o"></i></button>
-                                        <button class="btn btn-danger btn-sm" onclick="DeleteEduCourse(@Model.ElementAt(i).Id)"><i class="fa fa-trash-o"></i></button>
-                                    </td>
+                                    <td align="center">@Model.ElementAt(i).PublicPrice.ToString("0.00")</td>
+                                    <td align="center">@Model.ElementAt(i).PrivatePrice.ToString("0.00")</td>
+                                    @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
+                                    {
+                                        <td>
+                                            <button class="btn btn-primary btn-sm" onclick="EditCourse(@Model.ElementAt(i).Id)"><i class="fa fa-pencil-square-o"></i></button>
+                                            <button class="btn btn-danger btn-sm" onclick="DeleteEduCourse(@Model.ElementAt(i).Id)"><i class="fa fa-trash-o"></i></button>
+                                        </td>
+                                    }
                                 </tr>
                             }
                         </tbody>
@@ -138,22 +147,28 @@
                     maxlength:  4
                 },
                 PublicPrice: {
-                    required: true
+                    required: true //validatePrices()
                 },
                 PrivatePrice: {
-                    required: true
+                    required: true //validatePrices()
                 }
             }
         });
 
-        function SaveCourse() {
-            if ($('#frmCourse').valid()) {
-                $('#frmCourse').submit();
-            }
-        };
+        //function SaveCourse() {
+        //    alert($('#PublicPrice').val());
+        //    if ($('#frmCourse').valid()) {
+        //        $('#frmCourse').submit();
+        //    }
+        //};
+        function validatePrices()
+        {
+            debugger;
+            return ($('#PublicPrice').val() == '0' || $('#PublicPrice').val() == '' || $('#PublicPrice').val() == null)
+                && ($('#PrivatePrice').val() == '0' || $('#PrivatePrice').val() == '' || $('#PrivatePrice').val() == null);
+        }
 
         function SaveCourse() {
-            debugger;
             var cName = $('#CourseName').val() == null ? '' : $('#CourseName').val();
             var country = $('#Country').val() == null ? '' : $('#Country').val();
             var product = $('#Product').val() == null ? '' : $('#Product').val();

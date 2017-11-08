@@ -140,7 +140,7 @@
                 </div>
                 <div class="row css10">
                     <div class="col-md-2">
-                        <label class="control-label">Leads On Hand</label>
+                        <label class="control-label">Leads on hand</label>
                     </div>
                     <div class="col-md-4">
                         @Html.TextBoxFor(x => x.courseSalesMaster.LeadsOnHead, "{0:#.#}",
@@ -150,12 +150,12 @@
                         <label class="control-label">Registered</label>
                     </div>
                     <div class="col-md-4">
-                        @Html.DropDownListFor(x => x.courseSalesMaster.Registered, Enumerable.Range(1, 25).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), "Select Registered", new { @class = "form-control input-sm", onchange = "RegisteredUser()" })
+                        @Html.DropDownListFor(x => x.courseSalesMaster.Registered, Enumerable.Range(0, 25).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), "Select Registered", new { @class = "form-control input-sm", onchange = "RegisteredUser()" })
                     </div>
                 </div>
                 <div class="row css10">
                     <div class="col-md-2">
-                        <label class="control-label">Leads On Head Remarks</label>
+                        <label class="control-label">Leads on hand Details</label>
                     </div>
                     <div class="col-md-4">
                         @Html.TextAreaFor(x => x.courseSalesMaster.LeadsOnHeadRemarks,
@@ -166,7 +166,7 @@
                             new { @class = "form-control input-sm numCss", onblur = "RegisteredUser()" })
                         </div>*@
                     <div class="col-md-2">
-                        <label class="control-label">Registered Remarks</label>
+                        <label class="control-label">Registration Details</label>
                     </div>
                     <div class="col-md-4">
                         @Html.TextAreaFor(x => x.courseSalesMaster.RegisteredRemarks,

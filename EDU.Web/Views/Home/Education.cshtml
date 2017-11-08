@@ -18,8 +18,16 @@
                                         <span><i class="fa fa-book fa-5x" aria-hidden="true"></i></span>
                                     </div>
                                     <div class="content-section grey-btm">
-                                        <b> Education Products </b>
-                                        <p>Create or Modify the Education Product</p>
+                                        @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
+                                        {
+                                            <b> Education Products </b>
+                                            <p>Create or Modify the Education Product</p>
+                                        }
+                                        else
+                                        {
+                                            <b> Education Products </b>
+                                            <p>View the Education Product</p>
+                                        }
                                         <div class="btn btn-lg btn-danger"></div>
                                     </div>
                                 </a>
@@ -32,8 +40,16 @@
                                         <span><i class="fa fa-bars fa-5x" aria-hidden="true"></i></span>
                                     </div>
                                     <div class="content-section grey-btm">
-                                        <b> Courses </b>
-                                        <p>Create or Modify the Course</p>
+                                        @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
+                                        {
+                                            <b> Courses </b>
+                                            <p>Create or Modify the Courses</p>
+                                        }
+                                        else
+                                        {
+                                            <b> Courses </b>
+                                            <p>View the Courses</p>
+                                        }
                                         <div class="btn btn-lg btn-danger"></div>
                                     </div>
                                 </a>
