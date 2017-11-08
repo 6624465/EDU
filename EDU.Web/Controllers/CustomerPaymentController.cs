@@ -2,6 +2,7 @@
 using EDU.Web.ViewModels.CustomerPayments;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -59,7 +60,15 @@ namespace EDU.Web.Controllers
                 customerPayment.OtherRecievables = customerPaymentVM.OtherRecievables;
                 customerPayment.PaidAmount = customerPaymentVM.PaidAmount;
                 customerPayment.RecieptDate = customerPaymentVM.RecieptDate;
-                customerPayment.ReferenceDocument = customerPaymentVM.ReferenceDocument.FileName;
+
+                if (customerPaymentVM.ReferenceDocument.ContentLength > 0)
+                {
+                    customerPayment.ReferenceDocument = customerPaymentVM.ReferenceDocument.FileName;
+                    string fileName = customerPaymentVM.ReferenceDocument.FileName;
+                    string path = Path.Combine(Server.MapPath("~/FileUploads"), fileName);
+                    customerPaymentVM.ReferenceDocument.SaveAs(path);
+                }
+
 
                 dbContext.CustomerPayments.Add(customerPayment);
                 dbContext.SaveChanges();
