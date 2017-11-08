@@ -3,6 +3,10 @@
     ViewBag.Title = "TrainersList";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section seccss{
+    <link href="@Url.Content("~/Css/dataTables.bootstrap.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Css/dataTables.responsive.css")" rel="stylesheet" />
+}
 <section class="content">
 
     <div class="box box-dnex">
@@ -79,7 +83,10 @@
 </section>
 @section secscripts{
     <script type="text/javascript">
-        $('#tblTrainer').DataTable();
+        $(function () {
+            $('#tblTrainer').DataTable();
+        });
+       
 
         function DeleteTrainer(id) {
 
