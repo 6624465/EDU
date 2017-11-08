@@ -3,15 +3,27 @@
     ViewBag.Title = "Payment";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Payment</h2>
-
+@section seccss{
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css" rel="stylesheet">
+}
 @using (Html.BeginForm("Payment", "CustomerPayment", FormMethod.Post,
-                                                                                                    new { id = "frmCustomerPayment", name = "frmCustomerPayment", enctype = "multipart/form-data" }))
+                                                                                                                            new { id = "frmCustomerPayment", name = "frmCustomerPayment", enctype = "multipart/form-data" }))
 {
     @Html.HiddenFor(x => x.CustomerId, new { @class = "form-control input-sm" })
     <section class="content">
-        <div class="box box-dnex">
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <div class="row">
+                    <section class="content-header">
+                        <ol class="breadcrumb">
+                            <li><a href='@Url.Content("~/Home/Modules")'><i class="fa fa-dashboard"></i> Home</a></li>
+                            <li><a href='@Url.Content("~/CustomerPayment/CustomerPaymentList")'>Payment List</a></li>
+                            <li><a href='@Url.Content("~/CustomerPayment/Payment?customerId=-1")'> Master Data</a></li>
+
+                        </ol>
+                    </section>
+                </div>
+            </div>
             <div class="box-body">
                 <div class="row css10">
                     <div class="col-md-2">
@@ -92,7 +104,7 @@
                     </div>
                     <div class="col-md-2">
 
-                        <label class="control-label pull-right">CompanyName</label>
+                        <label class="control-label pull-right">Reference Document</label>
                     </div>
                     <div class="col-md-4">
                         @Html.TextBoxFor(x => x.ReferenceDocument, new { type = "file", @class = "form-control" })

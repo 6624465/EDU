@@ -3,18 +3,24 @@
     ViewBag.Title = "CustomerPaymentList";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>CustomerPaymentList</h2>
-
+@section seccss{
+    <link href="@Url.Content("~/Css/dataTables.bootstrap.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Css/dataTables.responsive.css")" rel="stylesheet" />
+}
 <section class="content">
 
-    <div class="box box-dnex">
+    <div class="box box-default">
         <div class="box-header with-border">
             <div class="row">
-                <div class="row">
-                    <section class="content-header"></section>
-                </div>
+                <section class="content-header">
+                    <ol class="breadcrumb">
+                        <li><a href='@Url.Content("~/Home/Modules")'><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li><a href='@Url.Content("~/Home/Index")'>Modules</a></li>
+                        <li><a href='@Url.Content("~/CustomerPayment/CustomerPaymentList")'>Payment List</a></li>
+                    </ol>
+                </section>
             </div>
+
             <div class="box-tools">
                 @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
                 {
@@ -40,7 +46,7 @@
                                 <th>Other Recievables</th>
                                 <th>Due Date</th>
                                 <th>Reciept Date</th>
-                                <th>Remarks</th>
+                                <th>ReferenceDocument</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -76,22 +82,21 @@
         </div>
     </div>
 </section>
-@using (Html.BeginForm("DeleteCustomerPayment", "CustomerPayment", FormMethod.Post,new {id= "frmDelete",name= "frmDelete" }))
+@using (Html.BeginForm("DeleteCustomerPayment", "CustomerPayment", FormMethod.Post, new { id = "frmDelete", name = "frmDelete" }))
 {
-    <input type="hidden" id="customerId" name="customerId"/>
+    <input type="hidden" id="customerId" name="customerId" />
 }
 @section secscripts{
     <script type="text/javascript">
         $('#tblCustomerPayments').DataTable();
-        function DeleteCustomerPayment(Id)
-        {
+        function DeleteCustomerPayment(Id) {
             if (confirm("Are you sure, do you want delete?")) {
                 $('#customerId').val(Id);
                 $('#frmDelete').submit();
             }
         }
-        
+
     </script>
-   
+
 
 }

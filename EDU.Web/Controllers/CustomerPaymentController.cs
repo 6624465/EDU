@@ -16,7 +16,7 @@ namespace EDU.Web.Controllers
         public ActionResult Payment(int customerId = -1)
         {
             CustomerPayment customerPayment = dbContext.CustomerPayments.
-                    Where(x => x.CustomerId == customerId).FirstOrDefault();
+                    Where(x => x.CustomerId == customerId && x.IsActive == true).FirstOrDefault();
 
             if (customerPayment == null)
             {
@@ -60,6 +60,7 @@ namespace EDU.Web.Controllers
                 customerPayment.OtherRecievables = customerPaymentVM.OtherRecievables;
                 customerPayment.PaidAmount = customerPaymentVM.PaidAmount;
                 customerPayment.RecieptDate = customerPaymentVM.RecieptDate;
+                customerPayment.IsActive = true;
 
                 if (customerPaymentVM.ReferenceDocument.ContentLength > 0)
                 {
@@ -91,12 +92,16 @@ namespace EDU.Web.Controllers
 
                 dbContext.SaveChanges();
             }
-            return View("CustomerPaymentList");
+            return RedirectToAction("CustomerPaymentList");
         }
 
         public ActionResult CustomerPaymentList()
         {
-            List<CustomerPayment> customerPayment = dbContext.CustomerPayments.ToList();
+            List<CustomerPayment> customerPayment = dbContext.CustomerPayments.Where(x => x.IsActive == true).ToList();
+            foreach (CustomerPayment cp in customerPayment)
+            {
+                cp.ReferenceDocument = "~/FileUploads/" + cp.ReferenceDocument;
+            }
             return View(customerPayment);
         }
 
@@ -108,7 +113,8 @@ namespace EDU.Web.Controllers
 
             if (customerPayment != null)
             {
-                dbContext.CustomerPayments.Remove(customerPayment);
+                customerPayment.IsActive = false;
+                dbContext.SaveChanges();
             }
 
             return Json(true, JsonRequestBehavior.AllowGet);

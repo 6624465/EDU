@@ -14,13 +14,13 @@ namespace EDU.Web.Controllers
         [HttpGet]
         public ActionResult GetRegistrationList()
         {
-            List<Registration> registrationList = dbContext.Registrations.ToList();
+            List<Registration> registrationList = dbContext.Registrations.Where(x=>x.IsActive==true).ToList();
             return View(registrationList);
         }
 
         public ActionResult Registration(int Id)
         {
-            Registration registration = dbContext.Registrations.Where(x => x.RegistrationId == Id).FirstOrDefault();
+            Registration registration = dbContext.Registrations.Where(x => x.RegistrationId == Id && x.IsActive == true).FirstOrDefault();
             if (registration == null)
             {
                 registration = new Registration();
@@ -33,6 +33,7 @@ namespace EDU.Web.Controllers
         {
             if (registration.RegistrationId == -1)
             {
+                registration.IsActive = true;
                 dbContext.Registrations.Add(registration);
                 dbContext.SaveChanges();
             }
@@ -68,7 +69,7 @@ namespace EDU.Web.Controllers
             Registration regObj = dbContext.Registrations.Where(x => x.RegistrationId == Id).FirstOrDefault();
             if (regObj != null)
             {
-                dbContext.Registrations.Remove(regObj);
+                regObj.IsActive = true;
                 dbContext.SaveChanges();
             }
             return Json(true, JsonRequestBehavior.AllowGet);

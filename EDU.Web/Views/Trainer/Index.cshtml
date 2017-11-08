@@ -4,14 +4,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Add Trainer</h2>
-
-
 @using (Html.BeginForm("SaveTrainer", "Trainer", FormMethod.Post, new { id = "frmTrainer", name = "frmTrainer", enctype = "multipart/form-data" }))
 {
     @Html.HiddenFor(x => x.TrainerInformation.TrianerId, new { @class = "form-control input-sm" })
     <section class="content">
-        <div class="box box-dnex">
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <div class="row">
+                    <section class="content-header">
+                        <ol class="breadcrumb">
+                            <li><a href='@Url.Content("~/Home/Modules")'><i class="fa fa-dashboard"></i> Home</a></li>
+                            <li><a href='@Url.Content("~/Trainer/TrainersList")'>Trainers List</a></li>
+                            <li><a href='@Url.Content("~/Trainer/Index?Id=-1")'>Add Trainer</a></li>
+                        </ol>
+                    </section>
+                </div>
+            </div>
             <div class="box-body">
                 <div class="row css10">
                     <div class="col-md-2">
@@ -86,7 +94,7 @@
                 </div>
             </div>
         </div>
-    </section>
+</section>
 }
 @section secscripts {
     <script type="text/javascript">
