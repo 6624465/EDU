@@ -18,7 +18,7 @@ namespace EDU.Web.Controllers
             return View(registrationList);
         }
 
-        public ActionResult Registration(int Id)
+        public ActionResult Registration(int Id=-1)
         {
             Registration registration = dbContext.Registrations.Where(x => x.RegistrationId == Id && x.IsActive == true).FirstOrDefault();
             if (registration == null)
@@ -69,7 +69,7 @@ namespace EDU.Web.Controllers
             Registration regObj = dbContext.Registrations.Where(x => x.RegistrationId == Id).FirstOrDefault();
             if (regObj != null)
             {
-                regObj.IsActive = true;
+                regObj.IsActive = false;
                 dbContext.SaveChanges();
             }
             return Json(true, JsonRequestBehavior.AllowGet);

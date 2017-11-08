@@ -80,6 +80,14 @@
                 </div>
             </div>
         </div>
+        <div class="box-footer">
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn btn-default btn-sm pull-right" type="button" onclick="location.href = '@Url.Content("~/Home/Education")'"><i class="fa fa-backward"></i>&nbsp;Back</button>
+                </div>
+
+            </div>
+        </div>
     </div>
 </section>
 @using (Html.BeginForm("DeleteCustomerPayment", "CustomerPayment", FormMethod.Post, new { id = "frmDelete", name = "frmDelete" }))
