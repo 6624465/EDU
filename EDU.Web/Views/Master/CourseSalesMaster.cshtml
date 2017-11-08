@@ -60,8 +60,8 @@
                     </div>
                     <div class="col-md-4">
                         @if (Model.courseSalesMaster.Id == -1)
-                                {
-                                    @Html.DropDownListFor(x => x.courseSalesMaster.Course,
+                        {
+                            @Html.DropDownListFor(x => x.courseSalesMaster.Course,
                                 Enumerable.Empty<SelectListItem>(),
                                 "Select Course",
                                 new { @class = "form-control input-sm", disabled = "disabled", onchange = "CourseChange(this)" })
@@ -79,7 +79,7 @@
                     </div>
                     <div class="col-md-4">
                         @*@Html.RadioButtonFor(x => x.courseSalesMaster.LVC, new { onclick = "todChange()" })*@
-                        <input type="radio" name="rdoGroup" id="rdoLVC" checked="@Model.courseSalesMaster.LVC" onclick="todChange()" />
+                        <input type="radio" name="rdoGroup" id="rdoLVC" checked="@((Model.courseSalesMaster.LVC==null && Model.courseSalesMaster.TOD==null)?true: Model.courseSalesMaster.LVC)" on onclick="todChange()" />
                         @Html.Label("LVC")
                         &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
                         @*@Html.RadioButtonFor(x => x.courseSalesMaster.TOD, new { onclick = "todChange()" })*@
@@ -254,10 +254,17 @@
                 format: 'DD/MM/YYYY'
             });
 
+
+            @if (Model.courseSalesMaster.Id != -1 && Model.courseSalesMaster.TOD.Value) {
+                <text>
+                    $('#courseSalesMaster_NoOfDays').removeAttr('disabled');
+                </text>
+            }
             @if (Model.courseSalesMaster.Id != -1)
             {
                 <text>
             $('#EndDt').data("DateTimePicker").minDate($('#courseSalesMaster_StartDate').val());
+
             </text>
             }
             else
@@ -290,7 +297,9 @@
 
             }
             else {
-                $('#courseSalesMaster_NoOfDays').attr('disabled','disabled');
+                debugger;
+                $('#courseSalesMaster_NoOfDays').attr('disabled', 'disabled');
+                CourseChangeWrapper($('#courseSalesMaster_Course').val());
             }
         }
 
@@ -300,7 +309,7 @@
             }
             else
                 return false;
-            
+
         }, 'Your error message!');
 
         function SaveCourseSalesMaster() {
@@ -385,11 +394,10 @@
             }
         }
 
-        function CourseChange(el) {
-            debugger;
-            if (el.value) {
+        function CourseChangeWrapper(val) {
+            if (val) {
                 $.ajax({
-                    url: '@Url.Content("~/Master/GetCourse?Id=")' + el.value,
+                    url: '@Url.Content("~/Master/GetCourse?Id=")' + val,
                     method: 'GET',
                     contentType: 'application/json',
                     success: function (data) {
@@ -403,6 +411,11 @@
             }
             else
                 $('#courseSalesMaster_NoOfDays').val('');
+        }
+
+        function CourseChange(el) {
+            debugger;
+            CourseChangeWrapper(el.value);
         }
 
         function MinimumRegUser() {
