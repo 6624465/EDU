@@ -71,7 +71,7 @@
                                 <th style="text-align:center">Start Dt</th>
                                 <th style="text-align:center">End Dt</th>
                                 <th style="text-align:center">Min. Reg</th>
-                                <th style="text-align:center">Pipeline</th>
+                                <th style="text-align:center">Leads on hand</th>
                                 <th style="text-align:center">Registered</th>
                                 <th style="text-align:center">Avl. Seats</th>
                                 <th style="text-align:center">Reg. Closing Dt</th>
@@ -101,7 +101,7 @@
                                         else
                                         {
                                             <a style="cursor:pointer;text-decoration:underline;">
-                                                <span data-toggle="popover" data-html="true" data-title="Pipeline Remarks" data-content="@CheckString(Model.ElementAt(i).LeadsOnHeadRemarks)">@Model.ElementAt(i).LeadsOnHead</span>
+                                                <span data-toggle="popover" data-html="true" data-title="Leads on hand Details" data-content="@CheckString(Model.ElementAt(i).LeadsOnHeadRemarks)">@Model.ElementAt(i).LeadsOnHead</span>
                                             </a>
                                         }
                                         
@@ -114,7 +114,7 @@
                                         else
                                         {
                                             <a style="cursor:pointer;text-decoration:underline;">
-                                                <span data-toggle="popover" data-html="true" data-title="Registered Remarks" data-content="@CheckString(Model.ElementAt(i).RegisteredRemarks)">@Model.ElementAt(i).Registered</span>
+                                                <span data-toggle="popover" data-html="true" data-title="Registration Details" data-content="@CheckString(Model.ElementAt(i).RegisteredRemarks)">@Model.ElementAt(i).Registered</span>
                                             </a>
                                         }
                                         
