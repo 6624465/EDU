@@ -91,8 +91,8 @@ namespace EDU.Web.Controllers
             return View(customerPayment);
         }
 
-
-        public JsonResult DeleteCustomerPayment(int customerId)
+        [HttpPost]
+        public JsonResult DeleteCustomerPayment(int? customerId)
         {
             CustomerPayment customerPayment = dbContext.CustomerPayments.
                       Where(x => x.CustomerId == customerId).FirstOrDefault();
