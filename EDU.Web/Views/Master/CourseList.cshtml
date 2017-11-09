@@ -118,8 +118,7 @@
                 }
             });
         }
-        function DeleteEduCourse(Id)
-        {
+        function DeleteEduCourse(Id) {
             debugger;
             if (confirm("Are you sure, do you want delete?")) {
                 $('#id').val(Id);
@@ -144,24 +143,21 @@
                 },
                 NoOfDays: {
                     required: true,
-                    maxlength:  4
+                    maxlength: 4
                 },
                 PublicPrice: {
-                    validatePrices: true 
+                    validatePrices: true
                 },
                 PrivatePrice: {
-                    validatePrices: true 
+                    validatePrices: true
                 }
             }
         });
 
         $.validator.addMethod('validatePrices', function (value, element, param) {
-            debugger;
             var PublicPrice = parseFloat($('#PublicPrice').val());
             var PrivatePrice = parseFloat($('#PrivatePrice').val());
-            debugger;
             if ((isNaN(PublicPrice) || PublicPrice == 0) && (isNaN(PrivatePrice) || PrivatePrice == 0)) {
-                debugger;
                 return false;
             }
             else
@@ -237,8 +233,7 @@
                         $('#CourseName').val('');
                     }
                 }
-                else
-                {
+                else {
                     return result
                 }
             });
