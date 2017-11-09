@@ -160,7 +160,8 @@
             var PublicPrice = parseFloat($('#PublicPrice').val());
             var PrivatePrice = parseFloat($('#PrivatePrice').val());
             debugger;
-            if ((PublicPrice == 'NaN' || PublicPrice == 0) && (PrivatePrice == 'NaN' || PrivatePrice == 0)) {
+            if ((isNaN(PublicPrice) || PublicPrice == 0) && (isNaN(PrivatePrice) || PrivatePrice == 0)) {
+                debugger;
                 return false;
             }
             else
@@ -177,7 +178,6 @@
                 if ($('#Id').val() == '-1') {
                     var promise = ValidateByCourseName();
                     $.when(promise).done(function (result) {
-                        debugger;
                         if (result == "False") {
                             if ($('#frmCourse').valid()) {
                                 $('#CourseName').removeAttr('disabled');
