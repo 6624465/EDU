@@ -14,8 +14,7 @@
             <div class="row">
                 <section class="content-header">
                     <ol class="breadcrumb">
-                        <li><a href='@Url.Content("~/Home/Modules")'><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li><a href='@Url.Content("~/Home/Index")'>Modules</a></li>
+                        <li><a href='@Url.Content("~/Home/Education")'><i class="fa fa-dashboard"></i> Home</a></li>
                         <li><a href='@Url.Content("~/Trainer/TrainersList")'>Trainers List</a></li>
                     </ol>
                 </section>
@@ -56,7 +55,7 @@
                                     <td>@Model.ElementAt(i).TrainerName</td>
                                     <td>@Model.ElementAt(i).Technology</td>
                                     <td>@Model.ElementAt(i).Country</td>
-                                    <td><img src="@Url.Content(Model.ElementAt(i).Profile)" alt="Profile" style="height:20px;"/></td>
+                                    <td><img src="@Url.Content(Model.ElementAt(i).Profile)" alt="Profile" style="height:20px;" /></td>
                                     <td>@Model.ElementAt(i).TrainerRate</td>
                                     <td>@Model.ElementAt(i).VendorName</td>
                                     <td>@Model.ElementAt(i).Address</td>
@@ -86,7 +85,7 @@
         $(function () {
             $('#tblTrainer').DataTable();
         });
-       
+
 
         function DeleteTrainer(id) {
 
