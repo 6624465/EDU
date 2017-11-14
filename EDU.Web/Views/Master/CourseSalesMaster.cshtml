@@ -79,11 +79,11 @@
                     </div>
                     <div class="col-md-4">
                         @*@Html.RadioButtonFor(x => x.courseSalesMaster.LVC, new { onclick = "todChange()" })*@
-                        <input type="radio" name="rdoGroup" id="rdoLVC" checked="@((Model.courseSalesMaster.LVC==null && Model.courseSalesMaster.TOD==null)?true: Model.courseSalesMaster.LVC)" on onclick="todChange()" />
+                        <input type="radio" name="rdoGroup" id="rdoLVC" title="LVC" checked="@((Model.courseSalesMaster.LVC==null && Model.courseSalesMaster.TOD==null)?true: Model.courseSalesMaster.LVC)" onclick="todChange()" />
                         @Html.Label("LVC")
                         &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
                         @*@Html.RadioButtonFor(x => x.courseSalesMaster.TOD, new { onclick = "todChange()" })*@
-                        <input type="radio" name="rdoGroup" id="rdoTOD" checked="@Model.courseSalesMaster.TOD" onclick="todChange()" />
+                        <input type="radio" name="rdoGroup" id="rdoTOD" title="TOD" checked="@Model.courseSalesMaster.TOD" onclick="todChange()" />
                         @Html.Label("TOD")
 
                         @Html.HiddenFor(x => x.courseSalesMaster.LVC)
@@ -305,12 +305,29 @@
             }
         }
 
-        $.validator.addMethod('validatelvctod', function () {
+        $.validator.addMethod('validatelvctodsd', function () {
+            debugger;
             if (!$('#rdoLVC').is(':checked')) {
                 return true;
             }
             else
-                return false;
+                if ($('#courseSalesMaster_StartDate').val() == '')
+                    return false;
+                else
+                    return true;
+
+        }, 'Your error message!');
+
+        $.validator.addMethod('validatelvctoded', function () {
+            debugger;
+            if (!$('#rdoLVC').is(':checked')) {
+                return true;
+            }
+            else
+                if ($('#courseSalesMaster_EndDate').val() == '')
+                    return false;
+                else
+                    return true;
 
         }, 'Your error message!');
 
@@ -318,7 +335,7 @@
             $('#courseSalesMaster_LVC').val($('#rdoLVC').is(':checked'));
             $('#courseSalesMaster_TOD').val($('#rdoTOD').is(':checked'));
             if ($('#frmCourseDetail').valid()) {
-                SaveRemoveatrr();
+               // SaveRemoveatrr();
                 $('#frmCourseDetail').submit();
             }
         }
@@ -375,10 +392,10 @@
                     required: true
                 },
                 'courseSalesMaster.StartDate': {
-                    validatelvctod: true
+                    validatelvctodsd: true
                 },
                 'courseSalesMaster.EndDate': {
-                    validatelvctod: true
+                    validatelvctoded: true
                 },
                 'courseSalesMaster.RegClosingDate': {
                     required: true

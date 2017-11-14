@@ -52,8 +52,8 @@
                                     <td>@Model.ElementAt(i).CourseName</td>
                                     <td align="center">@Model.ElementAt(i).NoOfDays</td>
                                     <td>@Model.ElementAt(i).CountryName</td>
-                                    <td align="center">@Model.ElementAt(i).PublicPrice.ToString("0.00")</td>
-                                    <td align="center">@Model.ElementAt(i).PrivatePrice.ToString("0.00")</td>
+                                    <td align="center">@(Model.ElementAt(i).PublicPrice.ToString("0.00") == "0.00" ? "N/A" : Model.ElementAt(i).PublicPrice.ToString("0.00"))</td>
+                                    <td align="center">@(Model.ElementAt(i).PrivatePrice.ToString("0.00") == "0.00" ? "N/A" : Model.ElementAt(i).PrivatePrice.ToString("0.00"))</td>
                                     @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
                                     {
                                         <td>
