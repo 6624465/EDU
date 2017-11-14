@@ -223,9 +223,12 @@
                     </div>
                     <div class="col-md-2">
                     </div>
-                    <div class="col-md-4">
-                        @Html.TextAreaFor(x => x.courseSalesMaster.RegisteredRemarks,
-                        new { @class = "form-control input-sm" })
+                    <div class="col-md-4" id="IsConfirm">
+                      @*<label>IsConfirm</label>
+                       @Html.CheckBoxFor(x=>x.courseSalesMaster.IsConfirm.Value,
+                      new { @class="form-control"})*@
+                        <input type="checkbox"  id="chkIsConfirm" title="IsConfirm" checked="@((Model.courseSalesMaster.IsConfirm==null)?false: Model.courseSalesMaster.IsConfirm)" />
+                        @Html.Label("IsConfirm")
                     </div>
                 </div>
                 <div class="row">
@@ -233,7 +236,7 @@
                         <div class="text-center">
                             <button type="button" onclick="SaveCourseSalesMaster()" class="btn btn-primary btn-sm"><i class="fa fa-floppy-o"></i>&nbsp;Save</button> &nbsp;&nbsp;&nbsp;
                             <button class="btn btn-default btn-sm" type="button" onclick="location.href = '@Url.Content("~/Master/CourseSalesMasterList")'"><i class="fa fa-backward"></i>&nbsp;Back</button>&nbsp;&nbsp;&nbsp;
-                            <button type="button" id="confirmBtn" onclick="ConfirmCourseSalesMaster(@Model.courseSalesMaster.Id,@Model.courseSalesMaster.Registered,@Model.courseSalesMaster.RegisteredRemarks)" class="btn btn-success btn-sm">&nbsp;Confirm</button>
+                            @*<button type="button" id="confirmBtn" onclick="ConfirmCourseSalesMaster(@Model.courseSalesMaster.Id,@Model.courseSalesMaster.Registered,@Model.courseSalesMaster.RegisteredRemarks)" class="btn btn-success btn-sm">&nbsp;Confirm</button>*@
 
                         </div>
                     </div>
@@ -248,7 +251,7 @@
     <script src="@Url.Content("~/Scripts/moment.min.js")"></script>
     <script src="@Url.Content("~/Scripts/bootstrap-datetimepicker.js")"></script>
     <script type="text/javascript">
-        $('#confirmBtn').attr('disabled', 'disabled')
+        $('#chkIsConfirm').hide()
         $(function () {
             $('#StartDt, #RegClosingDt').datetimepicker({
                 icons: {
@@ -393,20 +396,21 @@
                 SaveRemoveatrr();
                 $('#frmCourseDetail').submit();
                 $('#confirmBtn').removeAttr('disabled')
+                $('#chkIsConfirm').show();
 
 
             }
         }
 
-        function ConfirmCourseSalesMaster(Id, Registered, RegisteredRemarks) {
-            if ($('#frmCourseConfirm').valid()) {
-                $("#id").val(Id);
-                $("#registered").val(Registered);
-                $("#registeredremarks").val(RegisteredRemarks);
-                $('#frmCourseConfirm').submit();
-                ConfirmAttrCoursesalesmaster();
-            }
-        }
+        //function ConfirmCourseSalesMaster(Id, Registered, RegisteredRemarks) {
+        //    if ($('#frmCourseConfirm').valid()) {
+        //        $("#id").val(Id);
+        //        $("#registered").val(Registered);
+        //        $("#registeredremarks").val(RegisteredRemarks);
+        //        $('#frmCourseConfirm').submit();
+        //        ConfirmAttrCoursesalesmaster();
+        //    }
+        //}
 
         function SaveRemoveatrr()
         {
