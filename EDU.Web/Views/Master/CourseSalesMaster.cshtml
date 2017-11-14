@@ -218,6 +218,8 @@
                         <div class="text-center">
                             <button type="button" onclick="SaveCourseSalesMaster()" class="btn btn-primary btn-sm"><i class="fa fa-floppy-o"></i>&nbsp;Save</button>
                             <button class="btn btn-default btn-sm" type="button" onclick="location.href = '@Url.Content("~/Master/CourseSalesMasterList")'"><i class="fa fa-backward"></i>&nbsp;Back</button>
+                            <button type="button" onclick="ConfirmCourseSalesMaster()" class="btn btn-primary btn-sm">&nbsp;Confirm</button>
+
                         </div>
                     </div>
                 </div>
@@ -316,10 +318,46 @@
             $('#courseSalesMaster_LVC').val($('#rdoLVC').is(':checked'));
             $('#courseSalesMaster_TOD').val($('#rdoTOD').is(':checked'));
             if ($('#frmCourseDetail').valid()) {
-                $('#courseSalesMaster_NoOfDays').removeAttr('disabled');
-                $('#courseSalesMaster_Month').removeAttr('disabled');
+                SaveRemoveatrr();
                 $('#frmCourseDetail').submit();
             }
+        }
+
+        function ConfirmCourseSalesMaster()
+        {
+            debugger;
+            if ($('#frmCourseDetail').valid())
+            {
+                $('#courseSalesMaster_Country').attr('disabled', 'disabled');
+                $('#courseSalesMaster_Product').attr('disabled', 'disabled');
+                $('#courseSalesMaster_Course').attr('disabled', 'disabled');
+                $('#courseSalesMaster_NoOfDays').attr('disabled', 'disabled');
+                $('#courseSalesMaster_Month').attr('disabled', 'disabled');
+                $('#courseSalesMaster_StartDate').attr('disabled', 'disabled');
+                $('#courseSalesMaster_EndDate').attr('disabled', 'disabled');
+                $('#courseSalesMaster_MinimumReg').attr('disabled', 'disabled');
+                $('#courseSalesMaster_LeadsOnHead').attr('disabled', 'disabled');
+                $('#courseSalesMaster_LeadsOnHeadRemarks').attr('disabled', 'disabled');
+                $('#courseSalesMaster_AvailableSeats').attr('disabled', 'disabled');
+                $('#courseSalesMaster_RegClosingDate').attr('disabled', 'disabled');
+
+            }
+        }
+
+        function SaveRemoveatrr()
+        {
+            $('#courseSalesMaster_Country').removeAttr('disabled');
+            $('#courseSalesMaster_Product').removeAttr('disabled');
+            $('#courseSalesMaster_Course').removeAttr('disabled');
+            $('#courseSalesMaster_NoOfDays').removeAttr('disabled');
+            $('#courseSalesMaster_Month').removeAttr('disabled');
+            $('#courseSalesMaster_StartDate').removeAttr('disabled');
+            $('#courseSalesMaster_EndDate').removeAttr('disabled');
+            $('#courseSalesMaster_MinimumReg').removeAttr('disabled');
+            $('#courseSalesMaster_LeadsOnHead').removeAttr('disabled');
+            $('#courseSalesMaster_LeadsOnHeadRemarks').removeAttr('disabled');
+            $('#courseSalesMaster_AvailableSeats').removeAttr('disabled');
+            $('#courseSalesMaster_RegClosingDate').removeAttr('disabled');
         }
 
         $('#frmCourseDetail').validate({
