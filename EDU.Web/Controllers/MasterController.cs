@@ -298,7 +298,7 @@ namespace EDU.Web.Controllers
         [HttpPost]
         public ActionResult DeleteEduProduct(int? Id)
         {
-            var result =new EduProductBO().DeleteEduProduct(new EduProduct { Id = Id.Value });
+            var result = new EduProductBO().DeleteEduProduct(new EduProduct { Id = Id.Value });
 
             var list = new EduProductBO().GetList();
             return View("EduProductList", list.AsEnumerable());
@@ -379,16 +379,16 @@ namespace EDU.Web.Controllers
         [HttpGet]
         public ViewResult CourseSalesMasterList()
         {
-            return View("CourseSalesMasterList", 
+            return View("CourseSalesMasterList",
                 new CourseSalesMasterBO().GetList().AsEnumerable());
         }
-        
+
         [HttpGet]
         public ViewResult CourseSalesMaster(int Id)
         {
             CourseSalesMaster courseSalesMaster = null;
             var courseSalesMasterVm = new CourseSalesMasterVm
-            {                
+            {
                 eduProductList = new EduProductBO().GetList().AsEnumerable(),
                 branchList = new BranchBO().GetList().AsEnumerable(),
                 monthList = GetMonthData(),
@@ -397,7 +397,8 @@ namespace EDU.Web.Controllers
 
             if (Id == -1)
             {
-                courseSalesMaster = new CourseSalesMaster {
+                courseSalesMaster = new CourseSalesMaster
+                {
                     Id = Id
                     //StartDate = UTILITY.SINGAPORETIME,
                     //EndDate = UTILITY.SINGAPORETIME,
@@ -419,7 +420,7 @@ namespace EDU.Web.Controllers
         }
 
         [HttpPost]
-        public RedirectToRouteResult CoureSalesMaster(CourseSalesMaster courseSalesMaster)
+        public ViewResult CoureSalesMaster(CourseSalesMaster courseSalesMaster)
         {
             courseSalesMaster.IsActive = true;
             courseSalesMaster.CreatedBy = USER_ID;
@@ -427,8 +428,27 @@ namespace EDU.Web.Controllers
             courseSalesMaster.ModifiedBy = USER_ID;
             courseSalesMaster.ModifiedOn = UTILITY.SINGAPORETIME;
 
-            var result = new CourseSalesMasterBO().SaveCourseSalesMaster(courseSalesMaster);
-            return RedirectToAction("CourseSalesMasterList");
+            //var result = new CourseSalesMasterBO().SaveCourseSalesMaster(courseSalesMaster);
+            //return RedirectToAction("CourseSalesMasterList");
+
+            var courseSalesMasterVm = new CourseSalesMasterVm
+            {
+                eduProductList = new EduProductBO().GetList().AsEnumerable(),
+                branchList = new BranchBO().GetList().AsEnumerable(),
+                monthList = GetMonthData(),
+                courseSalesMaster = courseSalesMaster
+            };
+
+            courseSalesMaster = new CourseSalesMasterBO()
+                                            .GetCourseSalesMaster(new CourseSalesMaster { Id = courseSalesMaster.Id });
+
+            courseSalesMasterVm.courseList = new CourseBO()
+                                                .GetCoursesByProduct(courseSalesMaster.Product)
+                                                .AsEnumerable();
+
+
+            courseSalesMasterVm.courseSalesMaster = courseSalesMaster;
+            return View("CourseSalesMaster", courseSalesMasterVm);
         }
 
 
@@ -444,7 +464,7 @@ namespace EDU.Web.Controllers
         [HttpPost]
         public ActionResult ConfirmCoureSalesMaster(int Id, Int16 Registered, string RegisteredRemarks)
         {
-            var result = new CourseSalesMasterBO().ConfirmCoureSalesMaster(new CourseSalesMaster { Id = Id, Registered= Registered, RegisteredRemarks = RegisteredRemarks });
+            var result = new CourseSalesMasterBO().ConfirmCoureSalesMaster(new CourseSalesMaster { Id = Id, Registered = Registered, RegisteredRemarks = RegisteredRemarks });
 
             return View("CourseSalesMasterList",
                new CourseSalesMasterBO().GetList().AsEnumerable());

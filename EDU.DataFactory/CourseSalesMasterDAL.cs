@@ -65,7 +65,7 @@ namespace EZY.EDU.DataFactory
                 db.AddInParameter(savecommand, "TOD", System.Data.DbType.Boolean, courseSalesMaster.TOD);
                 db.AddInParameter(savecommand, "LVC", System.Data.DbType.Boolean, courseSalesMaster.LVC);
                 db.AddInParameter(savecommand, "ILT", System.Data.DbType.Boolean, courseSalesMaster.ILT);
-                //db.AddInParameter(savecommand, "IsConfirm", System.Data.DbType.Boolean, courseSalesMaster.IsConfirm);
+                db.AddInParameter(savecommand, "IsConfirm", System.Data.DbType.Boolean, courseSalesMaster.IsConfirm);
 
                 result = db.ExecuteNonQuery(savecommand, transaction);
 
