@@ -223,12 +223,13 @@
                     </div>
                     <div class="col-md-2">
                     </div>
-                    <div class="col-md-4" id="IsConfirm">
+                    <div class="col-md-4">
                       @*<label>IsConfirm</label>
                        @Html.CheckBoxFor(x=>x.courseSalesMaster.IsConfirm.Value,
                       new { @class="form-control"})*@
                         <input type="checkbox"  id="chkIsConfirm" title="IsConfirm" checked="@((Model.courseSalesMaster.IsConfirm==null)?false: Model.courseSalesMaster.IsConfirm)" />
-                        @Html.Label("IsConfirm")
+                        <label>Confirm</label>
+                        @Html.HiddenFor(x => x.courseSalesMaster.IsConfirm)
                     </div>
                 </div>
                 <div class="row">
@@ -251,7 +252,7 @@
     <script src="@Url.Content("~/Scripts/moment.min.js")"></script>
     <script src="@Url.Content("~/Scripts/bootstrap-datetimepicker.js")"></script>
     <script type="text/javascript">
-        $('#chkIsConfirm').hide()
+        //$('#chkIsConfirm').attr('disabled', 'disabled');
         $(function () {
             $('#StartDt, #RegClosingDt').datetimepicker({
                 icons: {
@@ -336,15 +337,15 @@
             $('#rdoLVC').attr('disabled', 'disabled');
             $('#rdoTOD').attr('disabled', 'disabled');
             $('#rdoILT').attr('disabled', 'disabled');
-            $('#confirmBtn').removeAttr('disabled');
+            $('#chkIsConfirm').attr('disabled', 'disabled');
         }
 
 
         @if(Model.courseSalesMaster.IsConfirm==true)
         {
-           <text>
-        ConfirmAttrCoursesalesmaster();
-        </text>
+            <text>
+                ConfirmAttrCoursesalesmaster();
+            </text>
 
         }
         function todChange() {
@@ -389,28 +390,15 @@
             $('#courseSalesMaster_LVC').val($('#rdoLVC').is(':checked'));
             $('#courseSalesMaster_TOD').val($('#rdoTOD').is(':checked'));
             $('#courseSalesMaster_ILT').val($('#rdoILT').is(':checked'));
+            $('#courseSalesMaster_IsConfirm').val($('#chkIsConfirm').is(':checked'));
             if ($('#frmCourseDetail').valid()) {
-                // SaveRemoveatrr();
                 $('#courseSalesMaster_NoOfDays').removeAttr('disabled');
                 $('#courseSalesMaster_Month').removeAttr('disabled');
                 SaveRemoveatrr();
                 $('#frmCourseDetail').submit();
                 $('#confirmBtn').removeAttr('disabled')
-                $('#chkIsConfirm').show();
-
-
             }
         }
-
-        //function ConfirmCourseSalesMaster(Id, Registered, RegisteredRemarks) {
-        //    if ($('#frmCourseConfirm').valid()) {
-        //        $("#id").val(Id);
-        //        $("#registered").val(Registered);
-        //        $("#registeredremarks").val(RegisteredRemarks);
-        //        $('#frmCourseConfirm').submit();
-        //        ConfirmAttrCoursesalesmaster();
-        //    }
-        //}
 
         function SaveRemoveatrr()
         {
@@ -429,6 +417,7 @@
             $('#rdoTOD').removeAttr('disabled');
             $('#rdoLVC').removeAttr('disabled');
             $('#rdoILT').removeAttr('disabled');
+            $('#chkIsConfirm').removeAttr('disabled');
         }
 
         $('#frmCourseDetail').validate({

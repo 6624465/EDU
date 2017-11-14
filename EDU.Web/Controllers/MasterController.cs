@@ -420,7 +420,7 @@ namespace EDU.Web.Controllers
         }
 
         [HttpPost]
-        public ViewResult CoureSalesMaster(CourseSalesMaster courseSalesMaster)
+        public RedirectToRouteResult CoureSalesMaster(CourseSalesMaster courseSalesMaster)
         {
             courseSalesMaster.IsActive = true;
             courseSalesMaster.CreatedBy = USER_ID;
@@ -429,26 +429,26 @@ namespace EDU.Web.Controllers
             courseSalesMaster.ModifiedOn = UTILITY.SINGAPORETIME;
 
             courseSalesMaster.Id = new CourseSalesMasterBO().SaveCourseSalesMaster(courseSalesMaster);
-            //return RedirectToAction("CourseSalesMasterList");
+            return RedirectToAction("CourseSalesMasterList");
 
-            var courseSalesMasterVm = new CourseSalesMasterVm
-            {
-                eduProductList = new EduProductBO().GetList().AsEnumerable(),
-                branchList = new BranchBO().GetList().AsEnumerable(),
-                monthList = GetMonthData(),
-                courseSalesMaster = courseSalesMaster
-            };
+            //var courseSalesMasterVm = new CourseSalesMasterVm
+            //{
+            //    eduProductList = new EduProductBO().GetList().AsEnumerable(),
+            //    branchList = new BranchBO().GetList().AsEnumerable(),
+            //    monthList = GetMonthData(),
+            //    courseSalesMaster = courseSalesMaster
+            //};
 
-            courseSalesMaster = new CourseSalesMasterBO()
-                                            .GetCourseSalesMaster(new CourseSalesMaster { Id = courseSalesMaster.Id });
+            //courseSalesMaster = new CourseSalesMasterBO()
+            //                                .GetCourseSalesMaster(new CourseSalesMaster { Id = courseSalesMaster.Id });
 
-            courseSalesMasterVm.courseList = new CourseBO()
-                                                .GetCoursesByProduct(courseSalesMaster.Product)
-                                                .AsEnumerable();
+            //courseSalesMasterVm.courseList = new CourseBO()
+            //                                    .GetCoursesByProduct(courseSalesMaster.Product)
+            //                                    .AsEnumerable();
 
 
-            courseSalesMasterVm.courseSalesMaster = courseSalesMaster;
-            return View("CourseSalesMaster", courseSalesMasterVm);
+            //courseSalesMasterVm.courseSalesMaster = courseSalesMaster;
+            //return View("CourseSalesMaster", courseSalesMasterVm);
         }
 
 
