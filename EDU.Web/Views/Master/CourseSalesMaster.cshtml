@@ -264,9 +264,19 @@
 
 
             @if (Model.courseSalesMaster.Id != -1 && Model.courseSalesMaster.TOD.HasValue && Model.courseSalesMaster.TOD.Value) {
-                <text>
-            $('#courseSalesMaster_NoOfDays').removeAttr('disabled');
-            </text>
+               if(Model.courseSalesMaster.IsConfirm==true)
+                {
+                    <text>
+                        $('#courseSalesMaster_NoOfDays').attr('disabled', 'disabled');
+                    </text>
+
+                }
+                else
+                {
+                    <text>
+                        $('#courseSalesMaster_NoOfDays').removeAttr('disabled');
+                    </text>
+                }
             }
             @if (Model.courseSalesMaster.Id != -1)
             {
@@ -310,8 +320,11 @@
             $('#courseSalesMaster_LeadsOnHeadRemarks').attr('disabled', 'disabled');
             $('#courseSalesMaster_AvailableSeats').attr('disabled', 'disabled');
             $('#courseSalesMaster_RegClosingDate').attr('disabled', 'disabled');
+            $('#rdoLVC').attr('disabled', 'disabled');
+            $('#rdoTOD').attr('disabled', 'disabled');
             $('#confirmBtn').removeAttr('disabled');
         }
+
 
         @if(Model.courseSalesMaster.IsConfirm==true)
         {
@@ -325,10 +338,8 @@
             $('#frmCourseDetail').valid();
             if (!$('#rdoLVC').is(':checked')) {
                 $('#courseSalesMaster_NoOfDays').removeAttr('disabled');
-
             }
             else {
-                debugger;
                 $('#courseSalesMaster_NoOfDays').attr('disabled', 'disabled');
                 CourseChangeWrapper($('#courseSalesMaster_Course').val());
             }
@@ -367,6 +378,7 @@
                 // SaveRemoveatrr();
                 $('#courseSalesMaster_NoOfDays').removeAttr('disabled');
                 $('#courseSalesMaster_Month').removeAttr('disabled');
+                SaveRemoveatrr();
                 $('#frmCourseDetail').submit();
                 $('#confirmBtn').removeAttr('disabled')
 
@@ -375,30 +387,31 @@
         }
 
         function ConfirmCourseSalesMaster(Id) {
-            debugger;
             if ($('#frmCourseConfirm').valid()) {
                 $("#id").val(Id);
+                SaveRemoveatrr();
                 $('#frmCourseConfirm').submit();
-                debugger;
                 ConfirmAttrCoursesalesmaster();
             }
         }
 
-        //function SaveRemoveatrr()
-        //{
-        //    $('#courseSalesMaster_Country').removeAttr('disabled');
-        //    $('#courseSalesMaster_Product').removeAttr('disabled');
-        //    $('#courseSalesMaster_Course').removeAttr('disabled');
-        //    $('#courseSalesMaster_NoOfDays').removeAttr('disabled');
-        //    $('#courseSalesMaster_Month').removeAttr('disabled');
-        //    $('#courseSalesMaster_StartDate').removeAttr('disabled');
-        //    $('#courseSalesMaster_EndDate').removeAttr('disabled');
-        //    $('#courseSalesMaster_MinimumReg').removeAttr('disabled');
-        //    $('#courseSalesMaster_LeadsOnHead').removeAttr('disabled');
-        //    $('#courseSalesMaster_LeadsOnHeadRemarks').removeAttr('disabled');
-        //    $('#courseSalesMaster_AvailableSeats').removeAttr('disabled');
-        //    $('#courseSalesMaster_RegClosingDate').removeAttr('disabled');
-        //}
+        function SaveRemoveatrr()
+        {
+            $('#courseSalesMaster_Country').removeAttr('disabled');
+            $('#courseSalesMaster_Product').removeAttr('disabled');
+            $('#courseSalesMaster_Course').removeAttr('disabled');
+            $('#courseSalesMaster_NoOfDays').removeAttr('disabled');
+            $('#courseSalesMaster_Month').removeAttr('disabled');
+            $('#courseSalesMaster_StartDate').removeAttr('disabled');
+            $('#courseSalesMaster_EndDate').removeAttr('disabled');
+            $('#courseSalesMaster_MinimumReg').removeAttr('disabled');
+            $('#courseSalesMaster_LeadsOnHead').removeAttr('disabled');
+            $('#courseSalesMaster_LeadsOnHeadRemarks').removeAttr('disabled');
+            $('#courseSalesMaster_AvailableSeats').removeAttr('disabled');
+            $('#courseSalesMaster_RegClosingDate').removeAttr('disabled');
+            $('#rdoTOD').removeAttr('disabled');
+            $('#rdoLVC').removeAttr('disabled');
+        }
 
         $('#frmCourseDetail').validate({
             rules: {
