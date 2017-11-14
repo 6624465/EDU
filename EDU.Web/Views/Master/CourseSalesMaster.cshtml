@@ -265,8 +265,8 @@
 
             @if (Model.courseSalesMaster.Id != -1 && Model.courseSalesMaster.TOD.HasValue && Model.courseSalesMaster.TOD.Value) {
                 <text>
-                    $('#courseSalesMaster_NoOfDays').removeAttr('disabled');
-                </text>
+            $('#courseSalesMaster_NoOfDays').removeAttr('disabled');
+            </text>
             }
             @if (Model.courseSalesMaster.Id != -1)
             {
@@ -296,8 +296,31 @@
             //    $('#StartDt').data("DateTimePicker").maxDate(e.date);
             //});
         });
-        function todChange()
+
+        function ConfirmAttrCoursesalesmaster() {
+            $('#courseSalesMaster_Country').attr('disabled', 'disabled');
+            $('#courseSalesMaster_Product').attr('disabled', 'disabled');
+            $('#courseSalesMaster_Course').attr('disabled', 'disabled');
+            $('#courseSalesMaster_NoOfDays').attr('disabled', 'disabled');
+            $('#courseSalesMaster_Month').attr('disabled', 'disabled');
+            $('#courseSalesMaster_StartDate').attr('disabled', 'disabled');
+            $('#courseSalesMaster_EndDate').attr('disabled', 'disabled');
+            $('#courseSalesMaster_MinimumReg').attr('disabled', 'disabled');
+            $('#courseSalesMaster_LeadsOnHead').attr('disabled', 'disabled');
+            $('#courseSalesMaster_LeadsOnHeadRemarks').attr('disabled', 'disabled');
+            $('#courseSalesMaster_AvailableSeats').attr('disabled', 'disabled');
+            $('#courseSalesMaster_RegClosingDate').attr('disabled', 'disabled');
+            $('#confirmBtn').removeAttr('disabled');
+        }
+
+        @if(Model.courseSalesMaster.IsConfirm==true)
         {
+           <text>
+        ConfirmAttrCoursesalesmaster();
+        </text>
+
+        }
+        function todChange() {
             debugger;
             $('#frmCourseDetail').valid();
             if (!$('#rdoLVC').is(':checked')) {
@@ -351,26 +374,13 @@
             }
         }
 
-        function ConfirmCourseSalesMaster(Id)
-        {
+        function ConfirmCourseSalesMaster(Id) {
             debugger;
-            if ($('#frmCourseConfirm').valid())
-            {
+            if ($('#frmCourseConfirm').valid()) {
                 $("#id").val(Id);
                 $('#frmCourseConfirm').submit();
                 debugger;
-                $('#courseSalesMaster_Country').attr('disabled', 'disabled');
-                $('#courseSalesMaster_Product').attr('disabled', 'disabled');
-                $('#courseSalesMaster_Course').attr('disabled', 'disabled');
-                $('#courseSalesMaster_NoOfDays').attr('disabled', 'disabled');
-                $('#courseSalesMaster_Month').attr('disabled', 'disabled');
-                $('#courseSalesMaster_StartDate').attr('disabled', 'disabled');
-                $('#courseSalesMaster_EndDate').attr('disabled', 'disabled');
-                $('#courseSalesMaster_MinimumReg').attr('disabled', 'disabled');
-                $('#courseSalesMaster_LeadsOnHead').attr('disabled', 'disabled');
-                $('#courseSalesMaster_LeadsOnHeadRemarks').attr('disabled', 'disabled');
-                $('#courseSalesMaster_AvailableSeats').attr('disabled', 'disabled');
-                $('#courseSalesMaster_RegClosingDate').attr('disabled', 'disabled');
+                ConfirmAttrCoursesalesmaster();
             }
         }
 
