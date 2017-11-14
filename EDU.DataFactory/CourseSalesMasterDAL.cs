@@ -64,6 +64,8 @@ namespace EZY.EDU.DataFactory
                 db.AddInParameter(savecommand, "RegisteredRemarks ", System.Data.DbType.String, courseSalesMaster.RegisteredRemarks);
                 db.AddInParameter(savecommand, "TOD", System.Data.DbType.Boolean, courseSalesMaster.TOD);
                 db.AddInParameter(savecommand, "LVC", System.Data.DbType.Boolean, courseSalesMaster.LVC);
+                db.AddInParameter(savecommand, "ILT", System.Data.DbType.Boolean, courseSalesMaster.ILT);
+                //db.AddInParameter(savecommand, "IsConfirm", System.Data.DbType.Boolean, courseSalesMaster.IsConfirm);
 
                 result = db.ExecuteNonQuery(savecommand, transaction);
 
@@ -118,6 +120,35 @@ namespace EZY.EDU.DataFactory
                                                     MapBuilder<CourseSalesMaster>.BuildAllProperties(),
                                                     item.Id).FirstOrDefault();
             return courseSalesMasterItem;
+        }
+
+
+        public bool Confirm(Int32 id)
+        {
+            var result = false;
+
+            var connnection = db.CreateConnection();
+            connnection.Open();
+
+            var transaction = connnection.BeginTransaction();
+
+            try
+            {
+                var confirmCommand = db.GetStoredProcCommand(DBRoutine.CONFIRMEDUCOURSESALESMASTER);
+
+                db.AddInParameter(confirmCommand, "Id", System.Data.DbType.Int32, id);
+                result = Convert.ToBoolean(db.ExecuteNonQuery(confirmCommand, transaction));
+
+                transaction.Commit();
+
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw ex;
+            }
+
+            return result;
         }
     }
 }

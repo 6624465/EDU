@@ -440,6 +440,15 @@ namespace EDU.Web.Controllers
             return View("CourseSalesMasterList",
                new CourseSalesMasterBO().GetList().AsEnumerable());
         }
+
+        [HttpPost]
+        public ActionResult ConfirmCoureSalesMaster(int Id)
+        {
+            var result = new CourseSalesMasterBO().ConfirmCoureSalesMaster(Id);
+
+            return View("CourseSalesMasterList",
+               new CourseSalesMasterBO().GetList().AsEnumerable());
+        }
         #endregion
     }
 }

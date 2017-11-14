@@ -47,6 +47,8 @@ namespace EZY.EDU.Contract
         public string RegisteredRemarks { get; set; }
         public bool? TOD { get; set; }
         public bool? LVC { get; set; }
+        public bool? ILT { get; set; }
+        public bool? IsConfirm { get; set; }
     }
 
     public class CourseSalesMasterViewModel : IContract
@@ -90,5 +92,7 @@ namespace EZY.EDU.Contract
         public string RegisteredRemarks { get; set; }
         public bool? TOD { get; set; }
         public bool? LVC { get; set; }
+        public bool? ILT { get; set; }
+        public bool? IsConfirm { get; set; }
     }
 }

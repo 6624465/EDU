@@ -82,6 +82,7 @@ namespace EZY.EDU.DataFactory
         public const string SAVEEDUCOURSESALESMASTER = "[Edu].[usp_CourseSalesMasterSave]";
         public const string SELECTEDUCOURSESALESMASTER = "[Edu].[usp_CourseSalesMasterSelect]";
         public const string SELECTEDUCOURSESALESMASTERTABLEDATA = "[Edu].[CourseSalesMasterTableData]";
+        public const string CONFIRMEDUCOURSESALESMASTER = "[Edu].[usp_CourseSalesMasterConfirm]";
 
         /// <summary>
         /// [Master].[Site]
