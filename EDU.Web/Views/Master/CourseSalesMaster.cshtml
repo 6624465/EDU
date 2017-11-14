@@ -255,7 +255,7 @@
             });
 
 
-            @if (Model.courseSalesMaster.Id != -1 && Model.courseSalesMaster.TOD.Value) {
+            @if (Model.courseSalesMaster.Id != -1 && Model.courseSalesMaster.TOD.HasValue && Model.courseSalesMaster.TOD.Value) {
                 <text>
                     $('#courseSalesMaster_NoOfDays').removeAttr('disabled');
                 </text>
