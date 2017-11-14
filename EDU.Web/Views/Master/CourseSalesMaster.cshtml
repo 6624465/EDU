@@ -85,14 +85,18 @@
 
                     </div>
                     <div class="col-md-4">
-                        <input type="radio" name="rdoGroup" id="rdoLVC" title="LVC" checked="@((Model.courseSalesMaster.LVC==null && Model.courseSalesMaster.TOD==null)?true: Model.courseSalesMaster.LVC)" onclick="todChange()" />
+                        <input type="radio" name="rdoGroup" id="rdoLVC" title="LVC" checked="@((Model.courseSalesMaster.LVC==null && Model.courseSalesMaster.TOD==null && Model.courseSalesMaster.ILT==null)?true: Model.courseSalesMaster.LVC)" onclick="todChange()" />
                         @Html.Label("LVC")
                         &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
                         <input type="radio" name="rdoGroup" id="rdoTOD" title="TOD" checked="@Model.courseSalesMaster.TOD" onclick="todChange()" />
                         @Html.Label("TOD")
+                        &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+                        <input type="radio" name="rdoGroup" id="rdoILT" title="ILT" checked="@Model.courseSalesMaster.ILT" onclick="todChange()" />
+                        @Html.Label("ILT")
 
                         @Html.HiddenFor(x => x.courseSalesMaster.LVC)
                         @Html.HiddenFor(x => x.courseSalesMaster.TOD)
+                        @Html.HiddenFor(x => x.courseSalesMaster.ILT)
                     </div>
                 </div>
                 <div class="row css10">
@@ -217,7 +221,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-2">                      
+                    <div class="col-md-2">
                     </div>
                     <div class="col-md-4">
                         @Html.TextAreaFor(x => x.courseSalesMaster.RegisteredRemarks,
@@ -328,6 +332,7 @@
             $('#courseSalesMaster_RegClosingDate').attr('disabled', 'disabled');
             $('#rdoLVC').attr('disabled', 'disabled');
             $('#rdoTOD').attr('disabled', 'disabled');
+            $('#rdoILT').attr('disabled', 'disabled');
             $('#confirmBtn').removeAttr('disabled');
         }
 
@@ -342,7 +347,7 @@
         function todChange() {
             debugger;
             $('#frmCourseDetail').valid();
-            if (!$('#rdoLVC').is(':checked')) {
+            if (!$('#rdoLVC').is(':checked') && !$('#rdoILT').is(':checked')) {
                 $('#courseSalesMaster_NoOfDays').removeAttr('disabled');
             }
             else {
@@ -353,7 +358,7 @@
 
         $.validator.addMethod('validatelvctodsd', function () {
             debugger;
-            if (!$('#rdoLVC').is(':checked')) {
+            if (!$('#rdoLVC').is(':checked') && !$('#rdoILT').is(':checked')) {
                 return true;
             }
             else
@@ -366,7 +371,7 @@
 
         $.validator.addMethod('validatelvctoded', function () {
             debugger;
-            if (!$('#rdoLVC').is(':checked')) {
+            if (!$('#rdoLVC').is(':checked') && !$('#rdoILT').is(':checked')) {
                 return true;
             }
             else
@@ -380,6 +385,7 @@
         function SaveCourseSalesMaster() {
             $('#courseSalesMaster_LVC').val($('#rdoLVC').is(':checked'));
             $('#courseSalesMaster_TOD').val($('#rdoTOD').is(':checked'));
+            $('#courseSalesMaster_ILT').val($('#rdoILT').is(':checked'));
             if ($('#frmCourseDetail').valid()) {
                 // SaveRemoveatrr();
                 $('#courseSalesMaster_NoOfDays').removeAttr('disabled');
@@ -418,6 +424,7 @@
             $('#courseSalesMaster_RegClosingDate').removeAttr('disabled');
             $('#rdoTOD').removeAttr('disabled');
             $('#rdoLVC').removeAttr('disabled');
+            $('#rdoILT').removeAttr('disabled');
         }
 
         $('#frmCourseDetail').validate({

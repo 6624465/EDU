@@ -22,7 +22,7 @@ namespace EZY.EDU.BusinessFactory
         }
 
 
-        public bool SaveCourseSalesMaster(CourseSalesMaster newItem)
+        public Int32 SaveCourseSalesMaster(CourseSalesMaster newItem)
         {
 
             return courseSalesMasterDAL.Save(newItem);
