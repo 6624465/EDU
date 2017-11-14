@@ -18,6 +18,8 @@
 @using (Html.BeginForm("ConfirmCoureSalesMaster", "Master", FormMethod.Post, new { id = "frmCourseConfirm", name = "frmCourseConfirm" }))
 {
     <input type="hidden" id="id" name="id" />
+    <input type="hidden" id="registered" name="registered" />
+    <input type="hidden" id="registeredremarks" name="registeredremarks" />
 }
 
 @using (Html.BeginForm("CoureSalesMaster", "Master", FormMethod.Post, new { id = "frmCourseDetail", name = "frmCourseDetail" }))
@@ -223,7 +225,7 @@
                         <div class="text-center">
                             <button type="button" onclick="SaveCourseSalesMaster()" class="btn btn-primary btn-sm"><i class="fa fa-floppy-o"></i>&nbsp;Save</button> &nbsp;&nbsp;&nbsp;
                             <button class="btn btn-default btn-sm" type="button" onclick="location.href = '@Url.Content("~/Master/CourseSalesMasterList")'"><i class="fa fa-backward"></i>&nbsp;Back</button>&nbsp;&nbsp;&nbsp;
-                            <button type="button" id="confirmBtn" onclick="ConfirmCourseSalesMaster(@Model.courseSalesMaster.Id)" class="btn btn-success btn-sm">&nbsp;Confirm</button>
+                            <button type="button" id="confirmBtn" onclick="ConfirmCourseSalesMaster(@Model.courseSalesMaster.Id,@Model.courseSalesMaster.Registered,@Model.courseSalesMaster.RegisteredRemarks)" class="btn btn-success btn-sm">&nbsp;Confirm</button>
 
                         </div>
                     </div>
@@ -386,10 +388,11 @@
             }
         }
 
-        function ConfirmCourseSalesMaster(Id) {
+        function ConfirmCourseSalesMaster(Id, Registered, RegisteredRemarks) {
             if ($('#frmCourseConfirm').valid()) {
                 $("#id").val(Id);
-                SaveRemoveatrr();
+                $("#registered").val(Registered);
+                $("#registeredremarks").val(RegisteredRemarks);
                 $('#frmCourseConfirm').submit();
                 ConfirmAttrCoursesalesmaster();
             }

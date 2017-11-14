@@ -33,9 +33,9 @@ namespace EZY.EDU.BusinessFactory
         {
             return courseSalesMasterDAL.Delete(item);
         }
-        public bool ConfirmCoureSalesMaster(Int32 id)
+        public bool ConfirmCoureSalesMaster(CourseSalesMaster item)
         {
-            return courseSalesMasterDAL.Confirm(id);
+            return courseSalesMasterDAL.Confirm(item);
         }
 
         public CourseSalesMaster GetCourseSalesMaster(CourseSalesMaster item)

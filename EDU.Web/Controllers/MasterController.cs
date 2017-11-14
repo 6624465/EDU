@@ -442,9 +442,9 @@ namespace EDU.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult ConfirmCoureSalesMaster(int Id)
+        public ActionResult ConfirmCoureSalesMaster(int Id, Int16 Registered, string RegisteredRemarks)
         {
-            var result = new CourseSalesMasterBO().ConfirmCoureSalesMaster(Id);
+            var result = new CourseSalesMasterBO().ConfirmCoureSalesMaster(new CourseSalesMaster { Id = Id, Registered= Registered, RegisteredRemarks = RegisteredRemarks });
 
             return View("CourseSalesMasterList",
                new CourseSalesMasterBO().GetList().AsEnumerable());

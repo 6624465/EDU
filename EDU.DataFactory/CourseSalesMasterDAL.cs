@@ -123,9 +123,10 @@ namespace EZY.EDU.DataFactory
         }
 
 
-        public bool Confirm(Int32 id)
+        public bool Confirm<T>(T item) where T : IContract
         {
             var result = false;
+            var courseSalesMaster = (CourseSalesMaster)(object)item;
 
             var connnection = db.CreateConnection();
             connnection.Open();
@@ -136,7 +137,9 @@ namespace EZY.EDU.DataFactory
             {
                 var confirmCommand = db.GetStoredProcCommand(DBRoutine.CONFIRMEDUCOURSESALESMASTER);
 
-                db.AddInParameter(confirmCommand, "Id", System.Data.DbType.Int32, id);
+                db.AddInParameter(confirmCommand, "Id", System.Data.DbType.Int32, courseSalesMaster.Id);
+                db.AddInParameter(confirmCommand, "Registered", System.Data.DbType.Int16, courseSalesMaster.Registered);
+                db.AddInParameter(confirmCommand, "RegisteredRemarks", System.Data.DbType.Int32, courseSalesMaster.RegisteredRemarks);
                 result = Convert.ToBoolean(db.ExecuteNonQuery(confirmCommand, transaction));
 
                 transaction.Commit();
