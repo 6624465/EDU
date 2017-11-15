@@ -5,22 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DB_9F30C5_edudevModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Lookup">
-          <Key>
-            <PropertyRef Name="LookupID" />
-          </Key>
-          <Property Name="LookupID" Type="smallint" Nullable="false" />
-          <Property Name="LookupCode" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="LookupDescription" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="LookupCategory" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Status" Type="bit" Nullable="false" />
-          <Property Name="ISOCode" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="MappingCode" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="CreatedBy" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
-          <Property Name="ModifiedBy" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="ModifiedOn" Type="datetime" Nullable="false" />
-        </EntityType>
         <EntityType Name="CustomerPayments">
           <Key>
             <PropertyRef Name="CustomerId" />
@@ -37,19 +21,6 @@
           <Property Name="ReferenceDocument" Type="nvarchar" MaxLength="50" />
           <Property Name="PaidAmount" Type="decimal" Precision="18" Scale="2" />
           <Property Name="IsActive" Type="bit" />
-        </EntityType>
-        <EntityType Name="Product">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ProductName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="ProductDescription" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
-          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
-          <Property Name="ModifiedOn" Type="datetime" />
-          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Registration">
           <Key>
@@ -114,9 +85,7 @@
           <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityContainer Name="DB_9F30C5_edudevModelStoreContainer">
-          <EntitySet Name="Lookup" EntityType="Self.Lookup" Schema="Config" store:Type="Tables" />
           <EntitySet Name="CustomerPayments" EntityType="Self.CustomerPayments" Schema="Edu" store:Type="Tables" />
-          <EntitySet Name="Product" EntityType="Self.Product" Schema="Edu" store:Type="Tables" />
           <EntitySet Name="Registration" EntityType="Self.Registration" Schema="Edu" store:Type="Tables" />
           <EntitySet Name="Revenue" EntityType="Self.Revenue" Schema="Edu" store:Type="Tables" />
           <EntitySet Name="TrainerInformation" EntityType="Self.TrainerInformation" Schema="Edu" store:Type="Tables" />
@@ -152,8 +121,6 @@
           <EntitySet Name="TrainerInformations" EntityType="DB_9F30C5_edudevModel.TrainerInformation" />
           <EntitySet Name="CustomerPayments" EntityType="DB_9F30C5_edudevModel.CustomerPayment" />
           <EntitySet Name="Revenues" EntityType="DB_9F30C5_edudevModel.Revenue" />
-          <EntitySet Name="Lookups" EntityType="DB_9F30C5_edudevModel.Lookup" />
-          <EntitySet Name="Products" EntityType="DB_9F30C5_edudevModel.Product" />
         </EntityContainer>
         <EntityType Name="TrainerInformation">
           <Key>
@@ -211,35 +178,6 @@
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="Lookup">
-          <Key>
-            <PropertyRef Name="LookupID" />
-          </Key>
-          <Property Name="LookupID" Type="Int16" Nullable="false" />
-          <Property Name="LookupCode" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="LookupDescription" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="LookupCategory" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Status" Type="Boolean" Nullable="false" />
-          <Property Name="ISOCode" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="MappingCode" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
-        <EntityType Name="Product">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ProductDescription" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -330,38 +268,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Lookups">
-            <EntityTypeMapping TypeName="DB_9F30C5_edudevModel.Lookup">
-              <MappingFragment StoreEntitySet="Lookup">
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="MappingCode" ColumnName="MappingCode" />
-                <ScalarProperty Name="ISOCode" ColumnName="ISOCode" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="LookupCategory" ColumnName="LookupCategory" />
-                <ScalarProperty Name="LookupDescription" ColumnName="LookupDescription" />
-                <ScalarProperty Name="LookupCode" ColumnName="LookupCode" />
-                <ScalarProperty Name="LookupID" ColumnName="LookupID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="DB_9F30C5_edudevModel.Product">
-              <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
