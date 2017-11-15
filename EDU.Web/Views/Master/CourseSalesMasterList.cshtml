@@ -25,6 +25,7 @@
 <style>
     .popover {
         color: black;
+        min-width: 500px;
     }
 
     .popover-title {
@@ -99,7 +100,7 @@
                                         }
                                         else
                                         {
-                                            <a style="cursor:pointer;text-decoration:underline;">
+                                            <a style="cursor:pointer;text-decoration:underline;" class="popoverwidth">
                                                 <span data-toggle="popover" data-html="true" data-title="Leads on hand Details" data-content="@CheckString(Model.ElementAt(i).LeadsOnHeadRemarks)">@Model.ElementAt(i).LeadsOnHead</span>
                                             </a>
                                         }
@@ -112,8 +113,8 @@
                                         }
                                         else
                                         {
-                                            <a style="cursor:pointer;text-decoration:underline;">
-                                                <span data-toggle="popover" data-html="true" data-title="Registration Details" data-content="@CheckString(Model.ElementAt(i).RegisteredRemarks)">@Model.ElementAt(i).Registered</span>
+                                            <a style="cursor:pointer;text-decoration:underline;" class="popoverwidth">
+                                                <span style="width:1000px" data-toggle="popover" data-html="true" data-title="Registration Details" data-content="@CheckString(Model.ElementAt(i).RegisteredRemarks)">@Model.ElementAt(i).Registered</span>
                                             </a>
                                         }
 
@@ -125,15 +126,15 @@
                                         <td style="width: 10%;text-align:center;">
                                             @if (Model.ElementAt(i).IsConfirm.Value == true)
                                             {
-                                                <span class="text-green" style="text-align:center;"><i class="fa fa-circle" style="font-size:20pt; "></i></span>
+                                                <span class="text-green"><i class="fa fa-circle" style="font-size:12pt; "></i></span>
                                             }
                                             else if (Model.ElementAt(i).IsDrop.Value == true)
                                             {
-                                                <span class="text-red"><i class="fa fa-circle" style="font-size:20pt;"></i></span>
+                                                <span class="text-red"><i class="fa fa-circle" style="font-size:12pt;"></i></span>
                                             }
                                             else
                                             {
-                                                <span class="text-gray"><i class="fa fa-circle" style="font-size:20pt;"></i></span>
+                                                <span class="text-gray"><i class="fa fa-circle" style="font-size:12pt;"></i></span>
                                             }
 
                                             &nbsp;&nbsp;&nbsp;
