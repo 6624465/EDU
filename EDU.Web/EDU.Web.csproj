@@ -365,7 +365,13 @@
       <DependentUpon>EduEntity.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\EmailGenerator.cs" />
+    <Compile Include="Models\Lookup.cs">
+      <DependentUpon>EduEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Registration.cs">
+      <DependentUpon>EduEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Revenue.cs">
       <DependentUpon>EduEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TrainerInformation.cs">

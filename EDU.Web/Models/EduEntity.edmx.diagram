@@ -6,8 +6,10 @@
     <edmx:Diagrams>
       <Diagram DiagramId="95e0de2ca056438d994d635bdbc1df03" Name="Diagram1" ZoomLevel="85">
         <EntityTypeShape EntityType="DB_9F30C5_edudevModel.Registration" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_9F30C5_edudevModel.TrainerInformation" Width="1.5" PointX="3.375" PointY="0.75" />
-        <EntityTypeShape EntityType="DB_9F30C5_edudevModel.CustomerPayment" Width="1.5" PointX="3.375" PointY="4.75" />
+        <EntityTypeShape EntityType="DB_9F30C5_edudevModel.TrainerInformation" Width="1.5" PointX="2.625" PointY="0.75" />
+        <EntityTypeShape EntityType="DB_9F30C5_edudevModel.CustomerPayment" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DB_9F30C5_edudevModel.Revenue" Width="1.5" PointX="6.875" PointY="0.75" />
+        <EntityTypeShape EntityType="DB_9F30C5_edudevModel.Lookup" Width="1.5" PointX="8.875" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -5,6 +5,22 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DB_9F30C5_edudevModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Lookup">
+          <Key>
+            <PropertyRef Name="LookupID" />
+          </Key>
+          <Property Name="LookupID" Type="smallint" Nullable="false" />
+          <Property Name="LookupCode" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="LookupDescription" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="LookupCategory" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="ISOCode" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="MappingCode" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="CustomerPayments">
           <Key>
             <PropertyRef Name="CustomerId" />
@@ -44,6 +60,30 @@
           <Property Name="TrainerName" Type="nvarchar" MaxLength="50" />
           <Property Name="IsActive" Type="bit" />
         </EntityType>
+        <EntityType Name="Revenue">
+          <Key>
+            <PropertyRef Name="RevenueId" />
+          </Key>
+          <Property Name="RevenueId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Country" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="Product" Type="int" Nullable="false" />
+          <Property Name="CurrencyCode" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="CurrencyExRate" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="Year" Type="int" Nullable="false" />
+          <Property Name="YearlyTarget" Type="int" Nullable="false" />
+          <Property Name="HalfYearlyTarget" Type="int" Nullable="false" />
+          <Property Name="QuarterlyTarget" Type="int" Nullable="false" />
+          <Property Name="MonthlyTarget" Type="int" Nullable="false" />
+          <Property Name="YearlyTargetAmt" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="HalfYearlyTargetAmt" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="QuarterlyTargetAmt" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="MonthlyTargetAmt" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
         <EntityType Name="TrainerInformation">
           <Key>
             <PropertyRef Name="TrianerId" />
@@ -61,8 +101,10 @@
           <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityContainer Name="DB_9F30C5_edudevModelStoreContainer">
+          <EntitySet Name="Lookup" EntityType="Self.Lookup" Schema="Config" store:Type="Tables" />
           <EntitySet Name="CustomerPayments" EntityType="Self.CustomerPayments" Schema="Edu" store:Type="Tables" />
           <EntitySet Name="Registration" EntityType="Self.Registration" Schema="Edu" store:Type="Tables" />
+          <EntitySet Name="Revenue" EntityType="Self.Revenue" Schema="Edu" store:Type="Tables" />
           <EntitySet Name="TrainerInformation" EntityType="Self.TrainerInformation" Schema="Edu" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -95,6 +137,8 @@
           <EntitySet Name="Registrations" EntityType="Self.Registration" />
           <EntitySet Name="TrainerInformations" EntityType="DB_9F30C5_edudevModel.TrainerInformation" />
           <EntitySet Name="CustomerPayments" EntityType="DB_9F30C5_edudevModel.CustomerPayment" />
+          <EntitySet Name="Revenues" EntityType="DB_9F30C5_edudevModel.Revenue" />
+          <EntitySet Name="Lookups" EntityType="DB_9F30C5_edudevModel.Lookup" />
         </EntityContainer>
         <EntityType Name="TrainerInformation">
           <Key>
@@ -128,6 +172,46 @@
           <Property Name="ReferenceDocument" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PaidAmount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Revenue">
+          <Key>
+            <PropertyRef Name="RevenueId" />
+          </Key>
+          <Property Name="RevenueId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Country" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Product" Type="Int32" Nullable="false" />
+          <Property Name="CurrencyCode" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="CurrencyExRate" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="YearlyTarget" Type="Int32" Nullable="false" />
+          <Property Name="HalfYearlyTarget" Type="Int32" Nullable="false" />
+          <Property Name="QuarterlyTarget" Type="Int32" Nullable="false" />
+          <Property Name="MonthlyTarget" Type="Int32" Nullable="false" />
+          <Property Name="YearlyTargetAmt" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="HalfYearlyTargetAmt" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="QuarterlyTargetAmt" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="MonthlyTargetAmt" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Lookup">
+          <Key>
+            <PropertyRef Name="LookupID" />
+          </Key>
+          <Property Name="LookupID" Type="Int16" Nullable="false" />
+          <Property Name="LookupCode" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="LookupDescription" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="LookupCategory" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="ISOCode" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="MappingCode" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -190,6 +274,48 @@
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Revenues">
+            <EntityTypeMapping TypeName="DB_9F30C5_edudevModel.Revenue">
+              <MappingFragment StoreEntitySet="Revenue">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="MonthlyTargetAmt" ColumnName="MonthlyTargetAmt" />
+                <ScalarProperty Name="QuarterlyTargetAmt" ColumnName="QuarterlyTargetAmt" />
+                <ScalarProperty Name="HalfYearlyTargetAmt" ColumnName="HalfYearlyTargetAmt" />
+                <ScalarProperty Name="YearlyTargetAmt" ColumnName="YearlyTargetAmt" />
+                <ScalarProperty Name="MonthlyTarget" ColumnName="MonthlyTarget" />
+                <ScalarProperty Name="QuarterlyTarget" ColumnName="QuarterlyTarget" />
+                <ScalarProperty Name="HalfYearlyTarget" ColumnName="HalfYearlyTarget" />
+                <ScalarProperty Name="YearlyTarget" ColumnName="YearlyTarget" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="CurrencyExRate" ColumnName="CurrencyExRate" />
+                <ScalarProperty Name="CurrencyCode" ColumnName="CurrencyCode" />
+                <ScalarProperty Name="Product" ColumnName="Product" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="RevenueId" ColumnName="RevenueId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lookups">
+            <EntityTypeMapping TypeName="DB_9F30C5_edudevModel.Lookup">
+              <MappingFragment StoreEntitySet="Lookup">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="MappingCode" ColumnName="MappingCode" />
+                <ScalarProperty Name="ISOCode" ColumnName="ISOCode" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="LookupCategory" ColumnName="LookupCategory" />
+                <ScalarProperty Name="LookupDescription" ColumnName="LookupDescription" />
+                <ScalarProperty Name="LookupCode" ColumnName="LookupCode" />
+                <ScalarProperty Name="LookupID" ColumnName="LookupID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
