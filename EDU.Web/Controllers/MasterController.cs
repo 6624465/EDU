@@ -427,6 +427,7 @@ namespace EDU.Web.Controllers
             courseSalesMaster.CreatedOn = UTILITY.SINGAPORETIME;
             courseSalesMaster.ModifiedBy = USER_ID;
             courseSalesMaster.ModifiedOn = UTILITY.SINGAPORETIME;
+            courseSalesMaster.ConfirmOrDropDate = UTILITY.SINGAPORETIME;
 
             courseSalesMaster.Id = new CourseSalesMasterBO().SaveCourseSalesMaster(courseSalesMaster);
             return RedirectToAction("CourseSalesMasterList");

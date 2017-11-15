@@ -65,7 +65,10 @@ namespace EZY.EDU.DataFactory
                 db.AddInParameter(savecommand, "TOD", System.Data.DbType.Boolean, courseSalesMaster.TOD);
                 db.AddInParameter(savecommand, "LVC", System.Data.DbType.Boolean, courseSalesMaster.LVC);
                 db.AddInParameter(savecommand, "ILT", System.Data.DbType.Boolean, courseSalesMaster.ILT);
+                db.AddInParameter(savecommand, "IsOpen", System.Data.DbType.Boolean, courseSalesMaster.IsOpen == null ? false : courseSalesMaster.IsOpen);
+                db.AddInParameter(savecommand, "IsDrop", System.Data.DbType.Boolean, courseSalesMaster.IsDrop == null ? false : courseSalesMaster.IsDrop);
                 db.AddInParameter(savecommand, "IsConfirm", System.Data.DbType.Boolean, courseSalesMaster.IsConfirm == null ? false : courseSalesMaster.IsConfirm);
+                db.AddInParameter(savecommand, "ConfirmOrDropDate", System.Data.DbType.DateTime, (courseSalesMaster.IsOpen == null || courseSalesMaster.IsOpen == false) ? courseSalesMaster.ConfirmOrDropDate : null);
                 db.AddOutParameter(savecommand, "NewId", System.Data.DbType.String, 50);
 
                 result = db.ExecuteNonQuery(savecommand, transaction);

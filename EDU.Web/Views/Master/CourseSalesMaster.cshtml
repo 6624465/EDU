@@ -85,13 +85,13 @@
 
                     </div>
                     <div class="col-md-4">
-                        <input type="radio" name="rdoGroup" id="rdoLVC" title="LVC" checked="@((Model.courseSalesMaster.LVC==null && Model.courseSalesMaster.TOD==null && Model.courseSalesMaster.ILT==null)?true: Model.courseSalesMaster.LVC)" onclick="todChange()" />
+                        <input type="radio" name="rdoGroup" id="rdoLVC" title="LVC" checked="@Model.courseSalesMaster.LVC" onclick="todChange()" />
                         @Html.Label("LVC")
                         &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
                         <input type="radio" name="rdoGroup" id="rdoTOD" title="TOD" checked="@Model.courseSalesMaster.TOD" onclick="todChange()" />
                         @Html.Label("TOD")
                         &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
-                        <input type="radio" name="rdoGroup" id="rdoILT" title="ILT" checked="@Model.courseSalesMaster.ILT" onclick="todChange()" />
+                        <input type="radio" name="rdoGroup" id="rdoILT" title="ILT" checked="@((Model.courseSalesMaster.LVC==null && Model.courseSalesMaster.TOD==null && Model.courseSalesMaster.ILT==null)?true: Model.courseSalesMaster.ILT)" onclick="todChange()" />
                         @Html.Label("ILT")
 
                         @Html.HiddenFor(x => x.courseSalesMaster.LVC)
@@ -106,10 +106,6 @@
                     <div class="col-md-4">
                         @Html.DropDownListFor(x => x.courseSalesMaster.NoOfDays, Enumerable.Range(0, 11).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), "Select NoOfDays ", new { @class = "form-control input-sm numCss", @disabled = "disabled" })
                     </div>
-                    @*<div class="col-md-4">
-                            @Html.TextBoxFor(x => x.courseSalesMaster.NoOfDays, "{0:#.#}",
-                            new { @class = "form-control input-sm numCss", @readonly = "readonly" })
-                        </div>*@
                     <div class="col-md-2">
                         <label class="control-label">Month</label>
                     </div>
@@ -158,10 +154,6 @@
                     <div class="col-md-4">
                         @Html.DropDownListFor(x => x.courseSalesMaster.MinimumReg, Enumerable.Range(1, 25).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), "Select Min.Registrations", new { @class = "form-control input-sm", onchange = "MinimumRegUser()" })
                     </div>
-                    @*<div class="col-md-4">
-                            @Html.TextBoxFor(x => x.courseSalesMaster.MinimumReg, "{0:#.#}",
-                            new { @class = "form-control input-sm numCss", onblur = "MinimumRegUser()" })
-                        </div>*@
                 </div>
                 <div class="row css10">
                     <div class="col-md-2">
@@ -186,10 +178,6 @@
                         @Html.TextAreaFor(x => x.courseSalesMaster.LeadsOnHeadRemarks,
                         new { @class = "form-control input-sm" })
                     </div>
-                    @*<div class="col-md-4">
-                            @Html.TextBoxFor(x => x.courseSalesMaster.Registered, "{0:#.#}",
-                            new { @class = "form-control input-sm numCss", onblur = "RegisteredUser()" })
-                        </div>*@
                     <div class="col-md-2">
                         <label class="control-label">Registration Details</label>
                     </div>
@@ -225,12 +213,19 @@
                     <div class="col-md-2">
                     </div>
                     <div class="col-md-4">
-                      @*<label>IsConfirm</label>
-                       @Html.CheckBoxFor(x=>x.courseSalesMaster.IsConfirm.Value,
-                      new { @class="form-control"})*@
-                        <input type="checkbox"  id="chkIsConfirm" title="IsConfirm" checked="@((Model.courseSalesMaster.IsConfirm==null)?false: Model.courseSalesMaster.IsConfirm)" />
-                        <label>Confirm</label>
+                        <input type="radio" name="rdoConfirmGroup" id="rdoOpen" title="Open" checked="@((Model.courseSalesMaster.IsConfirm==null && Model.courseSalesMaster.IsDrop==null && Model.courseSalesMaster.IsOpen==null)?true: Model.courseSalesMaster.IsOpen)" />
+                        @Html.Label("Open")
+                        &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+                        <input type="radio" name="rdoConfirmGroup" id="rdoDrop" title="Drop" checked="@Model.courseSalesMaster.IsDrop" />
+                        @Html.Label("Drop")
+                        &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+                        <input type="radio" name="rdoConfirmGroup" id="rdoConfirm" title="Confirm" checked="@Model.courseSalesMaster.IsConfirm" />
+                        @Html.Label("Confirm")
+
+                        @Html.HiddenFor(x => x.courseSalesMaster.IsOpen)
+                        @Html.HiddenFor(x => x.courseSalesMaster.IsDrop)
                         @Html.HiddenFor(x => x.courseSalesMaster.IsConfirm)
+
                     </div>
                 </div>
                 <div class="row">
@@ -253,7 +248,6 @@
     <script src="@Url.Content("~/Scripts/moment.min.js")"></script>
     <script src="@Url.Content("~/Scripts/bootstrap-datetimepicker.js")"></script>
     <script type="text/javascript">
-        //$('#chkIsConfirm').attr('disabled', 'disabled');
         $(function () {
             $('#StartDt, #RegClosingDt').datetimepicker({
                 icons: {
@@ -338,7 +332,10 @@
             $('#rdoLVC').attr('disabled', 'disabled');
             $('#rdoTOD').attr('disabled', 'disabled');
             $('#rdoILT').attr('disabled', 'disabled');
-            $('#chkIsConfirm').attr('disabled', 'disabled');
+
+            $('#rdoOpen').attr('disabled', 'disabled');
+            $('#rdoDrop').attr('disabled', 'disabled');
+            $('#rdoConfirm').attr('disabled', 'disabled');
         }
 
 
@@ -391,13 +388,16 @@
             $('#courseSalesMaster_LVC').val($('#rdoLVC').is(':checked'));
             $('#courseSalesMaster_TOD').val($('#rdoTOD').is(':checked'));
             $('#courseSalesMaster_ILT').val($('#rdoILT').is(':checked'));
-            $('#courseSalesMaster_IsConfirm').val($('#chkIsConfirm').is(':checked'));
+
+            $('#courseSalesMaster_IsOpen').val($('#rdoOpen').is(':checked'));
+            $('#courseSalesMaster_IsDrop').val($('#rdoDrop').is(':checked'));
+            $('#courseSalesMaster_IsConfirm').val($('#rdoConfirm').is(':checked'));
+            
             if ($('#frmCourseDetail').valid()) {
                 $('#courseSalesMaster_NoOfDays').removeAttr('disabled');
                 $('#courseSalesMaster_Month').removeAttr('disabled');
                 SaveRemoveatrr();
                 $('#frmCourseDetail').submit();
-                $('#confirmBtn').removeAttr('disabled')
             }
         }
 
@@ -418,7 +418,10 @@
             $('#rdoTOD').removeAttr('disabled');
             $('#rdoLVC').removeAttr('disabled');
             $('#rdoILT').removeAttr('disabled');
-            $('#chkIsConfirm').removeAttr('disabled');
+
+            $('#rdoOpen').removeAttr('disabled');
+            $('#rdoDrop').removeAttr('disabled');
+            $('#rdoConfirm').removeAttr('disabled');
         }
 
         $('#frmCourseDetail').validate({
