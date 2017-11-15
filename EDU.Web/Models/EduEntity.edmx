@@ -38,6 +38,19 @@
           <Property Name="PaidAmount" Type="decimal" Precision="18" Scale="2" />
           <Property Name="IsActive" Type="bit" />
         </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProductDescription" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="Registration">
           <Key>
             <PropertyRef Name="RegistrationId" />
@@ -103,6 +116,7 @@
         <EntityContainer Name="DB_9F30C5_edudevModelStoreContainer">
           <EntitySet Name="Lookup" EntityType="Self.Lookup" Schema="Config" store:Type="Tables" />
           <EntitySet Name="CustomerPayments" EntityType="Self.CustomerPayments" Schema="Edu" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="Edu" store:Type="Tables" />
           <EntitySet Name="Registration" EntityType="Self.Registration" Schema="Edu" store:Type="Tables" />
           <EntitySet Name="Revenue" EntityType="Self.Revenue" Schema="Edu" store:Type="Tables" />
           <EntitySet Name="TrainerInformation" EntityType="Self.TrainerInformation" Schema="Edu" store:Type="Tables" />
@@ -139,6 +153,7 @@
           <EntitySet Name="CustomerPayments" EntityType="DB_9F30C5_edudevModel.CustomerPayment" />
           <EntitySet Name="Revenues" EntityType="DB_9F30C5_edudevModel.Revenue" />
           <EntitySet Name="Lookups" EntityType="DB_9F30C5_edudevModel.Lookup" />
+          <EntitySet Name="Products" EntityType="DB_9F30C5_edudevModel.Product" />
         </EntityContainer>
         <EntityType Name="TrainerInformation">
           <Key>
@@ -212,6 +227,19 @@
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductDescription" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -316,6 +344,20 @@
                 <ScalarProperty Name="LookupDescription" ColumnName="LookupDescription" />
                 <ScalarProperty Name="LookupCode" ColumnName="LookupCode" />
                 <ScalarProperty Name="LookupID" ColumnName="LookupID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="DB_9F30C5_edudevModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
