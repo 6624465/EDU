@@ -75,6 +75,29 @@
                             </a>
                         </div>
                     </div>
+
+                    <div class="col-md-3">
+                        <div class="main-section blue ">
+                            <a href='@Url.Content("~/Revenue/RevenueList?country=10&year=2017")'>
+                                <div class="menu_section  blue">
+                                    <span><i class="fa fa-money fa-5x" aria-hidden="true"></i></span>
+                                </div>
+                                <div class="content-section grey-btm">
+                                    @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
+                                    {
+                                        <b> Revenue List </b>
+                                        <p>Modify the Revenue List</p>
+                                    }
+                                    else
+                                    {
+                                        <b>Revenue List Report </b>
+                                        <p>View the Revenue List Report</p>
+                                    }
+                                    <div class="btn btn-lg btn-danger"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
                     @*<div class="col-md-3">
                         <div class="main-section org-btm ">
                             <a href='@Url.Content("~/Registration/GetRegistrationList")'>

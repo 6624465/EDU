@@ -463,8 +463,9 @@
     <Content Include="Views\Reports\MaterialInward1.cshtml" />
     <Content Include="Views\Reports\OperationalExpenses.cshtml" />
     <Content Include="Views\Reports\Operationaltransaction.cshtml" />
-    <Content Include="Views\Revenue\RevenueList.cshtml" />
+    <Content Include="Views\Revenue\RevenueList1.cshtml" />
     <Content Include="Views\Revenue\Index.cshtml" />
+    <Content Include="Views\Revenue\RevenueList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

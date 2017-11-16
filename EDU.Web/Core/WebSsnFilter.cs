@@ -14,6 +14,7 @@ namespace EDU.Web
             if (ssnObj == null)
             {
                 filterContext.Result = new RedirectResult("~/Account/Index");
+                return;
             }
         }
     }

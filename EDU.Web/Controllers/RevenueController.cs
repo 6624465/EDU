@@ -1,139 +1,151 @@
 ﻿using EDU.Web.Models;
 using EDU.Web.ViewModels.RevenueModel;
 using EZY.EDU.BusinessFactory;
+using EZY.EDU.Contract;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 namespace EDU.Web.Controllers
 {
-    public class RevenueController : Controller
+    public class RevenueController : BaseController
     {
         EducationEntities dbContext = new EducationEntities();
 
-        public ActionResult Index(int Id = -1)
+        [HttpPost]
+        public JsonResult SaveRevenueInfo(Revenue revenue)
         {
-            Revenue RevenueInfo = dbContext.Revenues.
-                Where(x => x.RevenueId == Id && x.IsActive == true).FirstOrDefault();
+            revenue.Year = revenue.Year == 0 ? DateTime.Now.Year : revenue.Year;
 
-            if (RevenueInfo == null)
+            revenue.HalfYearlyTarget = revenue.YearlyTarget / 2;
+            revenue.QuarterlyTarget = revenue.YearlyTarget / 4;
+            revenue.MonthlyTarget = revenue.YearlyTarget / 12;
+
+            revenue.YearlyTargetAmt = revenue.YearlyTarget * revenue.CurrencyExRate;
+
+            revenue.HalfYearlyTargetAmt = revenue.YearlyTargetAmt / 2;
+            revenue.QuarterlyTargetAmt = revenue.YearlyTargetAmt / 4;
+            revenue.MonthlyTargetAmt = revenue.YearlyTargetAmt / 12;
+            revenue.IsActive = true;
+
+            try
             {
-                var revenueVM = new RevenueVM()
+                if (revenue.RevenueId == -1)
                 {
-                    countryList = new BranchBO().GetList().Where(x => x.IsActive == true).AsEnumerable(),
-                    //productList = new EduProductBO().GetList().Where(x => x.IsActive == true).AsEnumerable(),
-                    //currencyList = new LookupBO().GetList().Where(x => x.LookupCategory == "Currency").AsEnumerable()
+                    revenue.CreatedBy = USER_ID;
+                    revenue.CreatedOn = UTILITY.SINGAPORETIME;
+                    dbContext.Revenues.Add(revenue);
+                }
+                else
+                {
+                    Revenue revenueInfo = dbContext.Revenues.
+                       Where(x => x.RevenueId == revenue.RevenueId).FirstOrDefault();
 
-                };
-                revenueVM.revenueInfo = new Revenue()
-                {
-                    RevenueId = Id
-                };
-                return View(revenueVM);
+                    revenueInfo.CurrencyExRate = revenue.CurrencyExRate;
+
+                    revenueInfo.YearlyTarget = revenue.YearlyTarget;
+                    revenueInfo.HalfYearlyTarget = revenue.HalfYearlyTarget;
+                    revenueInfo.QuarterlyTarget = revenue.QuarterlyTarget;
+                    revenueInfo.MonthlyTarget = revenue.MonthlyTarget;
+
+                    revenueInfo.YearlyTargetAmt = revenue.YearlyTargetAmt;
+
+                    revenueInfo.HalfYearlyTargetAmt = revenue.HalfYearlyTargetAmt;
+                    revenueInfo.QuarterlyTargetAmt = revenue.QuarterlyTargetAmt;
+                    revenueInfo.MonthlyTargetAmt = revenue.MonthlyTargetAmt;
+                    revenueInfo.IsActive = true;
+
+                    revenueInfo.ModifiedBy = USER_ID;
+                    revenueInfo.ModifiedOn = UTILITY.SINGAPORETIME;
+
+                    dbContext.Entry(revenueInfo).State = EntityState.Modified;
+                }
+
+                dbContext.SaveChanges();
             }
-            else
+            catch (Exception ex)
             {
-                var revenueVM = new RevenueVM()
-                {
-                    countryList = new BranchBO().GetList().Where(x => x.IsActive == true).AsEnumerable(),
-                    //productList = new EduProductBO().GetList().Where(x => x.IsActive == true).AsEnumerable(),
-                    //currencyList = new LookupBO().GetList().Where(x => x.LookupCategory == "Currency").AsEnumerable()
-                };
-                revenueVM.revenueInfo = new Revenue()
-                {
-
-
-                    //TrainerName = TrainerInfo.TrainerName,
-                    //Address = TrainerInfo.Address,
-                    //Contact = TrainerInfo.Contact,
-                    //Country = TrainerInfo.Country,
-                    //TrianerId = TrainerInfo.TrianerId,
-                    //// Profile = "~/FileUploads/" + TrainerInfo.Profile,
-                    //Remarks = TrainerInfo.Remarks,
-                    //Technology = TrainerInfo.Technology,
-                    //TrainerRate = TrainerInfo.TrainerRate,
-                    //VendorName = TrainerInfo.VendorName,
-                };
-
-                return View(revenueVM);
+                throw ex;
             }
+
+            string message = "Saved Successfully.";
+            return Json(message, JsonRequestBehavior.AllowGet);
         }
 
-        //public ActionResult SaveTrainer(RevenueVM TrainerInfo)
-        //{
-        //    if (TrainerInfo.TrainerInformation.TrianerId == -1)
-        //    {
-        //        TrainerInformation ti = new TrainerInformation();
 
-        //        ti.TrainerName = TrainerInfo.TrainerInformation.TrainerName;
-        //        ti.Address = TrainerInfo.TrainerInformation.Address;
-        //        ti.Contact = TrainerInfo.TrainerInformation.Contact;
-        //        ti.Country = TrainerInfo.TrainerInformation.Country;
-        //        if (TrainerInfo.TrainerInformation.Profile.ContentLength > 0)
-        //        {
-        //            ti.Profile = TrainerInfo.TrainerInformation.Profile.FileName;
-        //            string fileName = Path.GetFileName(TrainerInfo.TrainerInformation.Profile.FileName);
-        //            string path = Path.Combine(Server.MapPath("~/FileUploads"), ti.Profile);
-        //            TrainerInfo.TrainerInformation.Profile.SaveAs(path);
+        [HttpPost]
+        public JsonResult updateRevenueInfoByExRate(Revenue revenue)
+        {
+            List<Revenue> RevenueList = dbContext.Revenues.Where(x => x.IsActive == true && x.Country == revenue.Country && x.Year == revenue.Year).ToList(); //&& x.CurrencyCode == revenue.CurrencyCode
 
-        //        }
-        //        ti.Remarks = TrainerInfo.TrainerInformation.Remarks;
-        //        ti.Technology = TrainerInfo.TrainerInformation.Technology;
-        //        ti.TrainerRate = TrainerInfo.TrainerInformation.TrainerRate;
-        //        ti.VendorName = TrainerInfo.TrainerInformation.VendorName;
-        //        ti.IsActive = true;
-        //        dbContext.TrainerInformations.Add(ti);
-        //        dbContext.SaveChanges();
-        //    }
+            try
+            {
+                foreach (Revenue rv in RevenueList)
+                {
+                    rv.CurrencyExRate = revenue.CurrencyExRate;
 
-        //    else
-        //    {
-        //        TrainerInformation trainerInfoDetail = dbContext.TrainerInformations.
-        //            Where(x => x.TrianerId == TrainerInfo.TrainerInformation.TrianerId).FirstOrDefault();
-        //        if (trainerInfoDetail != null)
-        //        {
-        //            trainerInfoDetail.TrainerName = TrainerInfo.TrainerInformation.TrainerName;
-        //            trainerInfoDetail.Address = TrainerInfo.TrainerInformation.Address;
-        //            trainerInfoDetail.Contact = TrainerInfo.TrainerInformation.Contact;
-        //            trainerInfoDetail.Country = TrainerInfo.TrainerInformation.Country;
-        //            trainerInfoDetail.Profile = TrainerInfo.TrainerInformation.Profile.FileName;
-        //            trainerInfoDetail.Remarks = TrainerInfo.TrainerInformation.Remarks;
-        //            trainerInfoDetail.Technology = TrainerInfo.TrainerInformation.Technology;
-        //            trainerInfoDetail.TrainerRate = TrainerInfo.TrainerInformation.TrainerRate;
-        //            trainerInfoDetail.VendorName = TrainerInfo.TrainerInformation.VendorName;
-        //        }
-        //        dbContext.SaveChanges();
-        //    }
-        //    return RedirectToAction("TrainersList");
-        //}
+                    rv.YearlyTargetAmt = rv.YearlyTarget * revenue.CurrencyExRate;
 
-        //[HttpGet]
-        //public ActionResult TrainersList()
-        //{
-        //    List<TrainerInformation> trainerList = dbContext.TrainerInformations.Where(x => x.IsActive == true).ToList();
-        //    foreach (TrainerInformation ti in trainerList)
-        //    {
-        //        ti.Profile = "~/FileUploads/" + ti.Profile;
-        //        var countryList = new CountryBO().GetList().AsEnumerable();
-        //        ti.Country = countryList.Where(x => x.CountryCode == ti.Country).FirstOrDefault().CountryName;
-        //    }
-        //    return View(trainerList);
-        //}
+                    rv.HalfYearlyTargetAmt = rv.YearlyTargetAmt/2;
+                    rv.QuarterlyTargetAmt = rv.YearlyTargetAmt/4;
+                    rv.MonthlyTargetAmt = rv.YearlyTargetAmt/12;
+                    rv.IsActive = true;
+
+                    rv.ModifiedBy = USER_ID;
+                    rv.ModifiedOn = UTILITY.SINGAPORETIME;
+
+                    dbContext.Entry(rv).State = EntityState.Modified;
+                }
+
+                dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            string message = "Currency Ex. Rate Updated Successfully.";
+            return Json(message, JsonRequestBehavior.AllowGet);
+        }
 
 
-        //[HttpPost]
-        //public JsonResult DeleteTrainer(int Id)
-        //{
-        //    TrainerInformation trainerInfoDetail = dbContext.TrainerInformations.
-        //           Where(x => x.TrianerId == Id).FirstOrDefault();
-        //    if (trainerInfoDetail != null)
-        //    {
-        //        trainerInfoDetail.IsActive = false;
-        //        dbContext.SaveChanges();
-        //    }
-        //    return Json(true, JsonRequestBehavior.AllowGet);
-        //}
+        [HttpGet]
+        public JsonResult GetCurrency(Int16 Id)
+        {
+            var country = new BranchBO().GetList().Where(x => x.IsActive == true && x.BranchID == Id).FirstOrDefault();
+            var currencyCode = new LookupBO().GetList().Where(x => x.LookupCategory == "Currency" && x.MappingCode == country.BranchCode).FirstOrDefault();
+
+            return Json(currencyCode == null ? "" : currencyCode.LookupCode, JsonRequestBehavior.AllowGet);
+
+        }
+
+        [HttpGet]
+        public ActionResult RevenueList(Int16 country, int year)
+        {
+            List<Revenue> List = GetList(country, year);
+            return View(List);
+        }
+
+        private List<Revenue> GetList(short country, int year)
+        {
+            List<Revenue> RevenueList = dbContext.Revenues.Where(x => x.IsActive == true && x.Country == country && x.Year == year).ToList();
+            var productList = new EduProductBO().GetList().Where(x => x.IsActive == true).ToList();
+
+            ViewData["CountryData"] = new BranchBO().GetList().Where(x => x.IsActive == true).ToList();
+            ViewData["CurrencyList"] = new LookupBO().GetList().Where(x => x.LookupCategory == "Currency").ToList();
+
+            var countryrow = ((List<Branch>)ViewData["CountryData"]).Where(x => x.IsActive == true && x.BranchID == country).FirstOrDefault();
+            var currencyCode = ((List<Lookup>)ViewData["CurrencyList"]).Where(x => x.LookupCategory == "Currency" && x.MappingCode == countryrow.BranchCode).FirstOrDefault();
+
+            foreach (EduProduct ep in productList)
+            {
+                if (RevenueList.Where(x => x.Product == ep.Id).Count() == 0)
+                    RevenueList.Add(new Revenue() { Product = ep.Id, ProductName = ep.ProductName, RevenueId = -1, CurrencyCode = currencyCode == null ? "" : currencyCode.LookupCode });
+            }
+            return RevenueList;
+        }
     }
 }
