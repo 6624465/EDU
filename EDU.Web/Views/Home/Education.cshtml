@@ -78,7 +78,7 @@
 
                     <div class="col-md-3">
                         <div class="main-section blue ">
-                            <a href='@Url.Content("~/Revenue/RevenueList?country=10&year=2017")'>
+                            <a href='@Url.Content("~/Revenue/RevenueList?country="+Convert.ToInt16(Session["BranchId"])+"&year=2017")'>
                                 <div class="menu_section  blue">
                                     <span><i class="fa fa-money fa-5x" aria-hidden="true"></i></span>
                                 </div>
@@ -99,156 +99,156 @@
                         </div>
                     </div>
                     @*<div class="col-md-3">
-                        <div class="main-section org-btm ">
-                            <a href='@Url.Content("~/Registration/GetRegistrationList")'>
-                                <div class="menu_section  org-btm">
-                                    <span><i class="fa fa-registered fa-5x" aria-hidden="true"></i></span>
-                                </div>
-                                <div class="content-section grey-btm">
-                                    @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
-                                    {
-                                        <b> Registration </b>
-                                        <p>Create Registrations</p>
-                                    }
-                                    else
-                                    {
-                                        <b> Registration </b>
-                                        <p>Add Registrations</p>
-                                    }
-                                    <div class="btn btn-lg btn-danger"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>*@
+                            <div class="main-section org-btm ">
+                                <a href='@Url.Content("~/Registration/GetRegistrationList")'>
+                                    <div class="menu_section  org-btm">
+                                        <span><i class="fa fa-registered fa-5x" aria-hidden="true"></i></span>
+                                    </div>
+                                    <div class="content-section grey-btm">
+                                        @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
+                                        {
+                                            <b> Registration </b>
+                                            <p>Create Registrations</p>
+                                        }
+                                        else
+                                        {
+                                            <b> Registration </b>
+                                            <p>Add Registrations</p>
+                                        }
+                                        <div class="btn btn-lg btn-danger"></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>*@
                 </div>
             </div>
         </div>
         @*<div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="main-section grey ">
-                            <a href='@Url.Content("~/Trainer/TrainersList")'>
-                                <div class="menu_section  grey">
-                                    <span><i class="fa fa-user fa-5x" aria-hidden="true"></i></span>
-                                </div>
-                                <div class="content-section grey-btm">
-                                    @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
-                                    {
-                                        <b> Trainers List </b>
-                                        <p>Create or Modify the Trainer</p>
-                                    }
-                                    else
-                                    {
-                                        <b> Education Products </b>
-                                        <p>View the Education Product</p>
-                                    }
-                                    <div class="btn btn-lg btn-danger"></div>
-                                </div>
-                            </a>
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="main-section grey ">
+                                <a href='@Url.Content("~/Trainer/TrainersList")'>
+                                    <div class="menu_section  grey">
+                                        <span><i class="fa fa-user fa-5x" aria-hidden="true"></i></span>
+                                    </div>
+                                    <div class="content-section grey-btm">
+                                        @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
+                                        {
+                                            <b> Trainers List </b>
+                                            <p>Create or Modify the Trainer</p>
+                                        }
+                                        else
+                                        {
+                                            <b> Education Products </b>
+                                            <p>View the Education Product</p>
+                                        }
+                                        <div class="btn btn-lg btn-danger"></div>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="main-section grey ">
-                            <a href='@Url.Content("~/CustomerPayment/CustomerPaymentList")'>
-                                <div class="menu_section  grey">
-                                    <span><i class="fa fa-user fa-5x" aria-hidden="true"></i></span>
-                                </div>
-                                <div class="content-section grey-btm">
-                                    @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
-                                    {
-                                        <b> Customer PaymentList </b>
-                                        <p>Create or Modify the Customer</p>
-                                    }
-                                    else
-                                    {
-                                        <b> Education Products </b>
-                                        <p>View the Education Product</p>
-                                    }
-                                    <div class="btn btn-lg btn-danger"></div>
-                                </div>
-                            </a>
+                        <div class="col-md-3">
+                            <div class="main-section grey ">
+                                <a href='@Url.Content("~/CustomerPayment/CustomerPaymentList")'>
+                                    <div class="menu_section  grey">
+                                        <span><i class="fa fa-user fa-5x" aria-hidden="true"></i></span>
+                                    </div>
+                                    <div class="content-section grey-btm">
+                                        @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
+                                        {
+                                            <b> Customer PaymentList </b>
+                                            <p>Create or Modify the Customer</p>
+                                        }
+                                        else
+                                        {
+                                            <b> Education Products </b>
+                                            <p>View the Education Product</p>
+                                        }
+                                        <div class="btn btn-lg btn-danger"></div>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="main-section grey ">
-                            <a href='@Url.Content("~/Reports/Achievement")'>
-                                <div class="menu_section  grey">
-                                    <span><i class="fa fa-pie-chart fa-5x" aria-hidden="true"></i></span>
-                                </div>
-                                <div class="content-section grey-btm">
-                                    @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
-                                    {
-                                        <b>Achievement Reports </b>
+                        <div class="col-md-3">
+                            <div class="main-section grey ">
+                                <a href='@Url.Content("~/Reports/Achievement")'>
+                                    <div class="menu_section  grey">
+                                        <span><i class="fa fa-pie-chart fa-5x" aria-hidden="true"></i></span>
+                                    </div>
+                                    <div class="content-section grey-btm">
+                                        @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
+                                        {
+                                            <b>Achievement Reports </b>
+                                            <p> Achievement Reports </p>
+
+                                        }
+                                        else
+                                        {  <b> Reports </b>
                                         <p> Achievement Reports </p>
 
-                                    }
-                                    else
-                                    {  <b> Reports </b>
-                                    <p> Achievement Reports </p>
-
-                                    }
-                                    <div class="btn btn-lg btn-danger"></div>
-                                </div>
-                            </a>
+                                        }
+                                        <div class="btn btn-lg btn-danger"></div>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="main-section grey ">
-                            <a href='@Url.Content("~/Reports/Operationaltransaction")'>
-                                <div class="menu_section  grey">
-                                    <span><i class="fa fa-pie-chart fa-5x" aria-hidden="true"></i></span>
-                                </div>
-                                <div class="content-section grey-btm">
-                                    @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
-                                    {
-                                        <b>Operational Reports </b>
-                                        <p> Operational Transaction Reports </p>
+                        <div class="col-md-3">
+                            <div class="main-section grey ">
+                                <a href='@Url.Content("~/Reports/Operationaltransaction")'>
+                                    <div class="menu_section  grey">
+                                        <span><i class="fa fa-pie-chart fa-5x" aria-hidden="true"></i></span>
+                                    </div>
+                                    <div class="content-section grey-btm">
+                                        @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
+                                        {
+                                            <b>Operational Reports </b>
+                                            <p> Operational Transaction Reports </p>
 
-                                    }
-                                    else
-                                    {
-                                        <b>Operational Reports </b>
-                                        <p> Operational Transaction Reports </p>
+                                        }
+                                        else
+                                        {
+                                            <b>Operational Reports </b>
+                                            <p> Operational Transaction Reports </p>
 
-                                    }
-                                    <div class="btn btn-lg btn-danger"></div>
-                                </div>
-                            </a>
+                                        }
+                                        <div class="btn btn-lg btn-danger"></div>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                    </div>
 
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="main-section grey ">
-                            <a href='@Url.Content("~/Reports/OperationalExpenses")'>
-                                <div class="menu_section  grey">
-                                    <span><i class="fa fa-bar-chart fa-5x" aria-hidden="true"></i></span>
-                                </div>
-                                <div class="content-section grey-btm">
-                                    @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
-                                    {
-                                        <b>Operational Reports </b>
-                                        <p>Operational Expenses Reports</p>
-                                    }
-                                    else
-                                    {
-                                        <b> Operational Reports </b>
-                                        <p>Operational Expenses Reports</p>
-                                    }
-                                    <div class="btn btn-lg btn-danger"></div>
-                                </div>
-                            </a>
-                        </div>
                     </div>
                 </div>
             </div>
-        </div>*@
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="main-section grey ">
+                                <a href='@Url.Content("~/Reports/OperationalExpenses")'>
+                                    <div class="menu_section  grey">
+                                        <span><i class="fa fa-bar-chart fa-5x" aria-hidden="true"></i></span>
+                                    </div>
+                                    <div class="content-section grey-btm">
+                                        @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
+                                        {
+                                            <b>Operational Reports </b>
+                                            <p>Operational Expenses Reports</p>
+                                        }
+                                        else
+                                        {
+                                            <b> Operational Reports </b>
+                                            <p>Operational Expenses Reports</p>
+                                        }
+                                        <div class="btn btn-lg btn-danger"></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
 
-        </div>
+    </div>
 </section>

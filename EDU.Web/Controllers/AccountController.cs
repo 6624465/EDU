@@ -99,6 +99,7 @@ namespace EDU.Web.Controllers
 
                 Session["UserID"] = currentUser.UserID;
                 Session["UserName"] = currentUser.UserName;
+                Session["BranchId"] = model.BranchID;
 
                 if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                     && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))

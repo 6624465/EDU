@@ -42,20 +42,20 @@
                     <div class="col-md-2"></div>
                     <div class="col-md-2">
                         @Html.DropDownListFor(x => x.FirstOrDefault().Country,
-     new SelectList((List<EZY.EDU.Contract.Branch>)ViewData["CountryData"], "BranchID", "BranchName"),
-     "Select Country", new { @class = "form-control input-sm", onchange = "CountryChange(this);" })
+                             new SelectList((List<EZY.EDU.Contract.Branch>)ViewData["CountryData"], "BranchID", "BranchName"),
+                             "Select Country", new { @class = "form-control input-sm", onchange = "CountryChange(this);" })
                     </div>
                     <div class="col-md-1">
                         @Html.DropDownListFor(x => x.FirstOrDefault().CurrencyCode,
-     new SelectList((List<EZY.EDU.Contract.Lookup>)ViewData["CurrencyList"], "LookupCode", "LookupCode"),
-     "Select Currency", new { @class = "form-control input-sm" })
+                             new SelectList((List<EZY.EDU.Contract.Lookup>)ViewData["CurrencyList"], "LookupCode", "LookupCode"),
+                             "Select Currency", new { @class = "form-control input-sm" })
                     </div>
                     @*<div class="col-md-2">
                             <label class="control-label">CONVERSION RATE</label>
                         </div>*@
                     <div class="col-md-2">
                         @Html.TextBoxFor(x => x.FirstOrDefault().CurrencyExRate, "{0:#.#}",
-         new { placeholder = "CONVERSION RATE", @class = "form-control input-sm numCss" })
+                            new { placeholder = "CONVERSION RATE", @class = "form-control input-sm numCss" })
                     </div>
                     <div class="col-md-3"></div>
                 </div>
@@ -115,10 +115,10 @@
                 </div>
                 <div class="row css10">
                     <div class="col-md-12">
-                       @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
-                       {
+                        @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
+                        {
                             <button type="button" onclick="updateRevenueInfoByExRate()" class="btn btn-primary btn-sm"><i class="fa fa-floppy-o"></i>&nbsp;Update</button>
-                       }
+                        }
                     </div>
                 </div>
             </div>
@@ -127,6 +127,15 @@
 
 @section secscripts {
     <script type="text/javascript">
+    @if(@Model.FirstOrDefault().Country != 10 || Session["UserID"].ToString().ToUpper() != "ADMIN")
+    {
+        <text>
+    $(function () {
+        $('#Country, #CurrencyCode, #CurrencyExRate').attr('disabled', 'disabled');
+    });
+        </text>
+    }
+
 
     $('#frmRevenue').validate({
         rules: {

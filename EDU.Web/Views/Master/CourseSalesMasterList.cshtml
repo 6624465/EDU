@@ -75,6 +75,7 @@
                                 <th style="text-align:center">Registered</th>
                                 <th style="text-align:center">Avl. Seats</th>
                                 <th style="text-align:center">Reg. Closing Dt</th>
+                                <th style="text-align:center">Status</th>
                                 @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
                                 {
                                     <th style="width: 10%;text-align:center;">#Action</th>
@@ -121,23 +122,23 @@
                                     </td>
                                     <td align="center">@Model.ElementAt(i).AvailableSeats</td>
                                     <td align="center">@Model.ElementAt(i).RegClosingDate.ToString("dd/MM/yyyy")</td>
+                                    <td align="center">
+                                        @if (Model.ElementAt(i).IsConfirm.Value == true)
+                                        {
+                                            <span class="text-green"><i class="fa fa-circle" style="font-size:12pt; "></i></span>
+                                        }
+                                        else if (Model.ElementAt(i).IsDrop.Value == true)
+                                        {
+                                            <span class="text-red"><i class="fa fa-circle" style="font-size:12pt;"></i></span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-gray"><i class="fa fa-circle" style="font-size:12pt;"></i></span>
+                                        }
+                                    </td>
                                     @if (Session["UserID"].ToString().ToUpper() == "ADMIN")
                                     {
                                         <td style="width: 10%;text-align:center;">
-                                            @if (Model.ElementAt(i).IsConfirm.Value == true)
-                                            {
-                                                <span class="text-green"><i class="fa fa-circle" style="font-size:12pt; "></i></span>
-                                            }
-                                            else if (Model.ElementAt(i).IsDrop.Value == true)
-                                            {
-                                                <span class="text-red"><i class="fa fa-circle" style="font-size:12pt;"></i></span>
-                                            }
-                                            else
-                                            {
-                                                <span class="text-gray"><i class="fa fa-circle" style="font-size:12pt;"></i></span>
-                                            }
-
-                                            &nbsp;&nbsp;&nbsp;
                                             <button style="margin-top:-10px;" class="btn btn-primary btn-sm" onclick="location.href = '@Url.Content("~/Master/CourseSalesMaster?Id=" + Model.ElementAt(i).Id)'"><i class="fa fa-pencil-square-o"></i></button>
                                             <button style="margin-top:-10px;" class="btn btn-danger btn-sm" onclick="DeleteCourseSalesMaster(@Model.ElementAt(i).Id)"><i class="fa fa-trash-o"></i></button>
                                         </td>
