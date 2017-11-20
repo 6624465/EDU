@@ -64,8 +64,8 @@
                         <thead>
                             <tr>
                                 <th>Country</th>
-                                <th>Product</th>
-                                <th>Course</th>
+                                <th style="width: 15%;">Product</th>
+                                <th style="width: 15%;">Course</th>
                                 <th style="text-align:center">No Of Days</th>
                                 <th>Month</th>
                                 <th style="text-align:center">Start Dt</th>
@@ -88,8 +88,8 @@
                             {
                                 <tr>
                                     <td>@Model.ElementAt(i).CountryName</td>
-                                    <td>@Model.ElementAt(i).ProductName</td>
-                                    <td>@Model.ElementAt(i).CourseName</td>
+                                    <td style="width: 15%;">@Model.ElementAt(i).ProductName</td>
+                                    <td style="width: 15%;">@Model.ElementAt(i).CourseName</td>
                                     <td align="center">@Model.ElementAt(i).NoOfDays</td>
                                     <td>@GetMonthById(Model.ElementAt(i).Month == null ? 0 : Model.ElementAt(i).Month.Value + 1)</td>
                                     <td align="center">@(@Model.ElementAt(i).StartDate == null ? null : Model.ElementAt(i).StartDate.Value.ToString("dd/MM/yyyy"))</td>
