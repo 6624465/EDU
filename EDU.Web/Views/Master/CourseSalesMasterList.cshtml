@@ -72,6 +72,7 @@
                                 <th style="text-align:center">End Dt</th>
                                 <th style="text-align:center">Min. Reg</th>
                                 <th style="text-align:center">Leads on hand</th>
+                                <th style="text-align:center">Revenue</th>
                                 <th style="text-align:center">Registered</th>
                                 <th style="text-align:center">Avl. Seats</th>
                                 <th style="text-align:center">Reg. Closing Dt</th>
@@ -107,6 +108,7 @@
                                         }
 
                                     </td>
+                                    <td align="center">@(Model.ElementAt(i).Revenue.HasValue? Model.ElementAt(i).Revenue.Value.ToString("0.00"):"N/A")</td>
                                     <td align="center">
                                         @if (string.IsNullOrWhiteSpace(Model.ElementAt(i).RegisteredRemarks))
                                         {
