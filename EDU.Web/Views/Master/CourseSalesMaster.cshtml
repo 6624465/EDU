@@ -154,6 +154,13 @@
                     <div class="col-md-4">
                         @Html.DropDownListFor(x => x.courseSalesMaster.MinimumReg, Enumerable.Range(1, 25).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), "Select Min.Registrations", new { @class = "form-control input-sm", onchange = "MinimumRegUser()" })
                     </div>
+                    <div class="col-md-2">
+                        <label class="control-label">Revenue</label>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(x => x.courseSalesMaster.Revenue, "{0:#.#}",
+                        new { @class = "form-control input-sm decimalCss" })
+                    </div>
                 </div>
                 <div class="row css10">
                     <div class="col-md-2">
